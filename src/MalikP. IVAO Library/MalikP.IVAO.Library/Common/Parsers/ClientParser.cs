@@ -52,6 +52,11 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         protected override Client CreateItem(string row)
         {
+            if (string.IsNullOrWhiteSpace(row))
+            {
+                return null;
+            }
+
             string[] rowData = Split(row);
 
             ClientType clientType = Annotation.AnnotationExtensions.GetFromMap<ClientType>(rowData[ClientIndex.All.ClientType]);

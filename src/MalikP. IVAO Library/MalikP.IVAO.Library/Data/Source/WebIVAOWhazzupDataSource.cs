@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: FollowMeFactory.cs 
+// File: WebIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,27 +25,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using MalikP.IVAO.Library.Common.Enums;
-using MalikP.IVAO.Library.Models.Clients;
+using System;
+using System.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
 
-namespace MalikP.IVAO.Library.Common.Parsers
+using MalikP.IVAO.Library.Models.DataHolders;
+
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class FollowMeFactory : AbstractClientFactory<FollowMe>
+    public class WebIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, IWebIVAOWhazzupDataSource
     {
-        public FollowMeFactory()
-            : base(ClientType.FollowMeCar)
+        private readonly Uri _uri;
+
+        public WebIVAOWhazzupDataSource(string url)
+            : this(new Uri(url))
         {
         }
 
-        public override FollowMe Create(string[] rowData)
+        public WebIVAOWhazzupDataSource(Uri uri)
         {
-            if (rowData.Length == 0)
+            _uri = uri;
+        }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (_uri == null)
             {
-                return null;
+                return Whazzup.Null;
             }
 
-            return AssignGeneralData(FollowMeBuilder.Create(), rowData)
-                .Build();
+            string[] data = Enumerable.Empty<string>().ToArray();
+
+            using (WebClient client = new WebClient())
+            {
+                string dataString = client.DownloadString(_uri);
+                data = Regex.Split(dataString, "\r\n|\r|\n")
+                    .Where(d => !string.IsNullOrWhiteSpace(d))
+                    .ToArray();
+            }
+
+            return new Whazzup(data);
         }
     }
 }

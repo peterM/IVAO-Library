@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: FollowMeFactory.cs 
+// File: IWebIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,27 +25,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using MalikP.IVAO.Library.Common.Enums;
-using MalikP.IVAO.Library.Models.Clients;
-
-namespace MalikP.IVAO.Library.Common.Parsers
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class FollowMeFactory : AbstractClientFactory<FollowMe>
+    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupDataSource
     {
-        public FollowMeFactory()
-            : base(ClientType.FollowMeCar)
-        {
-        }
-
-        public override FollowMe Create(string[] rowData)
-        {
-            if (rowData.Length == 0)
-            {
-                return null;
-            }
-
-            return AssignGeneralData(FollowMeBuilder.Create(), rowData)
-                .Build();
-        }
     }
 }

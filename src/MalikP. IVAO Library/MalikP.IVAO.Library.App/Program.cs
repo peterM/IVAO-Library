@@ -22,8 +22,10 @@ namespace MalikP.IVAO.Library.App
         {
             string path = GetPath();
 
-            ILocalIVAOWhazzupDataSource localDataSource = new LocalIVAOWhazzupDataSource(fileName);
-            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(localDataSource);
+            IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
+            IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+
+            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
             IGeneralSelector generalSelector = new GeneralSelector();

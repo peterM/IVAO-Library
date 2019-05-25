@@ -51,7 +51,7 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
             if (data.Length == 0)
             {
-                return GeneralDataBuilder.Create().Build();
+                return null;
             }
 
             return GeneralDataBuilder.Create()

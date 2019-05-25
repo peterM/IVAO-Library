@@ -42,7 +42,17 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         protected override Server CreateItem(string data)
         {
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                return null;
+            }
+
             string[] dataItems = Split(data);
+
+            if (dataItems.Length == 0)
+            {
+                return null;
+            }
 
             return ServerBuilder.Create()
                 .WithHostname(dataItems[ServerIndex.Hostname])
