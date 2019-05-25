@@ -16,6 +16,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<ApplicationIcon>IVAOLibrary.ico</ApplicationIcon>
 		<!--<ApplicationIcon />-->
 		<!--<Win32Resource />-->
 	</PropertyGroup>
