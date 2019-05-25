@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: Whazzup.cs 
+// File: LocalIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,17 +25,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Linq;
+using System.IO;
 
-namespace MalikP.IVAO.Library.Models.DataHolders
+using MalikP.IVAO.Library.Models.DataHolders;
+
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class Whazzup : AbstractDataHolder<string[]>, IWhazzup
+    public sealed class LocalIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalIVAOWhazzupDataSource
     {
-        public static Whazzup Null { get; } = new Whazzup(Enumerable.Empty<string>().ToArray());
-
-        public Whazzup(string[] data)
-            : base(data)
+        public LocalIVAOWhazzupDataSource(string path)
         {
+            Path = path;
+        }
+
+        private string Path { get; }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (string.IsNullOrWhiteSpace(Path) || !File.Exists(Path))
+            {
+                return Whazzup.Null;
+            }
+
+            return new Whazzup(File.ReadAllLines(Path));
         }
     }
 }

@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: Whazzup.cs 
+// File: AbstractIVAODataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,17 +25,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Linq;
-
-namespace MalikP.IVAO.Library.Models.DataHolders
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class Whazzup : AbstractDataHolder<string[]>, IWhazzup
+    public abstract class AbstractIVAODataSource<TModel> : IIVAODataSource<TModel>
     {
-        public static Whazzup Null { get; } = new Whazzup(Enumerable.Empty<string>().ToArray());
+        public abstract TModel GetIVAOData();
 
-        public Whazzup(string[] data)
-            : base(data)
+        object IIVAODataSource.GetIVAOData()
         {
+            return GetIVAOData();
         }
     }
 }

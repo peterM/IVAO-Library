@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: Whazzup.cs 
+// File: LocalCachedIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,17 +25,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Linq;
+using MalikP.IVAO.Library.Models.DataHolders;
 
-namespace MalikP.IVAO.Library.Models.DataHolders
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class Whazzup : AbstractDataHolder<string[]>, IWhazzup
+    public sealed class LocalCachedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalCachedIVAOWhazzupDataSource
     {
-        public static Whazzup Null { get; } = new Whazzup(Enumerable.Empty<string>().ToArray());
+        private readonly ILocalIVAOWhazzupDataSource _localIVAOWhazzupDataSource;
+        private IWhazzup _cache;
 
-        public Whazzup(string[] data)
-            : base(data)
+        public LocalCachedIVAOWhazzupDataSource(ILocalIVAOWhazzupDataSource localIVAOWhazzupDataSource)
         {
+            _localIVAOWhazzupDataSource = localIVAOWhazzupDataSource;
+        }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (_cache == null || _cache == Whazzup.Null)
+            {
+                _cache = _localIVAOWhazzupDataSource.GetIVAOData();
+            }
+
+            return _cache;
         }
     }
 }
