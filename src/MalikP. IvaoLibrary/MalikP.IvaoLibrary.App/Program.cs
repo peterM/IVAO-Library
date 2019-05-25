@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 using MalikP.IvaoLibrary.Common.Parsers;
 using MalikP.IvaoLibrary.Common.Selector;
@@ -16,10 +15,10 @@ namespace MalikP.IvaoLibrary.App
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             string path = @"C:\Sources\Tfs\IvaoLibrary\src\MalikP. IvaoLibrary\MalikP.IvaoLibrary.App\testData.txt";
-            string[] data = await File.ReadAllLinesAsync(path);
+            string[] data = File.ReadAllLines(path);
             IWhazzup whazzupData = new Whazzup(data);
 
             IParserFactory parserFactory = new ParserFactory();
@@ -33,10 +32,18 @@ namespace MalikP.IvaoLibrary.App
             IServersProvider serversDataProvider = new ServersDataProvider(parserFactory, serverSelector);
             IAirportsProvider airportsDataProvider = new AirportsDataProvider(parserFactory, airportsSelector);
 
+            IClientsProvider atcClientsDataProvider = new AirTrafficControllersDataProvider(parserFactory, clientsSelector);
+            IClientsProvider pilotClientsDataProvider = new PilotsDataProvider(parserFactory, clientsSelector);
+            IClientsProvider followMeClientsDataProvider = new FollowMesDataProvider(parserFactory, clientsSelector);
+
             List<GeneralData> generalDataModels = generalDataProvider.GetData(whazzupData).ToList();
             List<Client> clientDataModels = clientsDataProvider.GetData(whazzupData).ToList();
             List<Server> serversDataModels = serversDataProvider.GetData(whazzupData).ToList();
             List<Airport> airportsDataModels = airportsDataProvider.GetData(whazzupData).ToList();
+
+            List<Client> atcDataModels = atcClientsDataProvider.GetData(whazzupData).ToList();
+            List<Client> pilotDataModels = pilotClientsDataProvider.GetData(whazzupData).ToList();
+            List<Client> followMeDataModels = followMeClientsDataProvider.GetData(whazzupData).ToList();
         }
     }
 }

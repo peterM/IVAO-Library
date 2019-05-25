@@ -28,7 +28,10 @@ namespace MalikP.IvaoLibrary.Common.Parsers
             {
                 TModel item = CreateItem(row);
 
-                result.Add(item);
+                if (item != null)
+                {
+                    result.Add(item);
+                }
             }
 
             return result;
@@ -46,7 +49,7 @@ namespace MalikP.IvaoLibrary.Common.Parsers
 
         protected virtual string[] Split(string data)
         {
-            return data.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            return data.Split(new char[] { ':' }, StringSplitOptions.None);
         }
     }
 }

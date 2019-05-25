@@ -3,9 +3,9 @@ using MalikP.IvaoLibrary.Models.Other;
 
 namespace MalikP.IvaoLibrary.Models.Clients
 {
-    public sealed class AirTrafficController : ClientWithRating<ATCRating>
+    public abstract class ClientWithRating<TRating> : Client
     {
-        public AirTrafficController(
+        public ClientWithRating(
             string callsign,
             string vid,
             string name,
@@ -18,12 +18,7 @@ namespace MalikP.IvaoLibrary.Models.Clients
             string softwareVersion,
             string administrativeVersion,
             string version,
-            ATCRating rating,
-            string frequency,
-            FacilityType facilityType,
-            string visualRange,
-            string atis,
-            string atisTime)
+            TRating rating)
             : base(callsign,
                    vid,
                    name,
@@ -35,26 +30,11 @@ namespace MalikP.IvaoLibrary.Models.Clients
                    softwareName,
                    softwareVersion,
                    administrativeVersion,
-                   version,
-                   rating)
+                   version)
         {
-            Frequency = frequency;
-            FacilityType = facilityType;
-            VisualRange = visualRange;
-            ATIS = atis;
-            ATISTime = atisTime;
+            Rating = rating;
         }
 
-        public string Frequency { get; }
-
-        //public string FrequencyCont { get; }
-
-        public FacilityType FacilityType { get; }
-
-        public string VisualRange { get; }
-
-        public string ATIS { get; }
-
-        public string ATISTime { get; }
+        public TRating Rating { get; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿namespace MalikP.IvaoLibrary.Common.Indexes
 {
-    public enum AirportIndex
+    public static class AirportIndex
     {
-        ICAO = 0,
-        ATIS = 1
+        public static int ICAO { get; } = 0;
+
+        public static int ATIS { get; } = 1;
     }
 }
