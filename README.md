@@ -35,8 +35,6 @@ Once you have data source created you can use it or you can create `Cached` data
 ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebDataSource);
 ``` 
 
-<br />
-
 ##### To delete cache
 
 > **_Note:_** In case you use cached provider, this provider will always return the same data until cache is deleted manually.
