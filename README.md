@@ -14,9 +14,6 @@ string path = @"C:\Data\whazzup.txt";
 IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
 ```
 
-<br />
-<br />
-
 #### Web based
 
 In case you want to load data from web.
@@ -26,9 +23,6 @@ string url = "http://api.ivao.aero/getdata/whazzup/whazzup.txt";
 IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource(url);
 ```
 
-<br />
-<br />
-
 #### Cached
 
 Once you have data source created you can use it or you can create `Cached` datasource.
@@ -36,7 +30,6 @@ Once you have data source created you can use it or you can create `Cached` data
 ```csharp
 ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebDataSource);
 ``` 
-<br />
 
 ##### To delete cache
 
@@ -45,8 +38,6 @@ ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCac
 ```csharp
 datasource.DeleteCache();
 ```
-<br />
-<br />
 
 ### Create parser factory
 
@@ -56,8 +47,6 @@ You need to create also factory to create parsers for specific data types / sect
 IParserFactory parserFactory = new ParserFactory();
 ```
 
-<br />
-<br />
 
 ### Create section selectors
 
@@ -69,9 +58,6 @@ IClientsSelector clientsSelector = new ClientsSelector();
 IServersSelector serverSelector = new ServersSelector();
 IAirportsSelector airportsSelector = new AirportsSelector();
 ```
-
-<br />
-<br />
 
 ### Create providers
 
@@ -99,8 +85,6 @@ IServersProvider serversDataProvider = new ServersDataProvider(dataSource, parse
 // in case you want !AIRPORTS data
 IAirportsProvider airportsDataProvider = new AirportsDataProvider(dataSource, parserFactory, airportsSelector);
 ```
-
-<br />
 
 Once you have provider instance you just need to call it to get data.
 
