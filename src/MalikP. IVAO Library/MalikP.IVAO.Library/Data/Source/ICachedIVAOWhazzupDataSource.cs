@@ -29,6 +29,6 @@ namespace MalikP.IVAO.Library.Data.Source
 {
     public interface ICachedIVAOWhazzupDataSource : IIVAOWhazzupDataSource
     {
-        void DeleteChache();
+        void DeleteCache();
     }
 }
