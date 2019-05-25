@@ -25,41 +25,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
     public enum ATCRating
     {
-        //[ItemShortcutDescription("DEF")]
+        [Map("DEF")]
         None = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
         Observer = 1,
 
-        //[ItemShortcutDescription("AS1")]
+        [Map("AS1")]
         Applicant = 2,
 
-        //[ItemShortcutDescription("AS2")]
+        [Map("AS2")]
         Trainee = 3,
 
-        //[ItemShortcutDescription("AS3")]
+        [Map("AS3")]
         AdvancedTrainee = 4,
 
-        //[ItemShortcutDescription("ADC")]
+        [Map("ADC")]
         AerodromeController = 5,
 
-        //[ItemShortcutDescription("APC")]
+        [Map("APC")]
         ApproachController = 6,
 
-        //[ItemShortcutDescription("ACC")]
+        [Map("ACC")]
         CenterController = 7,
 
-        //[ItemShortcutDescription("SEC")]
+        [Map("SEC")]
         SeniorController = 8,
 
-        //[ItemShortcutDescription("SAI")]
+        [Map("SAI")]
         SeniorATCInstructor = 9,
 
-        //[ItemShortcutDescription("CAI")]
+        [Map("CAI")]
         ChiefATCInstructor = 10,
     }
 }

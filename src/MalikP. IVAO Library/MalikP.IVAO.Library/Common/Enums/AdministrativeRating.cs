@@ -25,23 +25,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
     public enum AdministrativeRating
     {
-        //[ItemShortcutDescription("SUS")]
+        [Map("SUS")]
         Suspended = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
         Observer = 1,
 
-        //[ItemShortcutDescription("USR")]
+        [Map("USR")]
         User = 2,
 
-        //[ItemShortcutDescription("SUP")]
+        [Map("SUP")]
         Supervisor = 11,
 
-        //[ItemShortcutDescription("ADM")]
+        [Map("ADM")]
         Administrator = 12,
     }
 }

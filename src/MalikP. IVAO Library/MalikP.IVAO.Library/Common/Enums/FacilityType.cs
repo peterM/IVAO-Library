@@ -25,32 +25,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
     public enum FacilityType
     {
-        //[ItemShortcutDescriptionAttribute("OBS")]
+        [Map("OBS")]
         Observer = 0,
 
-        //[ItemShortcutDescriptionAttribute("FI")]
+        [Map("FI")]
         FlightInformation = 1,
 
-        //[ItemShortcutDescriptionAttribute("DEL")]
+        [Map("DEL")]
         Delivery = 2,
 
-        //[ItemShortcutDescriptionAttribute("GND")]
+        [Map("GND")]
         Ground = 3,
 
-        //[ItemShortcutDescriptionAttribute("TWR")]
+        [Map("TWR")]
         Tower = 4,
 
-        //[ItemShortcutDescriptionAttribute("APP")]
+        [Map("APP")]
         Approach = 5,
 
-        //[ItemShortcutDescriptionAttribute("ACC")]
+        [Map("ACC")]
         AreaControl = 6,
 
-        //[ItemShortcutDescriptionAttribute("DEP")]
+        [Map("DEP")]
         Departure = 7
     }
 }

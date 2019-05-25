@@ -25,41 +25,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
     public enum PilotRating
     {
-        //[ItemShortcutDescription("None")]
+        [Map("None")]
         None = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
         Observer = 1,
 
-        //[ItemShortcutDescription("FS1")]
+        [Map("FS1")]
         BasicFlightStudent = 2,
 
-        //[ItemShortcutDescription("FS2")]
+        [Map("FS2")]
         FlightStudent = 3,
 
-        //[ItemShortcutDescription("FS3")]
+        [Map("FS3")]
         AdvancedFlightStudent = 4,
 
-        //[ItemShortcutDescription("PP")]
+        [Map("PP")]
         PrivatePilot = 5,
 
-        //[ItemShortcutDescription("SPP")]
+        [Map("SPP")]
         SeniorPrivatePilot = 6,
 
-        //[ItemShortcutDescription("CP")]
+        [Map("CP")]
         CommercialPilot = 7,
 
-        //[ItemShortcutDescription("ATP")]
+        [Map("ATP")]
         AirlineTransportPilot = 8,
 
-        //[ItemShortcutDescription("SFI")]
+        [Map("SFI")]
         SeniorFlightInstructor = 9,
 
-        //[ItemShortcutDescription("CFI")]
+        [Map("CFI")]
         ChiefFlightInstructor = 10,
     }
 }
