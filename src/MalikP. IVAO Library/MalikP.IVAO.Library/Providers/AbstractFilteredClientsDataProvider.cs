@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: AirTrafficControllersDataProvider.cs 
+// File: AbstractFilteredClientsDataProvider.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
