@@ -40,7 +40,7 @@ namespace MalikP.IVAO.Library.Data.Source
             _datasource = ivaoWhazzupDataSource;
         }
 
-        public void DeleteChache()
+        public void DeleteCache()
         {
             lock (_locker)
             {
