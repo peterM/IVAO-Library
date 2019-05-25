@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IProvider`1.cs 
+// File: AbstractIVAODataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,15 +25,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-
-using MalikP.IVAO.Library.Models;
-
-namespace MalikP.IVAO.Library.Providers
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface IProvider<TModel> : IProvider
-        where TModel : class, IIvaoModel
+    public abstract class AbstractIVAODataSource<TModel> : IIVAODataSource<TModel>
     {
-        IEnumerable<TModel> GetData();
+        public abstract TModel GetIVAOData();
+
+        object IIVAODataSource.GetIVAOData()
+        {
+            return GetIVAOData();
+        }
     }
 }

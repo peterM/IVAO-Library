@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IProvider`1.cs 
+// File: WebIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,15 +25,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 
-using MalikP.IVAO.Library.Models;
+using MalikP.IVAO.Library.Models.DataHolders;
 
-namespace MalikP.IVAO.Library.Providers
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface IProvider<TModel> : IProvider
-        where TModel : class, IIvaoModel
+    public class WebIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, IWebIVAOWhazzupDataSource
     {
-        IEnumerable<TModel> GetData();
+        private readonly Uri _uri;
+
+        public WebIVAOWhazzupDataSource(string url)
+            : this(new Uri(url))
+        {
+        }
+
+        public WebIVAOWhazzupDataSource(Uri uri)
+        {
+            _uri = uri;
+        }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (_uri == null)
+            {
+                return Whazzup.Null;
+            }
+
+            string[] data = Enumerable.Empty<string>().ToArray();
+
+            using (WebClient client = new WebClient())
+            {
+                client.Encoding = Encoding.GetEncoding("iso-8859-1");
+
+                string dataString = client.DownloadString(_uri);
+                data = Regex.Split(dataString, "\r\n|\r|\n")
+                    .Where(d => !string.IsNullOrWhiteSpace(d))
+                    .ToArray();
+            }
+
+            return new Whazzup(data);
+        }
     }
 }

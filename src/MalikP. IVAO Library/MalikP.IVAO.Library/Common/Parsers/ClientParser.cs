@@ -52,29 +52,16 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         protected override Client CreateItem(string row)
         {
+            if (string.IsNullOrWhiteSpace(row))
+            {
+                return null;
+            }
+
             string[] rowData = Split(row);
 
-            ClientType clientType = GetClientType(rowData[ClientIndex.All.ClientType]);
+            ClientType clientType = Annotation.AnnotationExtensions.GetFromMap<ClientType>(rowData[ClientIndex.All.ClientType]);
 
             return _factories[clientType].Create(rowData);
-        }
-
-        private ClientType GetClientType(string value)
-        {
-            switch (value)
-            {
-                case "PILOT":
-                    return ClientType.Pilot;
-
-                case "FOLME":
-                    return ClientType.FollowMeCar;
-
-                case "ATC":
-                    return ClientType.ATC;
-
-                default:
-                    return ClientType.NotDefined;
-            }
         }
     }
 }

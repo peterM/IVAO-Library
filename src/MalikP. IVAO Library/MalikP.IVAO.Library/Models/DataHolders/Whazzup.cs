@@ -25,10 +25,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Linq;
+
 namespace MalikP.IVAO.Library.Models.DataHolders
 {
     public sealed class Whazzup : AbstractDataHolder<string[]>, IWhazzup
     {
+        public static Whazzup Null { get; } = new Whazzup(Enumerable.Empty<string>().ToArray());
+
         public Whazzup(string[] data)
             : base(data)
         {

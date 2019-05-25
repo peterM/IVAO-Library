@@ -27,6 +27,7 @@
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Providers
@@ -34,9 +35,11 @@ namespace MalikP.IVAO.Library.Providers
     public sealed class ServersDataProvider : AbstractProvider<Server, IServersSelector>, IServersProvider
     {
         public ServersDataProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IServersSelector selector)
-            : base(parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
         }

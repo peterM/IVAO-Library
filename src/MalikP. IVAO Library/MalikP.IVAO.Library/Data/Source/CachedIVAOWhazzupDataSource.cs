@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IProvider`1.cs 
+// File: CachedIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,15 +25,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
+using MalikP.IVAO.Library.Models.DataHolders;
 
-using MalikP.IVAO.Library.Models;
-
-namespace MalikP.IVAO.Library.Providers
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface IProvider<TModel> : IProvider
-        where TModel : class, IIvaoModel
+    public sealed class CachedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ICachedIVAOWhazzupDataSource
     {
-        IEnumerable<TModel> GetData();
+        private readonly object _locker = new object();
+        private readonly IIVAOWhazzupDataSource _datasource;
+        private IWhazzup _cache;
+
+        public CachedIVAOWhazzupDataSource(IIVAOWhazzupDataSource ivaoWhazzupDataSource)
+        {
+            _datasource = ivaoWhazzupDataSource;
+        }
+
+        public void DeleteChache()
+        {
+            lock (_locker)
+            {
+                _cache = null;
+            }
+        }
+
+        public override IWhazzup GetIVAOData()
+        {
+            lock (_locker)
+            {
+                if (_cache == null || _cache == Whazzup.Null)
+                {
+                    _cache = _datasource.GetIVAOData();
+                }
+            }
+
+            return _cache;
+        }
     }
 }

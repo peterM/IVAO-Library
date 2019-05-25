@@ -43,6 +43,11 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         public override AirTrafficController Create(string[] rowData)
         {
+            if (rowData.Length == 0)
+            {
+                return null;
+            }
+
             if (rowData.Length != 49)
             {
                 List<string> data = rowData.ToList();

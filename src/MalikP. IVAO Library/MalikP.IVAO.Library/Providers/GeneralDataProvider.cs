@@ -30,6 +30,7 @@ using System.Linq;
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.General;
 
 namespace MalikP.IVAO.Library.Providers
@@ -37,9 +38,11 @@ namespace MalikP.IVAO.Library.Providers
     public sealed class GeneralDataProvider : AbstractProvider<GeneralData, IGeneralSelector>, IGeneralDataProvider
     {
         public GeneralDataProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IGeneralSelector selector)
-            : base(parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
         }

@@ -40,6 +40,11 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         protected override Airport CreateItem(string data)
         {
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                return null;
+            }
+
             string[] dataItems = Split(data);
 
             return AirportBuilder.Create()
