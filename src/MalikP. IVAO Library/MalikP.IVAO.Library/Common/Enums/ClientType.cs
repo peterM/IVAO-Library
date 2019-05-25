@@ -25,20 +25,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
     public enum ClientType
     {
-        //[ItemShortcutDescription("NotDefined")]
         NotDefined = 0,
 
-        //[ItemShortcutDescription("ATC")]
+        [Map("ATC")]
         ATC = 1,
 
-        //[ItemShortcutDescription("PILOT")]
+        [Map("PILOT")]
         Pilot = 2,
 
-        //[ItemShortcutDescription("FOLME")]
+        [Map("FOLME")]
         FollowMeCar = 3,
     }
 }

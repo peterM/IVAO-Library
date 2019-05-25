@@ -32,14 +32,14 @@ using MalikP.IVAO.Library.Models.Clients;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public sealed class ClientsDataProvider : AbstractClientsDataProvider<Client>, IClientsProvider
+    public sealed class ClientsDataProvider : AbstractClientsDataProvider<Client>
     {
         public ClientsDataProvider(
             IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
-            : base(dataSource
-                  , parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
         }

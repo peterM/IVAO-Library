@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: AbstractProvider.cs 
+// File: AirTrafficControllersDataProvider.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -28,59 +28,66 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using MalikP.IVAO.Library.Common.Annotation;
+using MalikP.IVAO.Library.Common.Enums;
+using MalikP.IVAO.Library.Common.Indexes;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
-using MalikP.IVAO.Library.Models;
+using MalikP.IVAO.Library.Models.Clients;
 using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public abstract class AbstractProvider<TResult, TSelector> : IProvider<TResult>
-        where TResult : class, IIvaoModel
-        where TSelector : ISelector
+    public abstract class AbstractFilteredClientsDataProvider<TModel> : AbstractClientsDataProvider<TModel>
+         where TModel : Client
     {
-        private readonly IIVAOWhazzupDataSource _dataSource;
-
-        protected AbstractProvider(
+        protected AbstractFilteredClientsDataProvider(
             IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
-            TSelector selector)
+            IClientsSelector selector,
+            ClientType clientType)
+            : base(dataSource,
+                   parserFactory,
+                   selector)
         {
-            ParserFactory = parserFactory;
-            Selector = selector;
-            _dataSource = dataSource;
+            SelectedClientType = clientType;
         }
 
-        protected IParserFactory ParserFactory { get; }
+        protected ClientType SelectedClientType { get; }
 
-        protected TSelector Selector { get; }
-
-        public IEnumerable<TResult> GetData()
+        protected override ISelectedData FilterSelectedData(ISelectedData selectedData)
         {
-            IWhazzup whazzupData = _dataSource.GetIVAOData();
-            ISelectedData selectedData = Selector.SelectData(whazzupData);
-            selectedData = FilterSelectedData(selectedData);
+            selectedData = base.FilterSelectedData(selectedData);
 
-            IParser parser = ParserFactory.CreateParser(Selector);
-            object resultData = parser.Parse(selectedData);
+            List<string> data = new List<string>();
+            var selectorData = selectedData.Data.FirstOrDefault(d => d == Selector.Value);
 
-            return GetResult(resultData);
-        }
-
-        protected virtual ISelectedData FilterSelectedData(ISelectedData selectedData)
-        {
-            return selectedData;
-        }
-
-        protected virtual IEnumerable<TResult> GetResult(object data)
-        {
-            if (data is IEnumerable<TResult> castedData)
+            if (!string.IsNullOrEmpty(selectorData))
             {
-                return castedData;
+                data.Add(selectorData);
             }
 
-            return Enumerable.Empty<TResult>();
+            data.AddRange(selectedData.Data.Where(CheckItem));
+
+            return new SelectedData(data.ToArray());
+        }
+
+        private bool CheckItem(string row)
+        {
+            string[] data = row.Split(new char[] { ':' });
+
+            return data.Length >= 47 && AnnotationExtensions.GetFromMap<ClientType>(data[ClientIndex.All.ClientType]) == SelectedClientType;
+        }
+
+        protected override IEnumerable<TModel> GetResult(object data)
+        {
+            if (data is IEnumerable<object> castedData)
+            {
+                return castedData.OfType<TModel>().ToList();
+            }
+
+            return Enumerable.Empty<TModel>();
         }
     }
 }

@@ -25,9 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using System.Linq;
-
+using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -35,8 +33,7 @@ using MalikP.IVAO.Library.Models.Clients;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public sealed class AirTrafficControllersDataProvider
-        : AbstractClientsDataProvider<AirTrafficController>, IAirTrafficControllersProvider, IClientsProvider
+    public sealed class AirTrafficControllersDataProvider : AbstractFilteredClientsDataProvider<AirTrafficController>, IAirTrafficControllersProvider
     {
         public AirTrafficControllersDataProvider(
             IIVAOWhazzupDataSource dataSource,
@@ -44,18 +41,9 @@ namespace MalikP.IVAO.Library.Providers
             IClientsSelector selector)
             : base(dataSource,
                   parserFactory,
-                  selector)
+                  selector,
+                  ClientType.ATC)
         {
-        }
-
-        protected override IEnumerable<AirTrafficController> GetResult(object data)
-        {
-            if (data is IEnumerable<object> castedData)
-            {
-                return castedData.OfType<AirTrafficController>().ToList();
-            }
-
-            return Enumerable.Empty<AirTrafficController>();
         }
     }
 }

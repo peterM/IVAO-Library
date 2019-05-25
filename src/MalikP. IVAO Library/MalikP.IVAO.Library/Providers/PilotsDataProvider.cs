@@ -25,9 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using System.Linq;
-
+using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -35,27 +33,17 @@ using MalikP.IVAO.Library.Models.Clients;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public sealed class PilotsDataProvider
-        : AbstractClientsDataProvider<Pilot>, IPilotsProvider, IClientsProvider
+    public sealed class PilotsDataProvider : AbstractFilteredClientsDataProvider<Pilot>, IPilotsProvider
     {
         public PilotsDataProvider(
             IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
             : base(dataSource,
-                  parserFactory,
-                  selector)
+                   parserFactory,
+                   selector,
+                   ClientType.Pilot)
         {
-        }
-
-        protected override IEnumerable<Pilot> GetResult(object data)
-        {
-            if (data is IEnumerable<object> castedData)
-            {
-                return castedData.OfType<Pilot>().ToList();
-            }
-
-            return Enumerable.Empty<Pilot>();
         }
     }
 }

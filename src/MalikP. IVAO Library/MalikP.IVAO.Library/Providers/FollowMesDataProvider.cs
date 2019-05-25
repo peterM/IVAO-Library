@@ -25,9 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using System.Linq;
-
+using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -35,27 +33,17 @@ using MalikP.IVAO.Library.Models.Clients;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public sealed class FollowMesDataProvider
-        : AbstractClientsDataProvider<FollowMe>, IFollowMesProvider
+    public sealed class FollowMesDataProvider : AbstractFilteredClientsDataProvider<FollowMe>, IFollowMesProvider
     {
         public FollowMesDataProvider(
             IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
             : base(dataSource,
-                  parserFactory,
-                  selector)
+                   parserFactory,
+                   selector,
+                   ClientType.FollowMeCar)
         {
-        }
-
-        protected override IEnumerable<FollowMe> GetResult(object data)
-        {
-            if (data is IEnumerable<object> castedData)
-            {
-                return castedData.OfType<FollowMe>().ToList();
-            }
-
-            return Enumerable.Empty<FollowMe>();
         }
     }
 }
