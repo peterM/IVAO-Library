@@ -103,6 +103,12 @@ var data = yourProvider.GetData().ToList();
 
 <br />
 
+### License
+
+IVAO Library is licensed under the **MIT** license.
+
+<br />
+
 ### About IVAO
 
 In case you are interested vidsit `IVAO` homepage here **[https://www.ivao.aero/](https://www.ivao.aero/)**
