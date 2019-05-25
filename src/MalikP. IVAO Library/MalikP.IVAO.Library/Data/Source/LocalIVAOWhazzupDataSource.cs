@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IProvider`1.cs 
+// File: LocalIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,15 +25,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
+using System.IO;
 
-using MalikP.IVAO.Library.Models;
+using MalikP.IVAO.Library.Models.DataHolders;
 
-namespace MalikP.IVAO.Library.Providers
+namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface IProvider<TModel> : IProvider
-        where TModel : class, IIvaoModel
+    public sealed class LocalIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalIVAOWhazzupDataSource
     {
-        IEnumerable<TModel> GetData();
+        public LocalIVAOWhazzupDataSource(string path)
+        {
+            Path = path;
+        }
+
+        private string Path { get; }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (string.IsNullOrWhiteSpace(Path) || !File.Exists(Path))
+            {
+                return Whazzup.Null;
+            }
+
+            return new Whazzup(File.ReadAllLines(Path));
+        }
     }
 }

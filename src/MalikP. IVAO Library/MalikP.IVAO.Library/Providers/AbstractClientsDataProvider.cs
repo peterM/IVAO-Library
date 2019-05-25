@@ -25,21 +25,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Collections.Generic;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.Clients;
 
 namespace MalikP.IVAO.Library.Providers
 {
-    public abstract class AbstractClientsDataProvider<TModel> : AbstractProvider<TModel, IClientsSelector>
+    public abstract class AbstractClientsDataProvider<TModel> : AbstractProvider<TModel, IClientsSelector>, IClientsProvider
         where TModel : Client
     {
         protected AbstractClientsDataProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
-            : base(parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
+        }
+
+        IEnumerable<Client> IProvider<Client>.GetData()
+        {
+            return base.GetData();
         }
     }
 }

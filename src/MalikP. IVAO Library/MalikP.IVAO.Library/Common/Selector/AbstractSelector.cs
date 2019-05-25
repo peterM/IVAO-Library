@@ -50,6 +50,11 @@ namespace MalikP.IVAO.Library.Common.Selector
         private IEnumerable<string> SelectDataInternal(string[] dataLines)
         {
             int startIndex = dataLines.ToList().IndexOf(Value);
+            if (dataLines.Length == 0)
+            {
+                yield break;
+            }
+
             for (int i = startIndex; i < dataLines.Length; i++)
             {
                 if (dataLines[i].StartsWith("!") && dataLines[i] != Value)

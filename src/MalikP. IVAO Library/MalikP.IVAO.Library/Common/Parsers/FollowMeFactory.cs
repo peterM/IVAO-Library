@@ -39,6 +39,11 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
         public override FollowMe Create(string[] rowData)
         {
+            if (rowData.Length == 0)
+            {
+                return null;
+            }
+
             return AssignGeneralData(FollowMeBuilder.Create(), rowData)
                 .Build();
         }
