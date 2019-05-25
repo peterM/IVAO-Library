@@ -28,6 +28,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 
 using MalikP.IVAO.Library.Models.DataHolders;
@@ -59,6 +60,8 @@ namespace MalikP.IVAO.Library.Data.Source
 
             using (WebClient client = new WebClient())
             {
+                client.Encoding = Encoding.GetEncoding("iso-8859-1");
+
                 string dataString = client.DownloadString(_uri);
                 data = Regex.Split(dataString, "\r\n|\r|\n")
                     .Where(d => !string.IsNullOrWhiteSpace(d))
