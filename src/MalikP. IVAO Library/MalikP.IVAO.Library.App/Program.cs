@@ -23,7 +23,7 @@ namespace MalikP.IVAO.Library.App
             string path = GetPath();
 
             ILocalIVAOWhazzupDataSource localDataSource = new LocalIVAOWhazzupDataSource(fileName);
-            ILocalCachedIVAOWhazzupDataSource dataSource = new LocalCachedIVAOWhazzupDataSource(localDataSource);
+            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(localDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
             IGeneralSelector generalSelector = new GeneralSelector();

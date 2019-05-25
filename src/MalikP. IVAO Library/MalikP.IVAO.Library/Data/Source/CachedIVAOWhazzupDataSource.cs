@@ -29,21 +29,33 @@ using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class LocalCachedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalCachedIVAOWhazzupDataSource
+    public sealed class CachedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ICachedIVAOWhazzupDataSource
     {
-        private readonly ILocalIVAOWhazzupDataSource _localIVAOWhazzupDataSource;
+        private readonly object _locker = new object();
+        private readonly IIVAOWhazzupDataSource _datasource;
         private IWhazzup _cache;
 
-        public LocalCachedIVAOWhazzupDataSource(ILocalIVAOWhazzupDataSource localIVAOWhazzupDataSource)
+        public CachedIVAOWhazzupDataSource(IIVAOWhazzupDataSource ivaoWhazzupDataSource)
         {
-            _localIVAOWhazzupDataSource = localIVAOWhazzupDataSource;
+            _datasource = ivaoWhazzupDataSource;
+        }
+
+        public void DeleteChache()
+        {
+            lock (_locker)
+            {
+                _cache = null;
+            }
         }
 
         public override IWhazzup GetIVAOData()
         {
-            if (_cache == null || _cache == Whazzup.Null)
+            lock (_locker)
             {
-                _cache = _localIVAOWhazzupDataSource.GetIVAOData();
+                if (_cache == null || _cache == Whazzup.Null)
+                {
+                    _cache = _datasource.GetIVAOData();
+                }
             }
 
             return _cache;
