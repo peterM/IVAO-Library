@@ -9,8 +9,8 @@
 		<Product>MalikP. IVAO Library</Product>
 		<Description>Library to process IVAO data</Description>
 		<Copyright>Copyright © 2019 Peter Malik. (MalikP.)</Copyright>
-		<PackageProjectUrl>https://github.com/peterM/IVAO-Net</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/peterM/IVAO-Net</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/peterM/IVAO-Library</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/peterM/IVAO-Library</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>IVAO;WHAZZUP</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
