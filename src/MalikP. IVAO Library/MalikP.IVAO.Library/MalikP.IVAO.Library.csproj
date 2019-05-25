@@ -3,19 +3,21 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;netstandard2.0;net472;net471;net47;net462;net461;net46;net452;net451;net45</TargetFrameworks>
 		<PackageId>MalikP.IVAO.Library</PackageId>
-		<Version>0.8.0</Version>
+		<Version>0.8.1</Version>
 		<Authors>Peter Malik (MalikP.)</Authors>
 		<Company>Peter Malik (MalikP.)</Company>
 		<Product>MalikP. IVAO Library</Product>
 		<Description>Library to process IVAO data</Description>
 		<Copyright>Copyright © 2019 Peter Malik. (MalikP.)</Copyright>
-		<PackageProjectUrl>https://github.com/peterM/IVAO-Net</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/peterM/IVAO-Net</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/peterM/IVAO-Library</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/peterM/IVAO-Library</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageTags>IVAO;WHAZZUP</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<ApplicationIcon>IVAOLibrary.ico</ApplicationIcon>
+		<PackageIconUrl>https://raw.githubusercontent.com/peterM/IVAO-Library/master/resource/IVAOLibrary64x64.png</PackageIconUrl>
 		<!--<ApplicationIcon />-->
 		<!--<Win32Resource />-->
 	</PropertyGroup>
