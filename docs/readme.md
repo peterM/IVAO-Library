@@ -1,12 +1,14 @@
 ## Get documentation info
 
 [https://doc.ivao.aero/apidocumentation:whazzup](https://doc.ivao.aero/apidocumentation:whazzup)
+
 [https://doc.ivao.aero/apidocumentation:whazzup:howtoretrieve](https://doc.ivao.aero/apidocumentation:whazzup:howtoretrieve)
 
 ### Status data
 
 
 [https://www.ivao.aero/whazzup/status.txt](https://www.ivao.aero/whazzup/status.txt)
+
 [https://doc.ivao.aero/apidocumentation:whazzup:statusfileformat](https://doc.ivao.aero/apidocumentation:whazzup:statusfileformat)
 
 _Example contents:_
