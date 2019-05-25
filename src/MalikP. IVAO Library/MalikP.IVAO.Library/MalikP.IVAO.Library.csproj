@@ -17,6 +17,7 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<ApplicationIcon>IVAOLibrary.ico</ApplicationIcon>
+		<PackageIconUrl>https://raw.githubusercontent.com/peterM/IVAO-Library/master/resource/IVAOLibrary64x64.png</PackageIconUrl>
 		<!--<ApplicationIcon />-->
 		<!--<Win32Resource />-->
 	</PropertyGroup>
