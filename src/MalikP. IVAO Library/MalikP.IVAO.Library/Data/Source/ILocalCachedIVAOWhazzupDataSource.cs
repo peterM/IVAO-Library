@@ -29,7 +29,7 @@ using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface ILocalCachedIVAOWhazzupDataSource : IIVAODataSource<IWhazzup>
+    public interface ILocalCachedIVAOWhazzupDataSource : IIVAOWhazzupDataSource
     {
     }
 }

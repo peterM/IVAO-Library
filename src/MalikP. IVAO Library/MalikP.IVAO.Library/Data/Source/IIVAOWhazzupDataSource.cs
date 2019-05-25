@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: ILocalIVAOWhazzupDataSource.cs 
+// File: IIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -29,7 +29,7 @@ using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface ILocalIVAOWhazzupDataSource : IIVAOWhazzupDataSource
+    public interface IIVAOWhazzupDataSource : IIVAODataSource<IWhazzup>
     {
     }
 }

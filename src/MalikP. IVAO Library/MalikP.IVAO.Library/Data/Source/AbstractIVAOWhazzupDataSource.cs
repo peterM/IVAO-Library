@@ -29,7 +29,7 @@ using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public abstract class AbstractIVAOWhazzupDataSource : AbstractIVAODataSource<IWhazzup>
+    public abstract class AbstractIVAOWhazzupDataSource : AbstractIVAODataSource<IWhazzup>, IIVAOWhazzupDataSource
     {
     }
 }
