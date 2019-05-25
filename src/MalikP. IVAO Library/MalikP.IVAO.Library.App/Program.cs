@@ -4,6 +4,7 @@ using System.Linq;
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.Airports;
 using MalikP.IVAO.Library.Models.Clients;
 using MalikP.IVAO.Library.Models.DataHolders;
@@ -18,6 +19,10 @@ namespace MalikP.IVAO.Library.App
         public static void Main(string[] args)
         {
             string path = @"C:\Sources\Tfs\IvaoLibrary\src\MalikP. IvaoLibrary\MalikP.IVAO.Library.App\testData.txt";
+
+            ILocalIVAOWhazzupDataSource localDataSource = new LocalIVAOWhazzupDataSource(path);
+            ILocalCachedIVAOWhazzupDataSource dataSource = new LocalCachedIVAOWhazzupDataSource(localDataSource);
+
             string[] data = File.ReadAllLines(path);
             IWhazzup whazzupData = new Whazzup(data);
 
