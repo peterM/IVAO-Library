@@ -30,8 +30,8 @@ using System.Linq;
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.Clients;
-using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Providers
 {
@@ -39,9 +39,11 @@ namespace MalikP.IVAO.Library.Providers
         : AbstractClientsDataProvider<Pilot>, IPilotsProvider, IClientsProvider
     {
         public PilotsDataProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
-            : base(parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
         }
@@ -54,11 +56,6 @@ namespace MalikP.IVAO.Library.Providers
             }
 
             return Enumerable.Empty<Pilot>();
-        }
-
-        IEnumerable<Client> IProvider<Client>.GetData(IWhazzup whazzupData)
-        {
-            return base.GetData(whazzupData);
         }
     }
 }

@@ -37,24 +37,30 @@ namespace MalikP.IVAO.Library.Common.Parsers
 {
     public sealed class GeneralParser : AbstractParser<GeneralData, IGeneralSelector>
     {
-        private const string dateTimeFormat = "yyyyMMddHHmmss";
+        private readonly IIVAOStringService _ivaoStringService;
 
         public GeneralParser(IGeneralSelector selector)
             : base(selector)
         {
+            _ivaoStringService = new IVAOStringService();
         }
 
         public override object Parse(ISelectedData selectedData)
         {
             string[] data = RemoveSelector(selectedData.Data);
 
+            if (data.Length == 0)
+            {
+                return GeneralDataBuilder.Create().Build();
+            }
+
             return GeneralDataBuilder.Create()
-                .WithVersion(int.Parse(new VersionExtractor().ExtractValue(data)))
-                .WithReload(int.Parse(new ReloadExtractor().ExtractValue(data)))
-                .WithUpdate(DateTime.ParseExact(new UpdateExtractor().ExtractValue(data), dateTimeFormat, CultureInfo.InvariantCulture))
-                .WithConnectedClients(int.Parse(new ConnectedClientsExtractor().ExtractValue(data)))
-                .WithConnectedServers(int.Parse(new ConnectedServersExtractor().ExtractValue(data)))
-                .WithConnectedAirports(int.Parse(new ConnectedAirportsExtractor().ExtractValue(data)))
+                .WithVersion(_ivaoStringService.IVAO_GetInt(new VersionExtractor().ExtractValue(data)))
+                .WithReload(_ivaoStringService.IVAO_GetInt(new ReloadExtractor().ExtractValue(data)))
+                .WithUpdate(_ivaoStringService.IVAO_GetDateTime(new UpdateExtractor().ExtractValue(data)) ?? DateTime.MinValue)
+                .WithConnectedClients(_ivaoStringService.IVAO_GetInt(new ConnectedClientsExtractor().ExtractValue(data)))
+                .WithConnectedServers(_ivaoStringService.IVAO_GetInt(new ConnectedServersExtractor().ExtractValue(data)))
+                .WithConnectedAirports(_ivaoStringService.IVAO_GetInt(new ConnectedAirportsExtractor().ExtractValue(data)))
                 .Build();
         }
     }

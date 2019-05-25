@@ -30,6 +30,7 @@ using System.Linq;
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models;
 using MalikP.IVAO.Library.Models.DataHolders;
 
@@ -39,20 +40,25 @@ namespace MalikP.IVAO.Library.Providers
         where TResult : class, IIvaoModel
         where TSelector : ISelector
     {
+        private readonly IIVAOWhazzupDataSource _dataSource;
+
         protected AbstractProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             TSelector selector)
         {
             ParserFactory = parserFactory;
             Selector = selector;
+            _dataSource = dataSource;
         }
 
         protected IParserFactory ParserFactory { get; }
 
         protected TSelector Selector { get; }
 
-        public IEnumerable<TResult> GetData(IWhazzup whazzupData)
+        public IEnumerable<TResult> GetData()
         {
+            IWhazzup whazzupData = _dataSource.GetIVAOData();
             ISelectedData selectedData = Selector.SelectData(whazzupData);
 
             IParser parser = ParserFactory.CreateParser(Selector);

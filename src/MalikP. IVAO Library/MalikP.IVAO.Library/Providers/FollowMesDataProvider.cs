@@ -30,18 +30,20 @@ using System.Linq;
 
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Models.Clients;
-using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Providers
 {
     public sealed class FollowMesDataProvider
-        : AbstractClientsDataProvider<FollowMe>, IFollowMesProvider, IClientsProvider
+        : AbstractClientsDataProvider<FollowMe>, IFollowMesProvider
     {
         public FollowMesDataProvider(
+            IIVAOWhazzupDataSource dataSource,
             IParserFactory parserFactory,
             IClientsSelector selector)
-            : base(parserFactory,
+            : base(dataSource,
+                  parserFactory,
                   selector)
         {
         }
@@ -54,11 +56,6 @@ namespace MalikP.IVAO.Library.Providers
             }
 
             return Enumerable.Empty<FollowMe>();
-        }
-
-        IEnumerable<Client> IProvider<Client>.GetData(IWhazzup whazzupData)
-        {
-            return base.GetData(whazzupData);
         }
     }
 }
