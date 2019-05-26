@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
@@ -33,7 +34,8 @@ using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
-    public abstract class Client : IIvaoModel
+    [DataContract]
+    public abstract class Client : AbstractIvaoModel
     {
         public Client(
             string callsign,
@@ -65,29 +67,45 @@ namespace MalikP.IVAO.Library.Models.Clients
             ClientRating = clientRating;
         }
 
-        public string Callsign { get; }
+        protected Client()
+        {
+        }
 
-        public string VID { get; }
+        [DataMember]
+        public string Callsign { get; private set; }
 
-        public string Name { get; }
+        [DataMember]
+        public string VID { get; private set; }
 
-        public ClientType ClientType { get; }
+        [DataMember]
+        public string Name { get; private set; }
+
+        [DataMember]
+        public ClientType ClientType { get; private set; }
 
         [Unit("N/A")]
-        public GPS Location { get; }
+        [DataMember]
+        public GPS Location { get; private set; }
 
-        public string Server { get; }
+        [DataMember]
+        public string Server { get; private set; }
 
-        public string Protocol { get; }
+        [DataMember]
+        public string Protocol { get; private set; }
 
-        public DateTime ConnectionTime { get; }
+        [DataMember]
+        public DateTime ConnectionTime { get; private set; }
 
-        public string SoftwareName { get; }
+        [DataMember]
+        public string SoftwareName { get; private set; }
 
-        public string SoftwareVersion { get; }
+        [DataMember]
+        public string SoftwareVersion { get; private set; }
 
-        public AdministrativeRating AdministrativeVersion { get; }
+        [DataMember]
+        public AdministrativeRating AdministrativeVersion { get; private set; }
 
-        public int ClientRating { get; }
+        [DataMember]
+        public int ClientRating { get; private set; }
     }
 }

@@ -25,34 +25,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(FacilityType))]
     public enum FacilityType
     {
         [Map("OBS")]
+        [EnumMember]
         Observer = 0,
 
         [Map("FI")]
+        [EnumMember]
         FlightInformation = 1,
 
         [Map("DEL")]
+        [EnumMember]
         Delivery = 2,
 
         [Map("GND")]
+        [EnumMember]
         Ground = 3,
 
         [Map("TWR")]
+        [EnumMember]
         Tower = 4,
 
         [Map("APP")]
+        [EnumMember]
         Approach = 5,
 
         [Map("ACC")]
+        [EnumMember]
         AreaControl = 6,
 
         [Map("DEP")]
+        [EnumMember]
         Departure = 7
     }
 }

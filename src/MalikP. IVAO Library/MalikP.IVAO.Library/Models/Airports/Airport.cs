@@ -25,9 +25,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Airports
 {
-    public sealed class Airport : IIvaoModel
+    [DataContract]
+    public sealed class Airport : AbstractIvaoModel
     {
         public Airport(
             string icao,
@@ -37,8 +40,10 @@ namespace MalikP.IVAO.Library.Models.Airports
             ATIS = atis;
         }
 
-        public string ICAO { get; }
+        [DataMember]
+        public string ICAO { get; private set; }
 
-        public string ATIS { get; }
+        [DataMember]
+        public string ATIS { get; private set; }
     }
 }

@@ -26,12 +26,15 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public sealed class AirTrafficController : ClientWithRating<ATCRating>
     {
         public AirTrafficController(
@@ -74,18 +77,27 @@ namespace MalikP.IVAO.Library.Models.Clients
             ATISTime = atisTime;
         }
 
-        public string Frequency { get; }
+        private AirTrafficController()
+        {
+        }
+
+        [DataMember]
+        public string Frequency { get; private set; }
 
         public decimal Freq => decimal.Parse(Frequency);
 
-        public FacilityType FacilityType { get; }
+        [DataMember]
+        public FacilityType FacilityType { get; private set; }
 
         [Unit("NM")]
-        public int VisualRange { get; }
+        [DataMember]
+        public int VisualRange { get; private set; }
 
         // todo: create type ATIS
-        public string ATIS { get; }
+        [DataMember]
+        public string ATIS { get; private set; }
 
-        public DateTime? ATISTime { get; }
+        [DataMember]
+        public DateTime? ATISTime { get; private set; }
     }
 }

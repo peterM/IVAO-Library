@@ -25,21 +25,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(ClientType))]
     public enum ClientType
     {
+        [EnumMember]
         NotDefined = 0,
 
         [Map("ATC")]
+        [EnumMember]
         ATC = 1,
 
         [Map("PILOT")]
+        [EnumMember]
         Pilot = 2,
 
         [Map("FOLME")]
+        [EnumMember]
         FollowMeCar = 3,
     }
 }

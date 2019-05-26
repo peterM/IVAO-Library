@@ -25,9 +25,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Servers
 {
-    public sealed class Server : IIvaoModel
+    [DataContract]
+    public sealed class Server : AbstractIvaoModel
     {
         public Server(
             string hostname,
@@ -45,16 +48,26 @@ namespace MalikP.IVAO.Library.Models.Servers
             MaximumConnections = maximumConnections;
         }
 
-        public string Hostname { get; }
+        private Server()
+        {
+        }
 
-        public string IP { get; }
+        [DataMember]
+        public string Hostname { get; private set; }
 
-        public string Location { get; }
+        [DataMember]
+        public string IP { get; private set; }
 
-        public string Name { get; }
+        [DataMember]
+        public string Location { get; private set; }
 
-        public bool ConnectionsAllowed { get; }
+        [DataMember]
+        public string Name { get; private set; }
 
-        public int MaximumConnections { get; }
+        [DataMember]
+        public bool ConnectionsAllowed { get; private set; }
+
+        [DataMember]
+        public int MaximumConnections { get; private set; }
     }
 }

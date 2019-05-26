@@ -25,10 +25,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Enums.Custom;
 
 namespace MalikP.IVAO.Library.Models.Other
 {
+    [DataContract]
     public sealed class FlightPlan
     {
         public FlightPlan(
@@ -73,43 +76,66 @@ namespace MalikP.IVAO.Library.Models.Other
             PersonsOnBoard = personsOnBoard;
         }
 
-        public string Aircraft { get; set; }
+        private FlightPlan()
+        {
+        }
+
+        [DataMember]
+        public string Aircraft { get; private set; }
 
         // TODO: Create separate model where willbe mach speed, and so on
-        public string CruisingSpeed { get; set; }
+        [DataMember]
+        public string CruisingSpeed { get; private set; }
 
-        public Aerodrome DepartureAerodrome { get; set; }
+        [DataMember]
+        public Aerodrome DepartureAerodrome { get; private set; }
 
-        public string CruisingLevel { get; set; }
+        [DataMember]
+        public string CruisingLevel { get; private set; }
 
-        public Aerodrome DestinationAerodrome { get; set; }
+        [DataMember]
+        public Aerodrome DestinationAerodrome { get; private set; }
 
-        public int Revision { get; set; }
+        [DataMember]
+        public int Revision { get; private set; }
 
-        public FlightRules FlightRules { get; set; }
+        [DataMember]
+        public FlightRules FlightRules { get; private set; }
 
-        public int DepartureTime { get; set; }
+        [DataMember]
+        public int DepartureTime { get; private set; }
 
-        public int ActualDepartureTime { get; set; }
+        [DataMember]
+        public int ActualDepartureTime { get; private set; }
 
-        public int EETHours { get; set; }
+        [DataMember]
+        public int EETHours { get; private set; }
 
-        public int EETMinutess { get; set; }
+        [DataMember]
+        public int EETMinutess { get; private set; }
 
-        public int EnduranceHours { get; set; }
+        [DataMember]
+        public int EnduranceHours { get; private set; }
 
-        public int EnduranceMinutes { get; set; }
+        [DataMember]
+        public int EnduranceMinutes { get; private set; }
 
-        public Aerodrome AlternateAerodrome { get; set; }
+        [DataMember]
+        public Aerodrome AlternateAerodrome { get; private set; }
 
-        public Aerodrome SecondAlternateAerodrome { get; set; }
+        [DataMember]
+        public Aerodrome SecondAlternateAerodrome { get; private set; }
 
-        public string OtherInfo { get; set; }
+        [DataMember]
+        public string OtherInfo { get; private set; }
 
-        public string Route { get; set; }
+        [DataMember]
+        public string Route { get; private set; }
 
-        public FlightType TypeOfFlight { get; }
+        [DataMember]
+        public FlightType TypeOfFlight { get; private set; }
 
-        public int PersonsOnBoard { get; }
+        [DataMember]
+        public int PersonsOnBoard { get; private set; }
     }
 }

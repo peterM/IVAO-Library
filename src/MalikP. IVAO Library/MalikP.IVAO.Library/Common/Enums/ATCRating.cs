@@ -25,43 +25,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(ATCRating))]
     public enum ATCRating
     {
         [Map("DEF")]
+        [EnumMember]
         None = 0,
 
         [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
         [Map("AS1")]
+        [EnumMember]
         Applicant = 2,
 
         [Map("AS2")]
+        [EnumMember]
         Trainee = 3,
 
         [Map("AS3")]
+        [EnumMember]
         AdvancedTrainee = 4,
 
         [Map("ADC")]
+        [EnumMember]
         AerodromeController = 5,
 
         [Map("APC")]
+        [EnumMember]
         ApproachController = 6,
 
         [Map("ACC")]
+        [EnumMember]
         CenterController = 7,
 
         [Map("SEC")]
+        [EnumMember]
         SeniorController = 8,
 
         [Map("SAI")]
+        [EnumMember]
         SeniorATCInstructor = 9,
 
         [Map("CAI")]
+        [EnumMember]
         ChiefATCInstructor = 10,
     }
 }

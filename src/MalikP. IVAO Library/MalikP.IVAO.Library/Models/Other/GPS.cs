@@ -25,10 +25,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Models.Other
 {
+    [DataContract]
     public class GPS
     {
         public GPS(
@@ -41,13 +44,20 @@ namespace MalikP.IVAO.Library.Models.Other
             Altitude = altitude;
         }
 
-        [Unit("degree")]
-        public decimal Latitude { get; }
+        private GPS()
+        {
+        }
 
         [Unit("degree")]
-        public decimal Longitude { get; }
+        [DataMember]
+        public decimal Latitude { get; private set; }
+
+        [Unit("degree")]
+        [DataMember]
+        public decimal Longitude { get; private set; }
 
         [Unit("Feet")]
-        public int Altitude { get; }
+        [DataMember]
+        public int Altitude { get; private set; }
     }
 }

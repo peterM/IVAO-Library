@@ -25,6 +25,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums.Custom
@@ -44,6 +46,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
     /// Other = X
     /// </code>
     /// </remarks>
+    [DataContract(Name = nameof(FlightType))]
     public enum FlightType
     {
         /// <summary>
@@ -51,6 +54,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("NOTDEFINED")]
         [ItemDescription("Was not defined or fpl is null")]
+        [EnumMember]
         NotDefinedOrNull,
 
         /// <summary>
@@ -58,6 +62,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("S")]
         [ItemDescription("Scheduled flight type")]
+        [EnumMember]
         ScheduledServices,
 
         /// <summary>
@@ -65,6 +70,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("N")]
         [ItemDescription("Non-Scheduled flight")]
+        [EnumMember]
         NonScheduledServices,
 
         /// <summary>
@@ -72,6 +78,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("G")]
         [ItemDescription("General aviation flight")]
+        [EnumMember]
         GeneralAviation,
 
         /// <summary>
@@ -79,6 +86,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("M")]
         [ItemDescription("Military flight")]
+        [EnumMember]
         Military,
 
         /// <summary>
@@ -86,6 +94,7 @@ namespace MalikP.IVAO.Library.Common.Enums.Custom
         /// </summary>
         [Map("X")]
         [ItemDescription("Other type of flight")]
+        [EnumMember]
         Other,
     }
 }

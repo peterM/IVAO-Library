@@ -25,25 +25,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(AdministrativeRating))]
     public enum AdministrativeRating
     {
         [Map("SUS")]
+        [EnumMember]
         Suspended = 0,
 
         [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
         [Map("USR")]
+        [EnumMember]
         User = 2,
 
         [Map("SUP")]
+        [EnumMember]
         Supervisor = 11,
 
         [Map("ADM")]
+        [EnumMember]
         Administrator = 12,
     }
 }

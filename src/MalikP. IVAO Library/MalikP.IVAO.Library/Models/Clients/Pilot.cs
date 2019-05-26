@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
@@ -33,6 +34,7 @@ using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public class Pilot : ClientWithRating<PilotRating>
     {
         public Pilot(
@@ -79,20 +81,31 @@ namespace MalikP.IVAO.Library.Models.Clients
             FlightPlan = flightPlan;
         }
 
-        [Unit("Knots")]
-        public int GroundSpeed { get; set; }
+        public Pilot()
+        {
+        }
 
-        public string TransponderCode { get; set; }
+        [Unit("Knots")]
+        [DataMember]
+        public int GroundSpeed { get; private set; }
+
+        [DataMember]
+        public string TransponderCode { get; private set; }
 
         [Unit("Degrees")]
-        public int Heading { get; set; }
+        [DataMember]
+        public int Heading { get; private set; }
 
-        public bool IsOnGround { get; set; }
+        [DataMember]
+        public bool IsOnGround { get; private set; }
 
-        public FlightSimulator Simulator { get; set; }
+        [DataMember]
+        public FlightSimulator Simulator { get; private set; }
 
-        public string PlaneMTL { get; set; }
+        [DataMember]
+        public string PlaneMTL { get; private set; }
 
-        public FlightPlan FlightPlan { get; set; }
+        [DataMember]
+        public FlightPlan FlightPlan { get; private set; }
     }
 }

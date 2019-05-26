@@ -25,26 +25,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums.Custom
 {
+    [DataContract(Name = nameof(FlightRules))]
     public enum FlightRules
     {
         NotDefined,
 
         [Map("V")]
         [ItemDescription("Visual Flight Rules (VFR)")]
+        [EnumMember]
         VFR,
 
         [ItemDescription("Marginal VFR (MVFR)")]
+        [EnumMember]
         MVFR,
 
         [Map("I")]
         [ItemDescription("Instrument Flight Rules (IFR)")]
+        [EnumMember]
         IFR,
 
         [ItemDescription("Low Instrument Flight Rules (LIFR)")]
+        [EnumMember]
         LIFR
     }
 }

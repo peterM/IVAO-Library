@@ -25,30 +25,74 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(FlightSimulator))]
     public enum FlightSimulator
     {
+        [EnumMember]
         Unknown = 0,
+
+        [EnumMember]
         MicrosoftFlightSimulator95 = 1,
+
+        [EnumMember]
         MicrosoftFlightSimulator98 = 2,
+
+        [EnumMember]
         MicrosoftCombatFlightSimulator = 3,
+
+        [EnumMember]
         MicrosoftFlightSimulator2000 = 4,
+
+        [EnumMember]
         MicrosoftCombatFlightSimulator2 = 5,
+
+        [EnumMember]
         MicrosoftFlightSimulator2002 = 6,
+
+        [EnumMember]
         MicrosoftCombatFlightSimulator3 = 7,
+
+        [EnumMember]
         MicrosoftFlightSimulator2004 = 8,
+
+        [EnumMember]
         MicrosoftFlightSimulatorX = 9,
+
+        [EnumMember]
         XPlaneUnknownVersion = 11,
+
+        [EnumMember]
         XPlaneSeries8 = 12,
+
+        [EnumMember]
         XPlaneSeries9 = 13,
+
+        [EnumMember]
         XPlaneSeries10 = 14,
+
+        [EnumMember]
         PS1 = 15,
+
+        [EnumMember]
         XPlaneSeries11 = 16,
+
+        [EnumMember]
         XPlaneSeries12 = 17,
+
+        [EnumMember]
         Fly = 20,
+
+        [EnumMember]
         Fly2 = 21,
+
+        [EnumMember]
         FlightGear = 25,
+
+        [EnumMember]
         Prepar3DSeries1 = 30
     }
 }

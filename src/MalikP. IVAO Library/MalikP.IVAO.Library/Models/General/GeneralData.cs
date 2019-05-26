@@ -26,10 +26,12 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.General
 {
-    public sealed class GeneralData : IIvaoModel
+    [DataContract]
+    public sealed class GeneralData : AbstractIvaoModel
     {
         public GeneralData(
             int version,
@@ -47,16 +49,26 @@ namespace MalikP.IVAO.Library.Models.General
             ConnectedAirports = connectedAirports;
         }
 
-        public int Version { get; }
+        private GeneralData()
+        {
+        }
 
-        public int Reload { get; }
+        [DataMember]
+        public int Version { get; private set; }
 
-        public DateTime Update { get; }
+        [DataMember]
+        public int Reload { get; private set; }
 
-        public int ConnectedClients { get; }
+        [DataMember]
+        public DateTime Update { get; private set; }
 
-        public int ConnectedServers { get; }
+        [DataMember]
+        public int ConnectedClients { get; private set; }
 
-        public int ConnectedAirports { get; }
+        [DataMember]
+        public int ConnectedServers { get; private set; }
+
+        [DataMember]
+        public int ConnectedAirports { get; private set; }
     }
 }

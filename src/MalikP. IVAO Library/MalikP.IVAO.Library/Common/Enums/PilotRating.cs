@@ -25,43 +25,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(PilotRating))]
     public enum PilotRating
     {
         [Map("None")]
+        [EnumMember]
         None = 0,
 
         [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
         [Map("FS1")]
+        [EnumMember]
         BasicFlightStudent = 2,
 
         [Map("FS2")]
+        [EnumMember]
         FlightStudent = 3,
 
         [Map("FS3")]
+        [EnumMember]
         AdvancedFlightStudent = 4,
 
         [Map("PP")]
+        [EnumMember]
         PrivatePilot = 5,
 
         [Map("SPP")]
+        [EnumMember]
         SeniorPrivatePilot = 6,
 
         [Map("CP")]
+        [EnumMember]
         CommercialPilot = 7,
 
         [Map("ATP")]
+        [EnumMember]
         AirlineTransportPilot = 8,
 
         [Map("SFI")]
+        [EnumMember]
         SeniorFlightInstructor = 9,
 
         [Map("CFI")]
+        [EnumMember]
         ChiefFlightInstructor = 10,
     }
 }

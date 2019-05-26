@@ -25,8 +25,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Other
 {
+    [DataContract]
     public class Aerodrome
     {
         public Aerodrome(string icao)
@@ -34,10 +37,13 @@ namespace MalikP.IVAO.Library.Models.Other
             ICAO = icao;
         }
 
-        string ICAO { get; }
+        private Aerodrome()
+        {
+        }
 
-        public bool IsEmpty => string.IsNullOrWhiteSpace(ICAO);
+        [DataMember]
+        public string ICAO { get; private set; }
 
-        public bool IsValid => !IsEmpty && ICAO.Length == 4;
+        public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
     }
 }

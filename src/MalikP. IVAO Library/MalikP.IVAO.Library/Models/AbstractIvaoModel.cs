@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: FollowMe.cs 
+// File: AbstractIvaoModel.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,46 +25,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
 using System.Runtime.Serialization;
 
-using MalikP.IVAO.Library.Common.Enums;
-using MalikP.IVAO.Library.Models.Other;
-
-namespace MalikP.IVAO.Library.Models.Clients
+namespace MalikP.IVAO.Library.Models
 {
     [DataContract]
-    public class FollowMe : Client
+    public abstract class AbstractIvaoModel : IIvaoModel
     {
-        public FollowMe(
-            string callsign,
-            string vid,
-            string name,
-            ClientType clientType,
-            GPS location,
-            string server,
-            string protocol,
-            DateTime connectionTime,
-            string softwareName,
-            string softwareVersion,
-            AdministrativeRating administrativeVersion,
-            int clientRating)
-            : base(callsign,
-                   vid,
-                   name,
-                   clientType,
-                   location,
-                   server,
-                   protocol,
-                   connectionTime,
-                   softwareName,
-                   softwareVersion,
-                   administrativeVersion,
-                   clientRating)
-        {
-        }
-
-        private FollowMe()
+        protected AbstractIvaoModel()
         {
         }
     }
