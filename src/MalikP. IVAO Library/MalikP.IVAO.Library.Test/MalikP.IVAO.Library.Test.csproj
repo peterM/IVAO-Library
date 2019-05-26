@@ -16,4 +16,10 @@
     <ProjectReference Include="..\MalikP.IVAO.Library\MalikP.IVAO.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
