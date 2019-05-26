@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.Servers
@@ -40,10 +41,10 @@ namespace MalikP.IVAO.Library.Models.Servers
             bool connectionsAllowed,
             int maximumConnections)
         {
-            Hostname = hostname;
-            IP = ip;
-            Location = location;
-            Name = name;
+            Hostname = hostname ?? string.Empty;
+            IP = ip ?? string.Empty;
+            Location = location ?? string.Empty;
+            Name = name ?? string.Empty;
             ConnectionsAllowed = connectionsAllowed;
             MaximumConnections = maximumConnections;
         }
@@ -69,5 +70,46 @@ namespace MalikP.IVAO.Library.Models.Servers
 
         [DataMember]
         public int MaximumConnections { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Server casted = obj as Server;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Hostname, Hostname, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.IP, IP, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ConnectionsAllowed, ConnectionsAllowed)
+                && Equals(casted.MaximumConnections, MaximumConnections)
+                && string.Equals(casted.Name, Name, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.Location, Location, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Hostname.ToUpper().GetHashCode() * 3)
+                    + (IP.ToUpper().GetHashCode() * 3)
+                    + (ConnectionsAllowed.GetHashCode() * 3)
+                    + (MaximumConnections.GetHashCode() * 3)
+                    + (Name.ToUpper().GetHashCode() * 3)
+                    + Location.ToUpper().GetHashCode() * 3 * 17;
+            }
+        }
     }
 }

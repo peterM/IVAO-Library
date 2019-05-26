@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.Airports
@@ -36,8 +37,8 @@ namespace MalikP.IVAO.Library.Models.Airports
             string icao,
             string atis)
         {
-            ICAO = icao;
-            ATIS = atis;
+            ICAO = icao ?? string.Empty;
+            ATIS = atis ?? string.Empty;
         }
 
         [DataMember]
@@ -45,5 +46,38 @@ namespace MalikP.IVAO.Library.Models.Airports
 
         [DataMember]
         public string ATIS { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Airport casted = obj as Airport;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.ATIS, ATIS, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (ICAO.ToUpper().GetHashCode() * 3
+                    + ATIS.ToUpper().GetHashCode() * 3) * 17;
+            }
+        }
     }
 }

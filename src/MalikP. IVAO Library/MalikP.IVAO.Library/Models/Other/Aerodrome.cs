@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.Other
@@ -34,7 +35,7 @@ namespace MalikP.IVAO.Library.Models.Other
     {
         public Aerodrome(string icao)
         {
-            ICAO = icao;
+            ICAO = icao ?? string.Empty;
         }
 
         private Aerodrome()
@@ -45,5 +46,36 @@ namespace MalikP.IVAO.Library.Models.Other
         public string ICAO { get; private set; }
 
         public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Aerodrome casted = obj as Aerodrome;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (ICAO.ToUpper().GetHashCode() * 3) * 17;
+            }
+        }
     }
 }

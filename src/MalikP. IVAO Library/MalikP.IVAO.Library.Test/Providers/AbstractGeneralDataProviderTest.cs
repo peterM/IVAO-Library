@@ -3,17 +3,18 @@ using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Providers;
-
+using MalikP.IVAO.Library.Test.Common;
+using MalikP.IVAO.Library.Tests.Abstracts;
 using NUnit.Framework;
 
-namespace Tests
+namespace MalikP.IVAO.Library.Tests.Providers
 {
-    [Category("General Data")]
-    public abstract class AbstractGeneralDataTest : AbstractTest
+    [Category(Categories.GeneralDataProvider)]
+    public abstract class AbstractGeneralDataProviderTest : AbstractProviderTest
     {
         protected IGeneralDataProvider testee;
 
-        protected AbstractGeneralDataTest()
+        protected AbstractGeneralDataProviderTest()
         {
             string path = GetPath();
             IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
@@ -25,7 +26,5 @@ namespace Tests
 
             testee = new GeneralDataProvider(dataSource, parserFactory, generalSelector);
         }
-
-
     }
 }

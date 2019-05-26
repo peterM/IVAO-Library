@@ -70,5 +70,46 @@ namespace MalikP.IVAO.Library.Models.General
 
         [DataMember]
         public int ConnectedAirports { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            GeneralData casted = obj as GeneralData;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && Equals(casted.Version, Version)
+                && Equals(casted.Version, Reload)
+                && Equals(casted.Update, Update)
+                && Equals(casted.ConnectedClients, ConnectedClients)
+                && Equals(casted.ConnectedServers, ConnectedServers)
+                && Equals(casted.ConnectedAirports, ConnectedAirports);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Version.GetHashCode() * 3)
+                    + (Version.GetHashCode() * 3)
+                    + (Update.GetHashCode() * 3)
+                    + (ConnectedClients.GetHashCode() * 3)
+                    + (ConnectedServers.GetHashCode() * 3)
+                    + ConnectedAirports.GetHashCode() * 3 * 17;
+            }
+        }
     }
 }

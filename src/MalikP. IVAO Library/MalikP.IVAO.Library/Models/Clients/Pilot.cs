@@ -56,7 +56,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             int heading,
             bool isOnGround,
             FlightSimulator flightSimulator,
-            string Mtl,
+            string planeMTL,
             FlightPlan flightPlan)
             : base(callsign,
                    vid,
@@ -73,11 +73,11 @@ namespace MalikP.IVAO.Library.Models.Clients
                    rating)
         {
             GroundSpeed = groundSpeed;
-            TransponderCode = transponderCode;
+            TransponderCode = transponderCode ?? string.Empty;
             Heading = heading;
             IsOnGround = isOnGround;
             Simulator = flightSimulator;
-            PlaneMTL = Mtl;
+            PlaneMTL = planeMTL ?? string.Empty;
             FlightPlan = flightPlan;
         }
 
@@ -107,5 +107,48 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         [DataMember]
         public FlightPlan FlightPlan { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Pilot casted = obj as Pilot;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && Equals(casted.GroundSpeed, GroundSpeed)
+                && string.Equals(casted.TransponderCode, TransponderCode, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.Heading, Heading)
+                && Equals(casted.IsOnGround, IsOnGround)
+                && Equals(casted.Simulator, Simulator)
+                && string.Equals(casted.PlaneMTL, PlaneMTL, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.FlightPlan, FlightPlan);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (GroundSpeed.GetHashCode() * 3)
+                    + (TransponderCode.ToUpper().GetHashCode() * 3)
+                    + (Heading.GetHashCode() * 3)
+                    + (IsOnGround.GetHashCode() * 3)
+                    + (Simulator.GetHashCode() * 3)
+                    + (PlaneMTL.ToUpper().GetHashCode() * 3)
+                    + (FlightPlan.GetHashCode() * 3) * 17;
+            }
+        }
     }
 }

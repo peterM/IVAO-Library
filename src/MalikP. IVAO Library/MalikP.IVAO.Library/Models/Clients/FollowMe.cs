@@ -67,5 +67,34 @@ namespace MalikP.IVAO.Library.Models.Clients
         private FollowMe()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            FollowMe casted = obj as FollowMe;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode();
+            }
+        }
     }
 }

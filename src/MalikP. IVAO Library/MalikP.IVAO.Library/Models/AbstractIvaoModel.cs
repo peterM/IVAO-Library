@@ -35,5 +35,28 @@ namespace MalikP.IVAO.Library.Models
         protected AbstractIvaoModel()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            return obj is AbstractIvaoModel;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -70,10 +70,10 @@ namespace MalikP.IVAO.Library.Models.Clients
                    clientRating,
                    rating)
         {
-            Frequency = frequency;
+            Frequency = frequency ?? string.Empty;
             FacilityType = facilityType;
             VisualRange = visualRange;
-            ATIS = atis;
+            ATIS = atis ?? string.Empty;
             ATISTime = atisTime;
         }
 
@@ -99,5 +99,44 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         [DataMember]
         public DateTime? ATISTime { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            AirTrafficController casted = obj as AirTrafficController;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Frequency, Frequency, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.FacilityType, FacilityType)
+                && Equals(casted.VisualRange, VisualRange)
+                && string.Equals(casted.ATIS, ATIS, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ATISTime, ATISTime);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Frequency.ToUpper().GetHashCode() * 3)
+                    + (FacilityType.GetHashCode() * 3)
+                    + (VisualRange.GetHashCode() * 3)
+                    + (ATIS.ToUpper().GetHashCode() * 3)
+                    + (ATISTime.GetHashCode() * 3) * 17;
+            }
+        }
     }
 }

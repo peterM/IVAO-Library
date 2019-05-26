@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Enums.Custom;
@@ -55,10 +56,10 @@ namespace MalikP.IVAO.Library.Models.Other
             FlightType typeOfFlight,
             int personsOnBoard)
         {
-            Aircraft = aircraft;
-            CruisingSpeed = cruisingSpeed;
+            Aircraft = aircraft ?? string.Empty;
+            CruisingSpeed = cruisingSpeed ?? string.Empty;
             DepartureAerodrome = departureAerodrome;
-            CruisingLevel = cruisingLevel;
+            CruisingLevel = cruisingLevel ?? string.Empty;
             DestinationAerodrome = destinationAerodrome;
             Revision = revision;
             FlightRules = flightRules;
@@ -69,8 +70,8 @@ namespace MalikP.IVAO.Library.Models.Other
             EnduranceHours = enduranceHours;
             EnduranceMinutes = enduranceMinutes;
             AlternateAerodrome = alternateAerodrome;
-            OtherInfo = otherInfo;
-            Route = route;
+            OtherInfo = otherInfo ?? string.Empty;
+            Route = route ?? string.Empty;
             SecondAlternateAerodrome = secondAlternateAerodrome;
             TypeOfFlight = typeOfFlight;
             PersonsOnBoard = personsOnBoard;
@@ -137,5 +138,72 @@ namespace MalikP.IVAO.Library.Models.Other
 
         [DataMember]
         public int PersonsOnBoard { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            FlightPlan casted = obj as FlightPlan;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Aircraft, Aircraft, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.CruisingSpeed, CruisingSpeed, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.DepartureAerodrome, DepartureAerodrome)
+                && string.Equals(casted.CruisingLevel, CruisingLevel, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.DestinationAerodrome, DestinationAerodrome)
+                && Equals(casted.FlightRules, FlightRules)
+                && Equals(casted.DepartureTime, DepartureTime)
+                && Equals(casted.ActualDepartureTime, ActualDepartureTime)
+                && Equals(casted.EETHours, EETHours)
+                && Equals(casted.EETMinutess, EETMinutess)
+                && Equals(casted.EnduranceHours, EnduranceHours)
+                && Equals(casted.EnduranceMinutes, EnduranceMinutes)
+                && Equals(casted.AlternateAerodrome, AlternateAerodrome)
+                && Equals(casted.SecondAlternateAerodrome, SecondAlternateAerodrome)
+                && string.Equals(casted.OtherInfo, OtherInfo, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.Route, Route, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.TypeOfFlight, TypeOfFlight)
+                && Equals(casted.PersonsOnBoard, PersonsOnBoard)
+                && Equals(casted.Revision, Revision);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Aircraft.ToUpper().GetHashCode() * 3)
+                    + (CruisingSpeed.ToUpper().GetHashCode() * 3)
+                    + (DepartureAerodrome.GetHashCode() * 3)
+                    + (CruisingLevel.ToUpper().GetHashCode() * 3)
+                    + (DestinationAerodrome.GetHashCode() * 3)
+                    + (DepartureTime.GetHashCode() * 3)
+                    + (ActualDepartureTime.GetHashCode() * 3)
+                    + (EETHours.GetHashCode() * 3)
+                    + (EETMinutess.GetHashCode() * 3)
+                    + (EnduranceHours.GetHashCode() * 3)
+                    + (EnduranceMinutes.GetHashCode() * 3)
+                    + (AlternateAerodrome.GetHashCode() * 3)
+                    + (SecondAlternateAerodrome.GetHashCode() * 3)
+                    + (OtherInfo.ToUpper().GetHashCode() * 3)
+                    + (Route.ToUpper().GetHashCode() * 3)
+                    + (TypeOfFlight.GetHashCode() * 3)
+                    + (PersonsOnBoard.GetHashCode() * 3)
+                    + (Revision.GetHashCode() * 3)
+                    + FlightRules.GetHashCode() * 3 * 17;
+            }
+        }
     }
 }

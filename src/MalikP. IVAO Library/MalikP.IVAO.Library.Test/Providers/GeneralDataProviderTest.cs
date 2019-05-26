@@ -1,9 +1,10 @@
 using System.Linq;
+
 using NUnit.Framework;
 
-namespace Tests
+namespace MalikP.IVAO.Library.Tests.Providers
 {
-    public class Tests : AbstractGeneralDataTest
+    public class GeneralDataProviderTest : AbstractGeneralDataProviderTest
     {
         [Test]
         public void GetData_WhenStandardFileIsLoaded_ThenOneGeneralDataModelIsCreated()

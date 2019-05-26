@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Annotation;
@@ -59,5 +60,40 @@ namespace MalikP.IVAO.Library.Models.Other
         [Unit("Feet")]
         [DataMember]
         public int Altitude { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            GPS casted = obj as GPS;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && Equals(casted.Latitude, Latitude)
+                && Equals(casted.Longitude, Longitude)
+                && Equals(casted.Altitude, Altitude);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Latitude.GetHashCode() * 3)
+                    + (Longitude.GetHashCode() * 3)
+                    + Altitude.GetHashCode() * 3 * 17;
+            }
+        }
     }
 }

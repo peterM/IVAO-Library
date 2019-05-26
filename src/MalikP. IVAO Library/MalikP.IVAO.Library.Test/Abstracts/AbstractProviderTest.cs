@@ -1,12 +1,14 @@
 ﻿using System.IO;
 using System.Reflection;
 
+using MalikP.IVAO.Library.Test.Common;
+
 using NUnit.Framework;
 
-namespace Tests
+namespace MalikP.IVAO.Library.Tests.Abstracts
 {
-    [TestFixture]
-    public abstract class AbstractTest
+    [Category(Categories.Providers)]
+    public abstract class AbstractProviderTest : AbstractTest
     {
         protected const string fileName = "testData.txt";
 
