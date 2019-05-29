@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: WebIVAOWhazzupDataSource.cs 
+// File: IGZipCompression.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,20 +25,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-
-namespace MalikP.IVAO.Library.Data.Source
+namespace MalikP.IVAO.Library.Common
 {
-    public sealed class WebIVAOWhazzupDataSource : AbstractWebIVAOWhazzupDataSource
+    public interface IGZipCompression
     {
-        public WebIVAOWhazzupDataSource(string url)
-            : base(url)
-        {
-        }
+        byte[] Compress(byte[] decompressedData);
 
-        public WebIVAOWhazzupDataSource(Uri uri)
-            : base(uri)
-        {
-        }
+        byte[] Decompress(byte[] compressedData);
     }
 }
