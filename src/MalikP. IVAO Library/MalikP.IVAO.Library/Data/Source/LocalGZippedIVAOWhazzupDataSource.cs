@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: AbstractWebIVAOWhazzupDataSource.cs 
+// File: LocalGZippedIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,57 +25,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
+using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 
+using System.Text.RegularExpressions;
+using MalikP.IVAO.Library.Common;
 using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public abstract class AbstractWebIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, IWebIVAOWhazzupDataSource
+    public sealed class LocalGZippedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalIVAOWhazzupDataSource
     {
-        private readonly Uri _uri;
+        private readonly IGZipCompression _gZipCompression;
+        private static readonly Regex _regex = new Regex("\r\n|\r|\n");
 
-        protected AbstractWebIVAOWhazzupDataSource(string url)
-            : this(new Uri(url))
+        public LocalGZippedIVAOWhazzupDataSource(string path, IGZipCompression gZipCompression)
         {
+            Path = path;
+            _gZipCompression = gZipCompression;
         }
 
-        protected AbstractWebIVAOWhazzupDataSource(Uri uri)
-        {
-            _uri = uri;
-        }
+        private string Path { get; }
 
         public override IWhazzup GetIVAOData()
         {
-            if (_uri == null)
+            if (string.IsNullOrWhiteSpace(Path) || !File.Exists(Path))
             {
                 return Whazzup.Null;
             }
 
-            string[] data = Enumerable.Empty<string>().ToArray();
+            byte[] bytes = File.ReadAllBytes(Path);
 
-            using (WebClient client = new WebClient())
-            {
-                client.Encoding = GetEncoding(ENCODING);
+            bytes = _gZipCompression.Decompress(bytes);
 
-                string dataString = client.DownloadString(_uri);
-                dataString = ProcessDataString(dataString);
+            string dataString = GetEncoding(ENCODING).GetString(bytes);
 
-                data = Regex.Split(dataString, "\r\n|\r|\n")
-                    .Where(d => !string.IsNullOrWhiteSpace(d))
-                    .ToArray();
-            }
+            string[] data = _regex.Split(dataString)
+                .Where(d => !string.IsNullOrWhiteSpace(d))
+                .ToArray();
 
             return new Whazzup(data);
-        }
-
-        protected virtual string ProcessDataString(string dataString)
-        {
-            return dataString;
         }
     }
 }

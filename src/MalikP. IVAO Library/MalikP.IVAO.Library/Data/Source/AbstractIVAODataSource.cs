@@ -25,15 +25,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Text;
+
 namespace MalikP.IVAO.Library.Data.Source
 {
     public abstract class AbstractIVAODataSource<TModel> : IIVAODataSource<TModel>
     {
+        protected const string ENCODING = "iso-8859-1";
         public abstract TModel GetIVAOData();
 
         object IIVAODataSource.GetIVAOData()
         {
             return GetIVAOData();
+        }
+
+        protected virtual Encoding GetEncoding(string encoding)
+        {
+            return Encoding.GetEncoding(encoding);
         }
     }
 }
