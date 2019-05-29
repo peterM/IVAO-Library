@@ -16,13 +16,25 @@ IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource
 
 <br />
 
-#### Web based
+#### Web based - plain data
 
-In case you want to load data from web.
+In case you want to load data from web in plain text format.
 
 ```csharp
 string url = "http://api.ivao.aero/getdata/whazzup/whazzup.txt";
 IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource(url);
+```
+
+<br />
+
+#### Web based - GZip compressed data
+
+In case you want to load data from web compressed using GZip.
+
+```csharp
+string url = "http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz";
+IGZipCompression gzipCompression = new GZipCompression();
+IIVAOWhazzupDataSource nonCachedGZippedWebDataSource = new WebGZippedIVAOWhazzupDataSource(url, gzipCompression);
 ```
 
 <br />
@@ -111,4 +123,4 @@ IVAO Library is licensed under the **MIT** license.
 
 ### About IVAO
 
-In case you are interested vidsit `IVAO` homepage here **[https://www.ivao.aero/](https://www.ivao.aero/)**
+In case you are interested visit `IVAO` homepage here **[https://www.ivao.aero/](https://www.ivao.aero/)**
