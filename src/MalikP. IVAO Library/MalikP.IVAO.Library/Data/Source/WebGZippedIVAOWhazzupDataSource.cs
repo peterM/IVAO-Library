@@ -33,24 +33,24 @@ namespace MalikP.IVAO.Library.Data.Source
 {
     public sealed class WebGZippedIVAOWhazzupDataSource : AbstractWebIVAOWhazzupDataSource
     {
-        private readonly IGZipCompression _gzip;
+        private readonly IGZipCompression _gZipCompression;
 
-        public WebGZippedIVAOWhazzupDataSource(string url, IGZipCompression gzip)
-            : this(new Uri(url), gzip)
+        public WebGZippedIVAOWhazzupDataSource(string url, IGZipCompression gZipCompression)
+            : this(new Uri(url), gZipCompression)
         {
         }
 
-        public WebGZippedIVAOWhazzupDataSource(Uri uri, IGZipCompression gzip)
+        public WebGZippedIVAOWhazzupDataSource(Uri uri, IGZipCompression gZipCompression)
             : base(uri)
         {
-            _gzip = gzip;
+            _gZipCompression = gZipCompression;
         }
 
         protected override string ProcessDataString(string dataString)
         {
             byte[] bytes = GetEncoding(ENCODING).GetBytes(dataString);
 
-            bytes = _gzip.Decompress(bytes);
+            bytes = _gZipCompression.Decompress(bytes);
 
             return GetEncoding(ENCODING).GetString(bytes);
         }

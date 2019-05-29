@@ -27,7 +27,10 @@
 
 namespace MalikP.IVAO.Library.Common
 {
-    public interface IGZipCompression : ICompression
+    public interface ICompression
     {
+        byte[] Compress(byte[] decompressedData);
+
+        byte[] Decompress(byte[] compressedData);
     }
 }
