@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IGZipCompression.cs 
+// File: ICompression.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
