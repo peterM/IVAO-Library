@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
+using MalikP.IVAO.Library.Common;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -21,11 +22,13 @@ namespace MalikP.IVAO.Library.App
         public static void Main(string[] args)
         {
             string path = GetPath();
+            IGZipCompression compression = new GZipCompression();
 
             IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
+            IIVAOWhazzupDataSource nonCachedWebGzipedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
             IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
 
-            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebDataSource);
+            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebGzipedDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
             IGeneralSelector generalSelector = new GeneralSelector();

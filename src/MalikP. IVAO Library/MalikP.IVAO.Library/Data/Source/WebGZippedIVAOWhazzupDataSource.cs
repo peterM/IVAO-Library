@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: WebIVAOWhazzupDataSource.cs 
+// File: WebGZippedIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -27,18 +27,32 @@
 
 using System;
 
+using MalikP.IVAO.Library.Common;
+
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class WebIVAOWhazzupDataSource : AbstractWebIVAOWhazzupDataSource
+    public sealed class WebGZippedIVAOWhazzupDataSource : AbstractWebIVAOWhazzupDataSource
     {
-        public WebIVAOWhazzupDataSource(string url)
-            : base(url)
+        private readonly IGZipCompression _gZipCompression;
+
+        public WebGZippedIVAOWhazzupDataSource(string url, IGZipCompression gZipCompression)
+            : this(new Uri(url), gZipCompression)
         {
         }
 
-        public WebIVAOWhazzupDataSource(Uri uri)
+        public WebGZippedIVAOWhazzupDataSource(Uri uri, IGZipCompression gZipCompression)
             : base(uri)
         {
+            _gZipCompression = gZipCompression;
+        }
+
+        protected override string ProcessDataString(string dataString)
+        {
+            byte[] bytes = GetEncoding(ENCODING).GetBytes(dataString);
+
+            bytes = _gZipCompression.Decompress(bytes);
+
+            return GetEncoding(ENCODING).GetString(bytes);
         }
     }
 }
