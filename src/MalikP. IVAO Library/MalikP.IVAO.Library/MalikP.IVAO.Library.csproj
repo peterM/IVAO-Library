@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;netstandard2.0;net472;net471;net47;net462;net461;net46;net452;net451;net45</TargetFrameworks>
 		<PackageId>MalikP.IVAO.Library</PackageId>
-		<Version>0.8.2</Version>
+		<Version>0.8.3</Version>
 		<Authors>Peter Malik (MalikP.)</Authors>
 		<Company>Peter Malik (MalikP.)</Company>
 		<Product>MalikP. IVAO Library</Product>

@@ -5,13 +5,25 @@
 ### Create datasource
 
 
-#### Local based
+#### Local based - text file
 
-In case you want to load data from local computer.
+In case you want to load data from text file stored in local computer.
 
 ```csharp
 string path = @"C:\Data\whazzup.txt";
 IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+```
+
+<br />
+
+#### Local based - GZip compressed file
+
+In case you want to load data from local computer compressed using GZip.
+
+```csharp
+string path = @"C:\Data\whazzup.txt.gz";
+IGZipCompression compression = new GZipCompression();
+IIVAOWhazzupDataSource nonCachedLocalGZippedDataSource = new LocalGZippedIVAOWhazzupDataSource(path, compression);
 ```
 
 <br />

@@ -17,7 +17,8 @@ namespace MalikP.IVAO.Library.App
 {
     internal static class Program
     {
-        const string fileName = "testData.txt";
+        const string fileName = "whazzup.txt.gz";
+        //const string fileName = "whazzup.txt";
 
         public static void Main(string[] args)
         {
@@ -25,10 +26,12 @@ namespace MalikP.IVAO.Library.App
             IGZipCompression compression = new GZipCompression();
 
             IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
-            IIVAOWhazzupDataSource nonCachedWebGzipedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
-            IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+            IIVAOWhazzupDataSource nonCachedWebGZippedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
 
-            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedWebGzipedDataSource);
+            IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+            IIVAOWhazzupDataSource nonCachedLocalGZippedDataSource = new LocalGZippedIVAOWhazzupDataSource(path, compression);
+
+            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedLocalGZippedDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
             IGeneralSelector generalSelector = new GeneralSelector();
