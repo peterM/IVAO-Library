@@ -222,5 +222,70 @@ namespace MalikP.IVAO.Library.Test.Models
             Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.True);
         }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesHashCodesAreEqual()
+        {
+            // arrange
+            FollowMeBuilder builder = FollowMeBuilder.Create()
+                .WithAdministrativeVersion(AdministrativeRating.Administrator)
+                .WithCallsign("LZKZ_FOLLOW")
+                .WithClientRating(2)
+                .WithConnectionTime(DateTime.Now)
+                .WithLocation(null)
+                .WithName("name")
+                .WithProtocol("protocol")
+                .WithServer("server")
+                .WithSoftwareName("IVAC")
+                .WithSoftwareVersion("3.2.1.3")
+                .WithVID("1234567");
+
+            FollowMe instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<FollowMe>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(Equals(result0, result1), Is.True);
+        }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesAreEqual()
+        {
+            // arrange
+            FollowMeBuilder builder = FollowMeBuilder.Create()
+                .WithAdministrativeVersion(AdministrativeRating.Administrator)
+                .WithCallsign("LZKZ_FOLLOW")
+                .WithClientRating(2)
+                .WithConnectionTime(DateTime.Now)
+                .WithLocation(null)
+                .WithName("name")
+                .WithProtocol("protocol")
+                .WithServer("server")
+                .WithSoftwareName("IVAC")
+                .WithSoftwareVersion("3.2.1.3")
+                .WithVID("1234567");
+
+            FollowMe instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            bool result = Equals(instance0, instance1);
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<FollowMe>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(result, Is.True);
+        }
     }
 }

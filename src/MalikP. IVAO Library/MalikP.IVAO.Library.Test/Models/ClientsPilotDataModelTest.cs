@@ -283,5 +283,86 @@ namespace MalikP.IVAO.Library.Test.Models
             Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.True);
         }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesHashCodesAreEqual()
+        {
+            // arrange
+            PilotBuilder builder = PilotBuilder.Create()
+                 .WithAdministrativeVersion(AdministrativeRating.Observer)
+                 .WithCallsign("RYR2WQ")
+                 .WithClientRating(2)
+                 .WithConnectionTime(DateTime.Now)
+                 .WithFlightPlan(null)
+                 .WithFlightSimulator(FlightSimulator.Fly)
+                 .WithGroundSpeed(20)
+                 .WithHeading(222)
+                 .WithIsOnGround(true)
+                 .WithLocation(null)
+                 .WithName("name")
+                 .WithPlaneMTL("mtl")
+                 .WithProtocol("protocol")
+                 .WithRating(PilotRating.AirlineTransportPilot)
+                 .WithServer("server")
+                 .WithSoftwareName("sw name")
+                 .WithSoftwareVersion("1.2.3.4")
+                 .WithTransponderCode("7200")
+                 .WithVID("4321");
+
+            Pilot instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<Pilot>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(Equals(result0, result1), Is.True);
+        }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesAreEqual()
+        {
+            // arrange
+            PilotBuilder builder = PilotBuilder.Create()
+                 .WithAdministrativeVersion(AdministrativeRating.Observer)
+                 .WithCallsign("RYR2WQ")
+                 .WithClientRating(2)
+                 .WithConnectionTime(DateTime.Now)
+                 .WithFlightPlan(null)
+                 .WithFlightSimulator(FlightSimulator.Fly)
+                 .WithGroundSpeed(20)
+                 .WithHeading(222)
+                 .WithIsOnGround(true)
+                 .WithLocation(null)
+                 .WithName("name")
+                 .WithPlaneMTL("mtl")
+                 .WithProtocol("protocol")
+                 .WithRating(PilotRating.AirlineTransportPilot)
+                 .WithServer("server")
+                 .WithSoftwareName("sw name")
+                 .WithSoftwareVersion("1.2.3.4")
+                 .WithTransponderCode("7200")
+                 .WithVID("4321");
+
+            Pilot instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            bool result = Equals(instance0, instance1);
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<Pilot>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(result, Is.True);
+        }
     }
 }
