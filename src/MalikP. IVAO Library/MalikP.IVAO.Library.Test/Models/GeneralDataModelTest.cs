@@ -34,7 +34,7 @@ namespace MalikP.IVAO.Library.Test.Models
         }
 
         [Test]
-        public void GetHashCode_WhenTwoSameInstancesAreCreated_ThenInstancesAreEquals()
+        public void GetHashCode_WhenTwoSameInstancesAreCreated_ThenInstancesHashCodesAreEquals()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
@@ -82,7 +82,7 @@ namespace MalikP.IVAO.Library.Test.Models
         }
 
         [Test]
-        public void GetHashCode_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesAreEquals()
+        public void GetHashCode_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesHashCodesAreEquals()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
