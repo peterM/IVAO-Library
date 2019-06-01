@@ -79,8 +79,7 @@ namespace MalikP.IVAO.Library.Models.Other
                 return false;
             }
 
-            return base.Equals(obj)
-                && Equals(casted.Latitude, Latitude)
+            return Equals(casted.Latitude, Latitude)
                 && Equals(casted.Longitude, Longitude)
                 && Equals(casted.Altitude, Altitude);
         }
@@ -89,10 +88,9 @@ namespace MalikP.IVAO.Library.Models.Other
         {
             unchecked
             {
-                return base.GetHashCode()
-                    + (Latitude.GetHashCode() * 3)
+                return (Latitude.GetHashCode() * 3)
                     + (Longitude.GetHashCode() * 3)
-                    + Altitude.GetHashCode() * 3 * 17;
+                    + (Altitude.GetHashCode() * 3) * 17;
             }
         }
 

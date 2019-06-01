@@ -79,5 +79,7 @@ namespace MalikP.IVAO.Library.Models.Airports
                     + ATIS.ToUpper().GetHashCode() * 3) * 17;
             }
         }
+
+        public static AirportBuilder Builder => AirportBuilder.Create();
     }
 }

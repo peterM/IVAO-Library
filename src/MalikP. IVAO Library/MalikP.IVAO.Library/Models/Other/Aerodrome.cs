@@ -65,16 +65,14 @@ namespace MalikP.IVAO.Library.Models.Other
                 return false;
             }
 
-            return base.Equals(obj)
-                && string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
+            return string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return base.GetHashCode()
-                    + (ICAO.ToUpper().GetHashCode() * 3) * 17;
+                return ICAO.ToUpper().GetHashCode() * 3 * 17;
             }
         }
     }

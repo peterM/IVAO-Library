@@ -157,8 +157,7 @@ namespace MalikP.IVAO.Library.Models.Other
                 return false;
             }
 
-            return base.Equals(obj)
-                && string.Equals(casted.Aircraft, Aircraft, StringComparison.InvariantCultureIgnoreCase)
+            return string.Equals(casted.Aircraft, Aircraft, StringComparison.InvariantCultureIgnoreCase)
                 && string.Equals(casted.CruisingSpeed, CruisingSpeed, StringComparison.InvariantCultureIgnoreCase)
                 && Equals(casted.DepartureAerodrome, DepartureAerodrome)
                 && string.Equals(casted.CruisingLevel, CruisingLevel, StringComparison.InvariantCultureIgnoreCase)
@@ -183,8 +182,7 @@ namespace MalikP.IVAO.Library.Models.Other
         {
             unchecked
             {
-                return base.GetHashCode()
-                    + (Aircraft.ToUpper().GetHashCode() * 3)
+                return (Aircraft.ToUpper().GetHashCode() * 3)
                     + (CruisingSpeed.ToUpper().GetHashCode() * 3)
                     + (DepartureAerodrome.GetHashCode() * 3)
                     + (CruisingLevel.ToUpper().GetHashCode() * 3)
@@ -202,7 +200,7 @@ namespace MalikP.IVAO.Library.Models.Other
                     + (TypeOfFlight.GetHashCode() * 3)
                     + (PersonsOnBoard.GetHashCode() * 3)
                     + (Revision.GetHashCode() * 3)
-                    + FlightRules.GetHashCode() * 3 * 17;
+                    + (FlightRules.GetHashCode() * 3) * 17;
             }
         }
 
