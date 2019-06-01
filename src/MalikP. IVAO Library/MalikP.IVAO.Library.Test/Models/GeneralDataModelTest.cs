@@ -23,16 +23,16 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder.Build();
 
             // act
-            bool result = Equals(generalData, generalData1);
+            bool result = Equals(generalData0, generalData1);
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(result, Is.True);
         }
 
@@ -54,16 +54,16 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder1.Build();
 
             // act
-            bool result = Equals(generalData, generalData1);
+            bool result = Equals(generalData0, generalData1);
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(result, Is.False);
         }
 
@@ -79,17 +79,17 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder.Build();
 
             // act
-            int result1 = generalData.GetHashCode();
+            int result1 = generalData0.GetHashCode();
             int result2 = generalData1.GetHashCode();
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(Equals(result1, result2), Is.True);
         }
 
@@ -111,17 +111,17 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder1.Build();
 
             // act
-            int result1 = generalData.GetHashCode();
+            int result1 = generalData0.GetHashCode();
             int result2 = generalData1.GetHashCode();
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(Equals(result1, result2), Is.False);
         }
 
@@ -137,19 +137,19 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
 
-            string serializedText = generalData.Serialize();
+            string serializedText = generalData0.Serialize();
 
             GeneralData generalData1 = serializedText.Deserialize<GeneralData>();
 
             // act
-            bool result = Equals(generalData, generalData1);
+            bool result = Equals(generalData0, generalData1);
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(result, Is.True);
         }
 
@@ -165,21 +165,21 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithUpdate(DateTime.Now)
                 .WithVersion(222);
 
-            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData0 = generalDataBuilder.Build();
 
-            string serializedText = generalData.Serialize();
+            string serializedText = generalData0.Serialize();
 
             GeneralData generalData1 = serializedText.Deserialize<GeneralData>();
 
             // act
 
-            int result1 = generalData.GetHashCode();
+            int result1 = generalData0.GetHashCode();
             int result2 = generalData1.GetHashCode();
 
             // assert
-            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData0, Is.Not.Null);
             Assert.That(generalData1, Is.Not.Null);
-            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(ReferenceEquals(generalData0, generalData1), Is.Not.True);
             Assert.That(Equals(result1, result2), Is.True);
         }
     }
