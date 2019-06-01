@@ -47,6 +47,17 @@ namespace MalikP.IVAO.Library.Models.General
             return new GeneralDataBuilder();
         }
 
+        public static GeneralDataBuilder FromModel(GeneralData model)
+        {
+            return new GeneralDataBuilder()
+                .WithConnectedAirports(model.ConnectedAirports)
+                .WithConnectedClients(model.ConnectedClients)
+                .WithConnectedServers(model.ConnectedServers)
+                .WithReload(model.Reload)
+                .WithUpdate(model.Update)
+                .WithVersion(model.Version);
+        }
+
         public GeneralDataBuilder WithVersion(int version)
         {
             _version = version;
