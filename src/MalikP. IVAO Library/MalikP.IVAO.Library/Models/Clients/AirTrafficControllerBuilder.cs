@@ -28,6 +28,7 @@
 using System;
 
 using MalikP.IVAO.Library.Common.Enums;
+using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -48,6 +49,28 @@ namespace MalikP.IVAO.Library.Models.Clients
         public static AirTrafficControllerBuilder Create()
         {
             return new AirTrafficControllerBuilder().WithClientType(ClientType.ATC);
+        }
+
+        public static AirTrafficControllerBuilder FromModel(AirTrafficController model)
+        {
+            return new AirTrafficControllerBuilder()
+                .WithClientType(model.ClientType)
+                .WithAdministrativeVersion(model.AdministrativeVersion)
+                .WithCallsign(model.Callsign)
+                .WithClientRating(model.ClientRating)
+                .WithConnectionTime(model.ConnectionTime)
+                .WithLocation(model.Location == null ? model.Location : (GPS)model.Location.Clone())
+                .WithName(model.Name)
+                .WithProtocol(model.Protocol)
+                .WithServer(model.Server)
+                .WithSoftwareName(model.SoftwareName)
+                .WithSoftwareVersion(model.SoftwareVersion)
+                .WithVID(model.VID)
+                .WithFrequency(model.Frequency)
+                .WithFacilityType(model.FacilityType)
+                .WithVisualRange(model.VisualRange)
+                .WithATIS(model.ATIS)
+                .WithATISTime(model.ATISTime);
         }
 
         public AirTrafficControllerBuilder WithFrequency(string frequency)

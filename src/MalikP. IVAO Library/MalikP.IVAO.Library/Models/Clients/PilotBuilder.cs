@@ -50,6 +50,31 @@ namespace MalikP.IVAO.Library.Models.Clients
             return new PilotBuilder().WithClientType(ClientType.Pilot);
         }
 
+        public static PilotBuilder FromModel(Pilot model)
+        {
+            return new PilotBuilder()
+                .WithClientType(model.ClientType)
+                .WithAdministrativeVersion(model.AdministrativeVersion)
+                .WithCallsign(model.Callsign)
+                .WithClientRating(model.ClientRating)
+                .WithConnectionTime(model.ConnectionTime)
+                .WithLocation(model.Location == null ? model.Location : (GPS)model.Location.Clone())
+                .WithName(model.Name)
+                .WithProtocol(model.Protocol)
+                .WithServer(model.Server)
+                .WithSoftwareName(model.SoftwareName)
+                .WithSoftwareVersion(model.SoftwareVersion)
+                .WithVID(model.VID)
+                .WithRating(model.Rating)
+                .WithGroundSpeed(model.GroundSpeed)
+                .WithTransponderCode(model.TransponderCode)
+                .WithHeading(model.Heading)
+                .WithIsOnGround(model.IsOnGround)
+                .WithFlightSimulator(model.Simulator)
+                .WithPlaneMTL(model.PlaneMTL)
+                .WithFlightPlan(model.FlightPlan == null ? null : (FlightPlan)model.FlightPlan.Clone());
+        }
+
         public PilotBuilder WithRating(PilotRating rating)
         {
             _rating = rating;

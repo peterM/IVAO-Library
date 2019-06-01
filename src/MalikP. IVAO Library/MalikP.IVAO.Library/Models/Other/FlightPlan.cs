@@ -204,6 +204,12 @@ namespace MalikP.IVAO.Library.Models.Other
             }
         }
 
+        public object Clone()
+        {
+            return FlightPlanBuilder.FromModel(this)
+                .Build();
+        }
+
         public static FlightPlanBuilder Builder => FlightPlanBuilder.Create();
     }
 }

@@ -151,6 +151,12 @@ namespace MalikP.IVAO.Library.Models.Clients
             }
         }
 
+        public override object Clone()
+        {
+            return PilotBuilder.FromModel(this)
+                .Build();
+        }
+
         public static PilotBuilder Builder => PilotBuilder.Create();
     }
 }

@@ -60,6 +60,30 @@ namespace MalikP.IVAO.Library.Models.Other
             return new FlightPlanBuilder();
         }
 
+        public static FlightPlanBuilder FromModel(FlightPlan model)
+        {
+            return new FlightPlanBuilder()
+                .WithAircraft(model.Aircraft)
+                .WithCruisingSpeed(model.CruisingSpeed)
+                .WithDepartureAerodrome(model.DepartureAerodrome == null ? null : (Aerodrome)model.DepartureAerodrome.Clone())
+                .WithCruisingLevel(model.CruisingLevel)
+                .WithDestinationAerodrome(model.DestinationAerodrome == null ? null : (Aerodrome)model.DestinationAerodrome.Clone())
+                .WithRevision(model.Revision)
+                .WithFlightRules(model.FlightRules)
+                .WithDepartureTime(model.DepartureTime)
+                .WithActualDepartureTime(model.ActualDepartureTime)
+                .WithEETHours(model.EETHours)
+                .WithEETMinutes(model.EETMinutess)
+                .WithEnduranceHours(model.EnduranceHours)
+                .WithEnduranceMinutes(model.EnduranceMinutes)
+                .WithAlternateAerodrome(model.AlternateAerodrome == null ? null : (Aerodrome)model.AlternateAerodrome.Clone())
+                .WithOtherInfo(model.OtherInfo)
+                .WithRoute(model.Route)
+                .WithSecondAlternateAerodrome(model.SecondAlternateAerodrome == null ? null : (Aerodrome)model.SecondAlternateAerodrome.Clone())
+                .WithTypeOfFlight(model.TypeOfFlight)
+                .WithPersonsOnBoard(model.PersonsOnBoard);
+        }
+
         public FlightPlanBuilder WithAircraft(string aircraft)
         {
             _aircraft = aircraft;
