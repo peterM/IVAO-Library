@@ -25,12 +25,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Net;
+
 namespace MalikP.IVAO.Library.Models.Servers
 {
     public sealed class ServerBuilder
     {
         private string _hostname;
-        private string _ip;
+        private IPAddress _ip;
         private string _location;
         private string _name;
         private bool _connectionsAllowed;
@@ -50,7 +52,7 @@ namespace MalikP.IVAO.Library.Models.Servers
             return new ServerBuilder()
                 .WithConnectionsAllowed(model.ConnectionsAllowed)
                 .WithHostname(model.Hostname)
-                .WithIP(model.IP)
+                .WithIP(model.IP == null ? null : IPAddress.Parse(model.IP.ToString()))
                 .WithLocation(model.Location)
                 .WithMaximumConnections(model.MaximumConnections)
                 .WithName(model.Name);
@@ -62,10 +64,15 @@ namespace MalikP.IVAO.Library.Models.Servers
             return this;
         }
 
-        public ServerBuilder WithIP(string ip)
+        public ServerBuilder WithIP(IPAddress ip)
         {
             _ip = ip;
             return this;
+        }
+
+        public ServerBuilder WithIP(string ip)
+        {
+            return WithIP(IPAddress.Parse(ip));
         }
 
         public ServerBuilder WithLocation(string location)

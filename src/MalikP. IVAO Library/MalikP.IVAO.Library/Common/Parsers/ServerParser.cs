@@ -26,7 +26,7 @@
 // SOFTWARE.
 
 using System;
-
+using System.Net;
 using MalikP.IVAO.Library.Common.Indexes;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Models.Servers;
@@ -56,7 +56,7 @@ namespace MalikP.IVAO.Library.Common.Parsers
 
             return ServerBuilder.Create()
                 .WithHostname(dataItems[ServerIndex.Hostname])
-                .WithIP(dataItems[ServerIndex.IP])
+                .WithIP(IPAddress.Parse(dataItems[ServerIndex.IP]))
                 .WithLocation(dataItems[ServerIndex.Location])
                 .WithName(dataItems[ServerIndex.Name])
                 .WithConnectionsAllowed(Convert.ToBoolean(Convert.ToInt16(dataItems[ServerIndex.ConnectionsAllowed])))

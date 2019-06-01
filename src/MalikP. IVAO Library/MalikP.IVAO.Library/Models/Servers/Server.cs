@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using System;
+using System.Net;
 using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.Servers
@@ -35,14 +36,14 @@ namespace MalikP.IVAO.Library.Models.Servers
     {
         public Server(
             string hostname,
-            string ip,
+            IPAddress ip,
             string location,
             string name,
             bool connectionsAllowed,
             int maximumConnections)
         {
             Hostname = hostname ?? string.Empty;
-            IP = ip ?? string.Empty;
+            IP = ip;
             Location = location ?? string.Empty;
             Name = name ?? string.Empty;
             ConnectionsAllowed = connectionsAllowed;
@@ -56,8 +57,14 @@ namespace MalikP.IVAO.Library.Models.Servers
         [DataMember]
         public string Hostname { get; private set; }
 
+        public IPAddress IP { get; private set; }
+
         [DataMember]
-        public string IP { get; private set; }
+        private string IPAddressIntenal
+        {
+            get { return IP.ToString(); }
+            set { IP = IPAddress.Parse(value); }
+        }
 
         [DataMember]
         public string Location { get; private set; }
@@ -91,7 +98,7 @@ namespace MalikP.IVAO.Library.Models.Servers
 
             return base.Equals(obj)
                 && string.Equals(casted.Hostname, Hostname, StringComparison.InvariantCultureIgnoreCase)
-                && string.Equals(casted.IP, IP, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.IP, IP)
                 && Equals(casted.ConnectionsAllowed, ConnectionsAllowed)
                 && Equals(casted.MaximumConnections, MaximumConnections)
                 && string.Equals(casted.Name, Name, StringComparison.InvariantCultureIgnoreCase)
@@ -104,7 +111,7 @@ namespace MalikP.IVAO.Library.Models.Servers
             {
                 return base.GetHashCode()
                     + (Hostname.ToUpper().GetHashCode() * 3)
-                    + (IP.ToUpper().GetHashCode() * 3)
+                    + (IP.GetHashCode() * 3)
                     + (ConnectionsAllowed.GetHashCode() * 3)
                     + (MaximumConnections.GetHashCode() * 3)
                     + (Name.ToUpper().GetHashCode() * 3)
