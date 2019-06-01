@@ -94,6 +94,12 @@ namespace MalikP.IVAO.Library.Models.Other
             }
         }
 
+        public object Clone()
+        {
+            return GPSBuilder.FromModel(this)
+                .Build();
+        }
+
         public static GPSBuilder Builder => GPSBuilder.Create();
     }
 }
