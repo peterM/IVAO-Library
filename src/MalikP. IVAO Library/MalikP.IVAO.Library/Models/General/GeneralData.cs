@@ -119,5 +119,15 @@ namespace MalikP.IVAO.Library.Models.General
         }
 
         public static GeneralDataBuilder Builder => GeneralDataBuilder.Create();
+
+        public static bool operator !=(GeneralData instance1, GeneralData instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(GeneralData instance1, GeneralData instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }

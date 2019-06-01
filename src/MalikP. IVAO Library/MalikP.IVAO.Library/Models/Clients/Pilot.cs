@@ -159,5 +159,15 @@ namespace MalikP.IVAO.Library.Models.Clients
         }
 
         public static PilotBuilder Builder => PilotBuilder.Create();
+
+        public static bool operator !=(Pilot instance1, Pilot instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(Pilot instance1, Pilot instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }

@@ -73,5 +73,15 @@ namespace MalikP.IVAO.Library.Models
                 return item.GetHashCode();
             }
         }
+
+        public static bool operator !=(AbstractIvaoModel instance1, AbstractIvaoModel instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(AbstractIvaoModel instance1, AbstractIvaoModel instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }

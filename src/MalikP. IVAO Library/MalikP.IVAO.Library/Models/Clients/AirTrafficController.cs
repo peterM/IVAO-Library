@@ -147,5 +147,15 @@ namespace MalikP.IVAO.Library.Models.Clients
         }
 
         public static AirTrafficControllerBuilder Builder => AirTrafficControllerBuilder.Create();
+
+        public static bool operator !=(AirTrafficController instance1, AirTrafficController instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(AirTrafficController instance1, AirTrafficController instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }

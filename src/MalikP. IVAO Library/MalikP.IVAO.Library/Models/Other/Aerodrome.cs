@@ -80,5 +80,15 @@ namespace MalikP.IVAO.Library.Models.Other
                 return ICAO.ToUpper().GetHashCode() * 3 * 17;
             }
         }
+
+        public static bool operator !=(Aerodrome instance1, Aerodrome instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(Aerodrome instance1, Aerodrome instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }

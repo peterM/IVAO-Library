@@ -105,5 +105,15 @@ namespace MalikP.IVAO.Library.Models.Clients
         }
 
         public static FollowMeBuilder Builder => FollowMeBuilder.Create();
+
+        public static bool operator !=(FollowMe instance1, FollowMe instance2)
+        {
+            return !instance1.Equals(instance2);
+        }
+
+        public static bool operator ==(FollowMe instance1, FollowMe instance2)
+        {
+            return instance1.Equals(instance2);
+        }
     }
 }
