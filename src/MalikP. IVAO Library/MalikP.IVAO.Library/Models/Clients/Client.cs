@@ -36,6 +36,10 @@ using MalikP.IVAO.Library.Models.Servers;
 namespace MalikP.IVAO.Library.Models.Clients
 {
     [DataContract]
+    [KnownType(typeof(AirTrafficController))]
+    [KnownType(typeof(Pilot))]
+    [KnownType(typeof(FollowMe))]
+    [KnownType(typeof(ClientWithRating<>))]
     public abstract class Client : AbstractIvaoModel
     {
         public Client(

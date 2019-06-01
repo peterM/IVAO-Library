@@ -71,6 +71,9 @@ namespace MalikP.IVAO.Library.App
 
             Client item = pilotDataModels.First();
 
+            IModelCloner modelCloner = new ModelCloner();
+            Client m = modelCloner.Clone(pilotDataModels[0]);
+
             TrySerialize(item);
         }
 
