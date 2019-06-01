@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IWebIVAOWhazzupDataSource.cs 
+// File: IIVAOWhazzupSpecificDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -27,7 +27,7 @@
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
+    public interface IIVAOWhazzupSpecificDataSource : IIVAOWhazzupDataSource
     {
     }
 }

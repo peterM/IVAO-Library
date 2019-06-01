@@ -36,11 +36,13 @@ namespace MalikP.IVAO.Library.App
         {
             IIoC ioc = Locator.GetContainer(new AdvancedContainerFactory());
             ioc.AddIVAOServices();
-            ioc.Register<LocalGZippedIVAOWhazzupDataSource>()
+            ioc.Register<IIVAOWhazzupSpecificDataSource, LocalGZippedIVAOWhazzupDataSource>()
                 .Extend()
                 .WithSpecific<string>(path);
 
-            ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<LocalGZippedIVAOWhazzupDataSource>()));
+            //ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<LocalGZippedIVAOWhazzupDataSource>()));
+            //ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<IIVAOWhazzupSpecificDataSource>()));
+            ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>();
 
             ICachedIVAOWhazzupDataSource dataSource = ioc.Resolve<ICachedIVAOWhazzupDataSource>();
 

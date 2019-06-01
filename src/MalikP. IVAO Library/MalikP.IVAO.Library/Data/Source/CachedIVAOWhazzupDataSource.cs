@@ -35,9 +35,14 @@ namespace MalikP.IVAO.Library.Data.Source
         private readonly IIVAOWhazzupDataSource _datasource;
         private IWhazzup _cache;
 
-        public CachedIVAOWhazzupDataSource(IIVAOWhazzupDataSource ivaoWhazzupDataSource)
+        public CachedIVAOWhazzupDataSource(IIVAOWhazzupSpecificDataSource specificDataSource)
+          : this(specificDataSource as IIVAOWhazzupDataSource)
         {
-            _datasource = ivaoWhazzupDataSource;
+        }
+
+        public CachedIVAOWhazzupDataSource(IIVAOWhazzupDataSource dataSource)
+        {
+            _datasource = dataSource;
         }
 
         public void DeleteCache()

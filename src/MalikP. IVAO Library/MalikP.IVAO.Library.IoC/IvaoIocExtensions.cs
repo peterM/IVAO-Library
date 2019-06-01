@@ -2,6 +2,7 @@
 using MalikP.IVAO.Library.Common.Enhancers;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
+using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Providers;
 
 namespace MalikP.IoC
@@ -19,7 +20,7 @@ namespace MalikP.IoC
             //ioc.Register<IIVAOWhazzupDataSource, LocalIVAOWhazzupDataSource>();
             //ioc.Register<IIVAOWhazzupDataSource, LocalGZippedIVAOWhazzupDataSource>();
 
-            //ioc.Register<ICachedIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>();
+            ioc.Register<ICachedIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>();
 
             ioc.Register<IGeneralSelector, GeneralSelector>();
             ioc.Register<IClientsSelector, ClientsSelector>();
