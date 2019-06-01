@@ -2,7 +2,6 @@
 using MalikP.IVAO.Library.Common.Enhancers;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
-using MalikP.IVAO.Library.Data.Source;
 using MalikP.IVAO.Library.Providers;
 
 namespace MalikP.IoC

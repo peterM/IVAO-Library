@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;netstandard2.0;net47;net462;net461;net46;net452;net451;net45</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;netstandard2.0;net472;net471;net47;net462;net461;net46;net452;net451;net45</TargetFrameworks>
 		<!--net472;net471;-->
 		<PackageId>MalikP.IVAO.Library.IoC</PackageId>
 		<Version>0.8.6</Version>
