@@ -9,7 +9,7 @@ namespace MalikP.IoC
 {
     public static class IvaoIocExtensions
     {
-        public static IIoC AddIVAOServices(this IIoC ioc)
+        public static IIoC RegisterDefaultIvaoWhazzupServices(this IIoC ioc)
         {
             ioc.Register<IParserFactory, ParserFactory>();
 
