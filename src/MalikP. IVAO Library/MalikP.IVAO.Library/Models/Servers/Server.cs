@@ -108,7 +108,7 @@ namespace MalikP.IVAO.Library.Models.Servers
                     + (ConnectionsAllowed.GetHashCode() * 3)
                     + (MaximumConnections.GetHashCode() * 3)
                     + (Name.ToUpper().GetHashCode() * 3)
-                    + Location.ToUpper().GetHashCode() * 3 * 17;
+                    + (Location.ToUpper().GetHashCode() * 3) * 17;
             }
         }
 

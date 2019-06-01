@@ -108,7 +108,7 @@ namespace MalikP.IVAO.Library.Models.General
                     + (Update.GetHashCode() * 3)
                     + (ConnectedClients.GetHashCode() * 3)
                     + (ConnectedServers.GetHashCode() * 3)
-                    + ConnectedAirports.GetHashCode() * 3 * 17;
+                    + (ConnectedAirports.GetHashCode() * 3) * 17;
             }
         }
 
