@@ -65,7 +65,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             return GetBuilder();
         }
 
-        public TBuilder WithClientType(ClientType clientType)
+        protected TBuilder WithClientType(ClientType clientType)
         {
             this.clientType = clientType;
             return GetBuilder();

@@ -74,7 +74,6 @@ namespace MalikP.IVAO.Library.Common.Parsers
                 .WithCallsign(rowData[ClientIndex.All.Callsign])
                 .WithVID(rowData[ClientIndex.All.VID])
                 .WithName(rowData[ClientIndex.All.Name])
-                .WithClientType(TargetClientType)
                 .WithLocation(location)
                 .WithServer(rowData[ClientIndex.All.Server])
                 .WithProtocol(rowData[ClientIndex.All.Protocol])

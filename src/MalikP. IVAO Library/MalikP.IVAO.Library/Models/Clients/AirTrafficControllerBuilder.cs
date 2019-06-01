@@ -47,7 +47,7 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         public static AirTrafficControllerBuilder Create()
         {
-            return new AirTrafficControllerBuilder();
+            return new AirTrafficControllerBuilder().WithClientType(ClientType.ATC);
         }
 
         public AirTrafficControllerBuilder WithFrequency(string frequency)

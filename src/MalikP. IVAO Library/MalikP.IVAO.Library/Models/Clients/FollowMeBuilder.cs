@@ -25,6 +25,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using MalikP.IVAO.Library.Common.Enums;
+
 namespace MalikP.IVAO.Library.Models.Clients
 {
     public sealed class FollowMeBuilder : AbstractClientBuilder<FollowMeBuilder>
@@ -35,7 +37,7 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         public static FollowMeBuilder Create()
         {
-            return new FollowMeBuilder();
+            return new FollowMeBuilder().WithClientType(ClientType.FollowMeCar);
         }
 
         public FollowMe Build()

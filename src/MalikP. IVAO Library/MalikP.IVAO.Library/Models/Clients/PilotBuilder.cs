@@ -47,7 +47,7 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         public static PilotBuilder Create()
         {
-            return new PilotBuilder();
+            return new PilotBuilder().WithClientType(ClientType.Pilot);
         }
 
         public PilotBuilder WithRating(PilotRating rating)
