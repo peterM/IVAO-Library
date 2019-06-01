@@ -27,7 +27,7 @@
 
 namespace MalikP.IVAO.Library.Models
 {
-    public interface IIvaoModel
+    public interface IIvaoModel : IModel
     {
     }
 }

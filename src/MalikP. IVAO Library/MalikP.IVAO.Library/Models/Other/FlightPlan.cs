@@ -33,7 +33,7 @@ using MalikP.IVAO.Library.Common.Enums.Custom;
 namespace MalikP.IVAO.Library.Models.Other
 {
     [DataContract]
-    public sealed class FlightPlan
+    public sealed class FlightPlan : IModel
     {
         public FlightPlan(
             string aircraft,

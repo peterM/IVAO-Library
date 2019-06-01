@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: Aerodrome.cs 
+// File: IModelCloner.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,55 +25,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-using System.Runtime.Serialization;
+using MalikP.IVAO.Library.Models;
 
-namespace MalikP.IVAO.Library.Models.Other
+namespace MalikP.IVAO.Library.Common
 {
-    [DataContract]
-    public class Aerodrome : IModel
+    public interface IModelCloner
     {
-        public Aerodrome(string icao)
-        {
-            ICAO = icao ?? string.Empty;
-        }
-
-        private Aerodrome()
-        {
-        }
-
-        [DataMember]
-        public string ICAO { get; private set; }
-
-        public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(obj, null))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(obj, this))
-            {
-                return true;
-            }
-
-            Aerodrome casted = obj as Aerodrome;
-            if (casted == null)
-            {
-                return false;
-            }
-
-            return string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ICAO.ToUpper().GetHashCode() * 3 * 17;
-            }
-        }
+        T Clone<T>(T source)
+            where T : IModel;
     }
 }

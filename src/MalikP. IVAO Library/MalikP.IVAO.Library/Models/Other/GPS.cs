@@ -33,7 +33,7 @@ using MalikP.IVAO.Library.Common.Annotation;
 namespace MalikP.IVAO.Library.Models.Other
 {
     [DataContract]
-    public class GPS
+    public class GPS : IModel
     {
         public GPS(
             decimal latitude,
