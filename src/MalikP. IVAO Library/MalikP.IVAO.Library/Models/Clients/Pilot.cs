@@ -147,7 +147,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (IsOnGround.GetHashCode() * 3)
                     + (Simulator.GetHashCode() * 3)
                     + (PlaneMTL.ToUpper().GetHashCode() * 3)
-                    + (FlightPlan.GetHashCode() * 3) * 17;
+                    + (GetItemHashCode(FlightPlan) * 3) * 17;
             }
         }
     }

@@ -58,5 +58,18 @@ namespace MalikP.IVAO.Library.Models
                 return 0;
             }
         }
+
+        protected int GetItemHashCode(object item)
+        {
+            if (item == null)
+            {
+                return 0;
+            }
+
+            unchecked
+            {
+                return item.GetHashCode();
+            }
+        }
     }
 }

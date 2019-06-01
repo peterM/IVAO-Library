@@ -150,7 +150,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (VID.ToUpper().GetHashCode() * 3)
                     + (Name.ToUpper().GetHashCode() * 3)
                     + (ClientType.GetHashCode() * 3)
-                    + (Location.GetHashCode() * 3)
+                    + (GetItemHashCode(Location) * 3)
                     + (Server.ToUpper().GetHashCode() * 3)
                     + (Protocol.ToUpper().GetHashCode() * 3)
                     + (ConnectionTime.GetHashCode() * 3)
