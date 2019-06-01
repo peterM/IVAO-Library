@@ -5,7 +5,7 @@
 // File: Aerodrome.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Other
 {
+    [DataContract]
     public class Aerodrome
     {
         public Aerodrome(string icao)
         {
-            ICAO = icao;
+            ICAO = icao ?? string.Empty;
         }
 
-        string ICAO { get; }
+        private Aerodrome()
+        {
+        }
 
-        public bool IsEmpty => string.IsNullOrWhiteSpace(ICAO);
+        [DataMember]
+        public string ICAO { get; private set; }
 
-        public bool IsValid => !IsEmpty && ICAO.Length == 4;
+        public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Aerodrome casted = obj as Aerodrome;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ICAO.ToUpper().GetHashCode() * 3 * 17;
+            }
+        }
     }
 }

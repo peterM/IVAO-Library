@@ -5,7 +5,7 @@
 // File: AdministrativeRating.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,23 +25,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(AdministrativeRating))]
     public enum AdministrativeRating
     {
-        //[ItemShortcutDescription("SUS")]
+        [Map("SUS")]
+        [EnumMember]
         Suspended = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
-        //[ItemShortcutDescription("USR")]
+        [Map("USR")]
+        [EnumMember]
         User = 2,
 
-        //[ItemShortcutDescription("SUP")]
+        [Map("SUP")]
+        [EnumMember]
         Supervisor = 11,
 
-        //[ItemShortcutDescription("ADM")]
+        [Map("ADM")]
+        [EnumMember]
         Administrator = 12,
     }
 }

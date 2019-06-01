@@ -5,7 +5,7 @@
 // File: Pilot.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
@@ -33,6 +34,7 @@ using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public class Pilot : ClientWithRating<PilotRating>
     {
         public Pilot(
@@ -54,7 +56,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             int heading,
             bool isOnGround,
             FlightSimulator flightSimulator,
-            string Mtl,
+            string planeMTL,
             FlightPlan flightPlan)
             : base(callsign,
                    vid,
@@ -71,28 +73,84 @@ namespace MalikP.IVAO.Library.Models.Clients
                    rating)
         {
             GroundSpeed = groundSpeed;
-            TransponderCode = transponderCode;
+            TransponderCode = transponderCode ?? string.Empty;
             Heading = heading;
             IsOnGround = isOnGround;
             Simulator = flightSimulator;
-            PlaneMTL = Mtl;
+            PlaneMTL = planeMTL ?? string.Empty;
             FlightPlan = flightPlan;
         }
 
-        [Unit("Knots")]
-        public int GroundSpeed { get; set; }
+        public Pilot()
+        {
+        }
 
-        public string TransponderCode { get; set; }
+        [Unit("Knots")]
+        [DataMember]
+        public int GroundSpeed { get; private set; }
+
+        [DataMember]
+        public string TransponderCode { get; private set; }
 
         [Unit("Degrees")]
-        public int Heading { get; set; }
+        [DataMember]
+        public int Heading { get; private set; }
 
-        public bool IsOnGround { get; set; }
+        [DataMember]
+        public bool IsOnGround { get; private set; }
 
-        public FlightSimulator Simulator { get; set; }
+        [DataMember]
+        public FlightSimulator Simulator { get; private set; }
 
-        public string PlaneMTL { get; set; }
+        [DataMember]
+        public string PlaneMTL { get; private set; }
 
-        public FlightPlan FlightPlan { get; set; }
+        [DataMember]
+        public FlightPlan FlightPlan { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Pilot casted = obj as Pilot;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && Equals(casted.GroundSpeed, GroundSpeed)
+                && string.Equals(casted.TransponderCode, TransponderCode, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.Heading, Heading)
+                && Equals(casted.IsOnGround, IsOnGround)
+                && Equals(casted.Simulator, Simulator)
+                && string.Equals(casted.PlaneMTL, PlaneMTL, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.FlightPlan, FlightPlan);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (GroundSpeed.GetHashCode() * 3)
+                    + (TransponderCode.ToUpper().GetHashCode() * 3)
+                    + (Heading.GetHashCode() * 3)
+                    + (IsOnGround.GetHashCode() * 3)
+                    + (Simulator.GetHashCode() * 3)
+                    + (PlaneMTL.ToUpper().GetHashCode() * 3)
+                    + (GetItemHashCode(FlightPlan) * 3) * 17;
+            }
+        }
+
+        public static PilotBuilder Builder => PilotBuilder.Create();
     }
 }

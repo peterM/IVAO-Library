@@ -5,7 +5,7 @@
 // File: GPS.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,10 +25,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 
 namespace MalikP.IVAO.Library.Models.Other
 {
+    [DataContract]
     public class GPS
     {
         public GPS(
@@ -41,13 +45,55 @@ namespace MalikP.IVAO.Library.Models.Other
             Altitude = altitude;
         }
 
-        [Unit("degree")]
-        public decimal Latitude { get; }
+        private GPS()
+        {
+        }
 
         [Unit("degree")]
-        public decimal Longitude { get; }
+        [DataMember]
+        public decimal Latitude { get; private set; }
+
+        [Unit("degree")]
+        [DataMember]
+        public decimal Longitude { get; private set; }
 
         [Unit("Feet")]
-        public int Altitude { get; }
+        [DataMember]
+        public int Altitude { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            GPS casted = obj as GPS;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return Equals(casted.Latitude, Latitude)
+                && Equals(casted.Longitude, Longitude)
+                && Equals(casted.Altitude, Altitude);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Latitude.GetHashCode() * 3)
+                    + (Longitude.GetHashCode() * 3)
+                    + (Altitude.GetHashCode() * 3) * 17;
+            }
+        }
+
+        public static GPSBuilder Builder => GPSBuilder.Create();
     }
 }

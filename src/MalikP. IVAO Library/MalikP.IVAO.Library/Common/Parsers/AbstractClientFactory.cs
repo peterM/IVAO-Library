@@ -5,7 +5,7 @@
 // File: AbstractClientFactory.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -74,7 +74,6 @@ namespace MalikP.IVAO.Library.Common.Parsers
                 .WithCallsign(rowData[ClientIndex.All.Callsign])
                 .WithVID(rowData[ClientIndex.All.VID])
                 .WithName(rowData[ClientIndex.All.Name])
-                .WithClientType(TargetClientType)
                 .WithLocation(location)
                 .WithServer(rowData[ClientIndex.All.Server])
                 .WithProtocol(rowData[ClientIndex.All.Protocol])

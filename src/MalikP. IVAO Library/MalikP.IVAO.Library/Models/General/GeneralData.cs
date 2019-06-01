@@ -5,7 +5,7 @@
 // File: GeneralData.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,12 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 namespace MalikP.IVAO.Library.Models.General
 {
-    public sealed class GeneralData : IIvaoModel
+    [DataContract]
+    public sealed class GeneralData : AbstractIvaoModel
     {
         public GeneralData(
             int version,
@@ -47,16 +49,69 @@ namespace MalikP.IVAO.Library.Models.General
             ConnectedAirports = connectedAirports;
         }
 
-        public int Version { get; }
+        private GeneralData()
+        {
+        }
 
-        public int Reload { get; }
+        [DataMember]
+        public int Version { get; private set; }
 
-        public DateTime Update { get; }
+        [DataMember]
+        public int Reload { get; private set; }
 
-        public int ConnectedClients { get; }
+        [DataMember]
+        public DateTime Update { get; private set; }
 
-        public int ConnectedServers { get; }
+        [DataMember]
+        public int ConnectedClients { get; private set; }
 
-        public int ConnectedAirports { get; }
+        [DataMember]
+        public int ConnectedServers { get; private set; }
+
+        [DataMember]
+        public int ConnectedAirports { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            GeneralData casted = obj as GeneralData;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && Equals(casted.Version, Version)
+                && Equals(casted.Reload, Reload)
+                && Equals(casted.Update, Update)
+                && Equals(casted.ConnectedClients, ConnectedClients)
+                && Equals(casted.ConnectedServers, ConnectedServers)
+                && Equals(casted.ConnectedAirports, ConnectedAirports);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Version.GetHashCode() * 3)
+                    + (Reload.GetHashCode() * 3)
+                    + (Update.GetHashCode() * 3)
+                    + (ConnectedClients.GetHashCode() * 3)
+                    + (ConnectedServers.GetHashCode() * 3)
+                    + (ConnectedAirports.GetHashCode() * 3) * 17;
+            }
+        }
+
+        public static GeneralDataBuilder Builder => GeneralDataBuilder.Create();
     }
 }

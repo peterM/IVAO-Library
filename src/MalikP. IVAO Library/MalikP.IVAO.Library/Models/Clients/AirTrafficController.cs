@@ -5,7 +5,7 @@
 // File: AirTrafficController.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,15 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
+
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public sealed class AirTrafficController : ClientWithRating<ATCRating>
     {
         public AirTrafficController(
@@ -67,25 +70,75 @@ namespace MalikP.IVAO.Library.Models.Clients
                    clientRating,
                    rating)
         {
-            Frequency = frequency;
+            Frequency = frequency ?? string.Empty;
             FacilityType = facilityType;
             VisualRange = visualRange;
-            ATIS = atis;
+            ATIS = atis ?? string.Empty;
             ATISTime = atisTime;
         }
 
-        public string Frequency { get; }
+        private AirTrafficController()
+        {
+        }
+
+        [DataMember]
+        public string Frequency { get; private set; }
 
         public decimal Freq => decimal.Parse(Frequency);
 
-        public FacilityType FacilityType { get; }
+        [DataMember]
+        public FacilityType FacilityType { get; private set; }
 
         [Unit("NM")]
-        public int VisualRange { get; }
+        [DataMember]
+        public int VisualRange { get; private set; }
 
         // todo: create type ATIS
-        public string ATIS { get; }
+        [DataMember]
+        public string ATIS { get; private set; }
 
-        public DateTime? ATISTime { get; }
+        [DataMember]
+        public DateTime? ATISTime { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            AirTrafficController casted = obj as AirTrafficController;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Frequency, Frequency, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.FacilityType, FacilityType)
+                && Equals(casted.VisualRange, VisualRange)
+                && string.Equals(casted.ATIS, ATIS, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ATISTime, ATISTime);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Frequency.ToUpper().GetHashCode() * 3)
+                    + (FacilityType.GetHashCode() * 3)
+                    + (VisualRange.GetHashCode() * 3)
+                    + (ATIS.ToUpper().GetHashCode() * 3)
+                    + (GetItemHashCode(ATISTime) * 3) * 17;
+            }
+        }
+
+        public static AirTrafficControllerBuilder Builder => AirTrafficControllerBuilder.Create();
     }
 }

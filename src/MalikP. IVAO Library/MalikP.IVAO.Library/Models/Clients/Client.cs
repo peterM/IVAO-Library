@@ -5,7 +5,7 @@
 // File: Client.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
@@ -33,7 +34,8 @@ using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
-    public abstract class Client : IIvaoModel
+    [DataContract]
+    public abstract class Client : AbstractIvaoModel
     {
         public Client(
             string callsign,
@@ -49,45 +51,114 @@ namespace MalikP.IVAO.Library.Models.Clients
             AdministrativeRating administrativeVersion,
             int clientRating)
         {
-            Callsign = callsign;
-            VID = vid;
-            Name = name;
+            Callsign = callsign ?? string.Empty;
+            VID = vid ?? string.Empty;
+            Name = name ?? string.Empty;
             ClientType = clientType;
             Location = location;
-            Server = server;
-            Protocol = protocol;
+            Server = server ?? string.Empty;
+            Protocol = protocol ?? string.Empty;
             ConnectionTime = connectionTime;
-            SoftwareName = softwareName;
+            SoftwareName = softwareName ?? string.Empty;
 
             // TODO: Possible to use 'Version' type
-            SoftwareVersion = softwareVersion;
+            SoftwareVersion = softwareVersion ?? string.Empty;
             AdministrativeVersion = administrativeVersion;
             ClientRating = clientRating;
         }
 
-        public string Callsign { get; }
+        protected Client()
+        {
+        }
 
-        public string VID { get; }
+        [DataMember]
+        public string Callsign { get; private set; }
 
-        public string Name { get; }
+        [DataMember]
+        public string VID { get; private set; }
 
-        public ClientType ClientType { get; }
+        [DataMember]
+        public string Name { get; private set; }
+
+        [DataMember]
+        public ClientType ClientType { get; private set; }
 
         [Unit("N/A")]
-        public GPS Location { get; }
+        [DataMember]
+        public GPS Location { get; private set; }
 
-        public string Server { get; }
+        [DataMember]
+        public string Server { get; private set; }
 
-        public string Protocol { get; }
+        [DataMember]
+        public string Protocol { get; private set; }
 
-        public DateTime ConnectionTime { get; }
+        [DataMember]
+        public DateTime ConnectionTime { get; private set; }
 
-        public string SoftwareName { get; }
+        [DataMember]
+        public string SoftwareName { get; private set; }
 
-        public string SoftwareVersion { get; }
+        [DataMember]
+        public string SoftwareVersion { get; private set; }
 
-        public AdministrativeRating AdministrativeVersion { get; }
+        [DataMember]
+        public AdministrativeRating AdministrativeVersion { get; private set; }
 
-        public int ClientRating { get; }
+        [DataMember]
+        public int ClientRating { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Client casted = obj as Client;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Callsign, Callsign, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.VID, VID, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.Name, Name, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ClientType, ClientType)
+                && Equals(casted.Location, Location)
+                && string.Equals(casted.Server, Server, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.Protocol, Protocol, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ConnectionTime, ConnectionTime)
+                && string.Equals(casted.SoftwareName, SoftwareName, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.SoftwareVersion, SoftwareVersion, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.AdministrativeVersion, AdministrativeVersion)
+                && Equals(casted.ClientRating, ClientRating);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Callsign.ToUpper().GetHashCode() * 3)
+                    + (VID.ToUpper().GetHashCode() * 3)
+                    + (Name.ToUpper().GetHashCode() * 3)
+                    + (ClientType.GetHashCode() * 3)
+                    + (GetItemHashCode(Location) * 3)
+                    + (Server.ToUpper().GetHashCode() * 3)
+                    + (Protocol.ToUpper().GetHashCode() * 3)
+                    + (ConnectionTime.GetHashCode() * 3)
+                    + (SoftwareName.ToUpper().GetHashCode() * 3)
+                    + (SoftwareVersion.ToUpper().GetHashCode() * 3)
+                    + (AdministrativeVersion.GetHashCode() * 3)
+                    + (ClientRating.GetHashCode() * 3) * 17;
+            }
+        }
     }
 }

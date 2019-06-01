@@ -5,7 +5,7 @@
 // File: FacilityType.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,32 +25,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(FacilityType))]
     public enum FacilityType
     {
-        //[ItemShortcutDescriptionAttribute("OBS")]
+        [Map("OBS")]
+        [EnumMember]
         Observer = 0,
 
-        //[ItemShortcutDescriptionAttribute("FI")]
+        [Map("FI")]
+        [EnumMember]
         FlightInformation = 1,
 
-        //[ItemShortcutDescriptionAttribute("DEL")]
+        [Map("DEL")]
+        [EnumMember]
         Delivery = 2,
 
-        //[ItemShortcutDescriptionAttribute("GND")]
+        [Map("GND")]
+        [EnumMember]
         Ground = 3,
 
-        //[ItemShortcutDescriptionAttribute("TWR")]
+        [Map("TWR")]
+        [EnumMember]
         Tower = 4,
 
-        //[ItemShortcutDescriptionAttribute("APP")]
+        [Map("APP")]
+        [EnumMember]
         Approach = 5,
 
-        //[ItemShortcutDescriptionAttribute("ACC")]
+        [Map("ACC")]
+        [EnumMember]
         AreaControl = 6,
 
-        //[ItemShortcutDescriptionAttribute("DEP")]
+        [Map("DEP")]
+        [EnumMember]
         Departure = 7
     }
 }

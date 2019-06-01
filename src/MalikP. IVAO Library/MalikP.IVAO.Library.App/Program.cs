@@ -2,6 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
 
 using MalikP.IVAO.Library.Common;
 using MalikP.IVAO.Library.Common.Parsers;
@@ -56,6 +59,27 @@ namespace MalikP.IVAO.Library.App
             List<Client> atcDataModels = atcClientsDataProvider.GetData().ToList();
             List<Client> pilotDataModels = pilotClientsDataProvider.GetData().ToList();
             List<Client> followMeDataModels = followMeClientsDataProvider.GetData().ToList();
+
+            Client item = pilotDataModels.First();
+
+            TrySerialize(item);
+        }
+
+        private static void TrySerialize(Client item)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                DataContractSerializer ser = new DataContractSerializer(typeof(Pilot));
+                ser.WriteObject(ms, item);
+
+                byte[] d = ms.ToArray();
+                string s = Encoding.UTF8.GetString(d);
+
+                ms.Position = 0;
+
+                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(ms, new XmlDictionaryReaderQuotas());
+                object deserializedPerson = ser.ReadObject(reader, true);
+            }
         }
 
         private static string GetPath()

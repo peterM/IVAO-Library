@@ -5,7 +5,7 @@
 // File: PilotRating.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,41 +25,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(PilotRating))]
     public enum PilotRating
     {
-        //[ItemShortcutDescription("None")]
+        [Map("None")]
+        [EnumMember]
         None = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
-        //[ItemShortcutDescription("FS1")]
+        [Map("FS1")]
+        [EnumMember]
         BasicFlightStudent = 2,
 
-        //[ItemShortcutDescription("FS2")]
+        [Map("FS2")]
+        [EnumMember]
         FlightStudent = 3,
 
-        //[ItemShortcutDescription("FS3")]
+        [Map("FS3")]
+        [EnumMember]
         AdvancedFlightStudent = 4,
 
-        //[ItemShortcutDescription("PP")]
+        [Map("PP")]
+        [EnumMember]
         PrivatePilot = 5,
 
-        //[ItemShortcutDescription("SPP")]
+        [Map("SPP")]
+        [EnumMember]
         SeniorPrivatePilot = 6,
 
-        //[ItemShortcutDescription("CP")]
+        [Map("CP")]
+        [EnumMember]
         CommercialPilot = 7,
 
-        //[ItemShortcutDescription("ATP")]
+        [Map("ATP")]
+        [EnumMember]
         AirlineTransportPilot = 8,
 
-        //[ItemShortcutDescription("SFI")]
+        [Map("SFI")]
+        [EnumMember]
         SeniorFlightInstructor = 9,
 
-        //[ItemShortcutDescription("CFI")]
+        [Map("CFI")]
+        [EnumMember]
         ChiefFlightInstructor = 10,
     }
 }

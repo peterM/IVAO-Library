@@ -5,7 +5,7 @@
 // File: ATCRating.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,41 +25,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Runtime.Serialization;
+
+using MalikP.IVAO.Library.Common.Annotation;
+
 namespace MalikP.IVAO.Library.Common.Enums
 {
+    [DataContract(Name = nameof(ATCRating))]
     public enum ATCRating
     {
-        //[ItemShortcutDescription("DEF")]
+        [Map("DEF")]
+        [EnumMember]
         None = 0,
 
-        //[ItemShortcutDescription("OBS")]
+        [Map("OBS")]
+        [EnumMember]
         Observer = 1,
 
-        //[ItemShortcutDescription("AS1")]
+        [Map("AS1")]
+        [EnumMember]
         Applicant = 2,
 
-        //[ItemShortcutDescription("AS2")]
+        [Map("AS2")]
+        [EnumMember]
         Trainee = 3,
 
-        //[ItemShortcutDescription("AS3")]
+        [Map("AS3")]
+        [EnumMember]
         AdvancedTrainee = 4,
 
-        //[ItemShortcutDescription("ADC")]
+        [Map("ADC")]
+        [EnumMember]
         AerodromeController = 5,
 
-        //[ItemShortcutDescription("APC")]
+        [Map("APC")]
+        [EnumMember]
         ApproachController = 6,
 
-        //[ItemShortcutDescription("ACC")]
+        [Map("ACC")]
+        [EnumMember]
         CenterController = 7,
 
-        //[ItemShortcutDescription("SEC")]
+        [Map("SEC")]
+        [EnumMember]
         SeniorController = 8,
 
-        //[ItemShortcutDescription("SAI")]
+        [Map("SAI")]
+        [EnumMember]
         SeniorATCInstructor = 9,
 
-        //[ItemShortcutDescription("CAI")]
+        [Map("CAI")]
+        [EnumMember]
         ChiefATCInstructor = 10,
     }
 }

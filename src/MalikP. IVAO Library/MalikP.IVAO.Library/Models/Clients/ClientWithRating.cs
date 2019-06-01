@@ -5,7 +5,7 @@
 // File: ClientWithRating.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,14 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public abstract class ClientWithRating<TRating> : Client
     {
         public ClientWithRating(
@@ -64,6 +66,11 @@ namespace MalikP.IVAO.Library.Models.Clients
             Rating = rating;
         }
 
-        public TRating Rating { get; }
+        protected ClientWithRating()
+        {
+        }
+
+        [DataMember]
+        public TRating Rating { get; private set; }
     }
 }

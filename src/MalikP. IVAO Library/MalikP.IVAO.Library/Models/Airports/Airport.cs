@@ -5,7 +5,7 @@
 // File: Airport.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,61 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Airports
 {
-    public sealed class Airport : IIvaoModel
+    [DataContract]
+    public sealed class Airport : AbstractIvaoModel
     {
         public Airport(
             string icao,
             string atis)
         {
-            ICAO = icao;
-            ATIS = atis;
+            ICAO = icao ?? string.Empty;
+            ATIS = atis ?? string.Empty;
         }
 
-        public string ICAO { get; }
+        [DataMember]
+        public string ICAO { get; private set; }
 
-        public string ATIS { get; }
+        [DataMember]
+        public string ATIS { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Airport casted = obj as Airport;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.ATIS, ATIS, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (ICAO.ToUpper().GetHashCode() * 3
+                    + ATIS.ToUpper().GetHashCode() * 3) * 17;
+            }
+        }
+
+        public static AirportBuilder Builder => AirportBuilder.Create();
     }
 }

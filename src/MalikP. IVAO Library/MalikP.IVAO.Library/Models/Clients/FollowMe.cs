@@ -5,7 +5,7 @@
 // File: FollowMe.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,14 @@
 // SOFTWARE.
 
 using System;
+using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
+    [DataContract]
     public class FollowMe : Client
     {
         public FollowMe(
@@ -61,5 +63,40 @@ namespace MalikP.IVAO.Library.Models.Clients
                    clientRating)
         {
         }
+
+        private FollowMe()
+        {
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            FollowMe casted = obj as FollowMe;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode();
+            }
+        }
+
+        public static FollowMeBuilder Builder => FollowMeBuilder.Create();
     }
 }

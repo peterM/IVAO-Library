@@ -5,7 +5,7 @@
 // File: Server.cs 
 // Company: MalikP.
 //
-// Repository: https://github.com/peterM/IVAO-Net
+// Repository: https://github.com/peterM/IVAO-Library
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
+using System.Runtime.Serialization;
+
 namespace MalikP.IVAO.Library.Models.Servers
 {
-    public sealed class Server : IIvaoModel
+    [DataContract]
+    public sealed class Server : AbstractIvaoModel
     {
         public Server(
             string hostname,
@@ -37,24 +41,77 @@ namespace MalikP.IVAO.Library.Models.Servers
             bool connectionsAllowed,
             int maximumConnections)
         {
-            Hostname = hostname;
-            IP = ip;
-            Location = location;
-            Name = name;
+            Hostname = hostname ?? string.Empty;
+            IP = ip ?? string.Empty;
+            Location = location ?? string.Empty;
+            Name = name ?? string.Empty;
             ConnectionsAllowed = connectionsAllowed;
             MaximumConnections = maximumConnections;
         }
 
-        public string Hostname { get; }
+        private Server()
+        {
+        }
 
-        public string IP { get; }
+        [DataMember]
+        public string Hostname { get; private set; }
 
-        public string Location { get; }
+        [DataMember]
+        public string IP { get; private set; }
 
-        public string Name { get; }
+        [DataMember]
+        public string Location { get; private set; }
 
-        public bool ConnectionsAllowed { get; }
+        [DataMember]
+        public string Name { get; private set; }
 
-        public int MaximumConnections { get; }
+        [DataMember]
+        public bool ConnectionsAllowed { get; private set; }
+
+        [DataMember]
+        public int MaximumConnections { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            Server casted = obj as Server;
+            if (casted == null)
+            {
+                return false;
+            }
+
+            return base.Equals(obj)
+                && string.Equals(casted.Hostname, Hostname, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.IP, IP, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.ConnectionsAllowed, ConnectionsAllowed)
+                && Equals(casted.MaximumConnections, MaximumConnections)
+                && string.Equals(casted.Name, Name, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(casted.Location, Location, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode()
+                    + (Hostname.ToUpper().GetHashCode() * 3)
+                    + (IP.ToUpper().GetHashCode() * 3)
+                    + (ConnectionsAllowed.GetHashCode() * 3)
+                    + (MaximumConnections.GetHashCode() * 3)
+                    + (Name.ToUpper().GetHashCode() * 3)
+                    + (Location.ToUpper().GetHashCode() * 3) * 17;
+            }
+        }
+
+        public static ServerBuilder Builder => ServerBuilder.Create();
     }
 }
