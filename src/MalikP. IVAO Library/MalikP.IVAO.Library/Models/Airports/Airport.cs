@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 namespace MalikP.IVAO.Library.Models.Airports
 {
     [DataContract]
-    public sealed class Airport : AbstractIvaoModel
+    public sealed class Airport : AbstractIvaoModel, ICloneable
     {
         public Airport(
             string icao,
@@ -78,6 +78,12 @@ namespace MalikP.IVAO.Library.Models.Airports
                     + (ICAO.ToUpper().GetHashCode() * 3
                     + ATIS.ToUpper().GetHashCode() * 3) * 17;
             }
+        }
+
+        public object Clone()
+        {
+            return AirportBuilder.FromModel(this)
+                .Build();
         }
 
         public static AirportBuilder Builder => AirportBuilder.Create();

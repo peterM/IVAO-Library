@@ -41,6 +41,13 @@ namespace MalikP.IVAO.Library.Models.Airports
             return new AirportBuilder();
         }
 
+        public static AirportBuilder FromModel(Airport model)
+        {
+            return new AirportBuilder()
+                .WithATIS(model.ATIS)
+                .WithICAO(model.ICAO);
+        }
+
         public AirportBuilder WithICAO(string icao)
         {
             _icao = icao;
