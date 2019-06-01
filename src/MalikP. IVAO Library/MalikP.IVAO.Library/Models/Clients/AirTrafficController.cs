@@ -135,7 +135,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (FacilityType.GetHashCode() * 3)
                     + (VisualRange.GetHashCode() * 3)
                     + (ATIS.ToUpper().GetHashCode() * 3)
-                    + (ATISTime.GetHashCode() * 3) * 17;
+                    + (GetItemHashCode(ATISTime) * 3) * 17;
             }
         }
     }

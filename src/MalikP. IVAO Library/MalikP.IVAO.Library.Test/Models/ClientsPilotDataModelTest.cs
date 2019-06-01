@@ -1,8 +1,10 @@
 ﻿using System;
+
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Clients;
 using MalikP.IVAO.Library.Test.Common;
 using MalikP.IVAO.Library.Test.Framework;
+
 using NUnit.Framework;
 
 namespace MalikP.IVAO.Library.Test.Models
@@ -36,16 +38,16 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithTransponderCode("7200")
                 .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
-            Pilot pilot1 = builder.Build();
+            Pilot instance0 = builder.Build();
+            Pilot instance1 = builder.Build();
 
             // act
-            bool result = Equals(pilot0, pilot1);
+            bool result = Equals(instance0, instance1);
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(result, Is.True);
         }
 
@@ -91,16 +93,16 @@ namespace MalikP.IVAO.Library.Test.Models
                .WithTransponderCode("7200")
                .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
-            Pilot pilot1 = builder1.Build();
+            Pilot instance0 = builder.Build();
+            Pilot instance1 = builder1.Build();
 
             // act
-            bool result = Equals(pilot0, pilot1);
+            bool result = Equals(instance0, instance1);
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(result, Is.False);
         }
 
@@ -129,17 +131,17 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithTransponderCode("7200")
                 .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
-            Pilot pilot1 = builder.Build();
+            Pilot instance0 = builder.Build();
+            Pilot instance1 = builder.Build();
 
             // act
-            int result0 = pilot0.GetHashCode();
-            int result1 = pilot1.GetHashCode();
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.True);
         }
 
@@ -185,19 +187,20 @@ namespace MalikP.IVAO.Library.Test.Models
                .WithTransponderCode("7200")
                .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
-            Pilot pilot1 = builder1.Build();
+            Pilot instance0 = builder.Build();
+            Pilot instance1 = builder1.Build();
 
             // act
-            int result0 = pilot0.GetHashCode();
-            int result1 = pilot1.GetHashCode();
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.False);
         }
+
         [Test]
         public void Equals_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesAreEqual()
         {
@@ -223,19 +226,19 @@ namespace MalikP.IVAO.Library.Test.Models
                  .WithTransponderCode("7200")
                  .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
+            Pilot instance0 = builder.Build();
 
-            string serializedText = pilot0.Serialize();
+            string serializedText = instance0.Serialize();
 
-            Pilot pilot1 = serializedText.Deserialize<Pilot>();
+            Pilot instance1 = serializedText.Deserialize<Pilot>();
 
             // act
-            bool result = Equals(pilot0, pilot1);
+            bool result = Equals(instance0, instance1);
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(result, Is.True);
         }
 
@@ -264,20 +267,20 @@ namespace MalikP.IVAO.Library.Test.Models
                  .WithTransponderCode("7200")
                  .WithVID("4321");
 
-            Pilot pilot0 = builder.Build();
+            Pilot instance0 = builder.Build();
 
-            string serializedText = pilot0.Serialize();
+            string serializedText = instance0.Serialize();
 
-            Pilot pilot1 = serializedText.Deserialize<Pilot>();
+            Pilot instance1 = serializedText.Deserialize<Pilot>();
 
             // act
-            int result0 = pilot0.GetHashCode();
-            int result1 = pilot1.GetHashCode();
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
 
             // assert
-            Assert.That(pilot0, Is.Not.Null);
-            Assert.That(pilot1, Is.Not.Null);
-            Assert.That(ReferenceEquals(pilot0, pilot1), Is.Not.True);
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.True);
         }
     }
