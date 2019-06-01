@@ -76,12 +76,12 @@ namespace MalikP.IVAO.Library.Models
 
         public static bool operator !=(AbstractIvaoModel instance1, AbstractIvaoModel instance2)
         {
-            return !instance1.Equals(instance2);
+            return !Equals(instance1, instance2);
         }
 
         public static bool operator ==(AbstractIvaoModel instance1, AbstractIvaoModel instance2)
         {
-            return instance1.Equals(instance2);
+            return Equals(instance1, instance2);
         }
     }
 }

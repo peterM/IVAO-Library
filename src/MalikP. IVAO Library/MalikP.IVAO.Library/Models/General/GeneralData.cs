@@ -122,12 +122,12 @@ namespace MalikP.IVAO.Library.Models.General
 
         public static bool operator !=(GeneralData instance1, GeneralData instance2)
         {
-            return !instance1.Equals(instance2);
+            return !Equals(instance1, instance2);
         }
 
         public static bool operator ==(GeneralData instance1, GeneralData instance2)
         {
-            return instance1.Equals(instance2);
+            return Equals(instance1, instance2);
         }
     }
 }

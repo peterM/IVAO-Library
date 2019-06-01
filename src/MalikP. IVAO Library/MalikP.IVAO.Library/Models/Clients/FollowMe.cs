@@ -108,12 +108,12 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         public static bool operator !=(FollowMe instance1, FollowMe instance2)
         {
-            return !instance1.Equals(instance2);
+            return !Equals(instance1, instance2);
         }
 
         public static bool operator ==(FollowMe instance1, FollowMe instance2)
         {
-            return instance1.Equals(instance2);
+            return Equals(instance1, instance2);
         }
     }
 }
