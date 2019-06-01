@@ -56,7 +56,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                 .WithClientType(model.ClientType)
                 .WithAdministrativeVersion(model.AdministrativeVersion)
                 .WithCallsign(model.Callsign)
-                .WithClientRating(model.ClientRating)
+                .WithClientRating((int)model.ClientRating)
                 .WithConnectionTime(model.ConnectionTime)
                 .WithLocation(model.Location == null ? model.Location : (GPS)model.Location.Clone())
                 .WithName(model.Name)

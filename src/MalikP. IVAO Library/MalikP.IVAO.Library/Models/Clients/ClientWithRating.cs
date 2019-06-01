@@ -72,5 +72,7 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         [DataMember]
         public TRating Rating { get; private set; }
+
+        public new TRating ClientRating => (TRating)Enum.Parse(typeof(TRating), base.ClientRating.ToString());
     }
 }
