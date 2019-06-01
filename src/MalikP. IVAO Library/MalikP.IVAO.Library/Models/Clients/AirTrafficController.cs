@@ -138,5 +138,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (GetItemHashCode(ATISTime) * 3) * 17;
             }
         }
+
+        public static AirTrafficControllerBuilder Builder => AirTrafficControllerBuilder.Create();
     }
 }

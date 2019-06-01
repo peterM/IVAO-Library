@@ -150,5 +150,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (GetItemHashCode(FlightPlan) * 3) * 17;
             }
         }
+
+        public static PilotBuilder Builder => PilotBuilder.Create();
     }
 }

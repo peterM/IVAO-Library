@@ -205,5 +205,7 @@ namespace MalikP.IVAO.Library.Models.Other
                     + FlightRules.GetHashCode() * 3 * 17;
             }
         }
+
+        public static FlightPlanBuilder Builder => FlightPlanBuilder.Create();
     }
 }

@@ -96,5 +96,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                 return base.GetHashCode();
             }
         }
+
+        public static FollowMeBuilder Builder => FollowMeBuilder.Create();
     }
 }

@@ -111,5 +111,7 @@ namespace MalikP.IVAO.Library.Models.Servers
                     + Location.ToUpper().GetHashCode() * 3 * 17;
             }
         }
+
+        public static ServerBuilder Builder => ServerBuilder.Create();
     }
 }

@@ -111,5 +111,7 @@ namespace MalikP.IVAO.Library.Models.General
                     + ConnectedAirports.GetHashCode() * 3 * 17;
             }
         }
+
+        public static GeneralDataBuilder Builder => GeneralDataBuilder.Create();
     }
 }

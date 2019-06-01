@@ -95,5 +95,7 @@ namespace MalikP.IVAO.Library.Models.Other
                     + Altitude.GetHashCode() * 3 * 17;
             }
         }
+
+        public static GPSBuilder Builder => GPSBuilder.Create();
     }
 }
