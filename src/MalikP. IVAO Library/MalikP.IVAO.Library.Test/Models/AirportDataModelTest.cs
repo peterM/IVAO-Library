@@ -1,5 +1,5 @@
-﻿using MalikP.IVAO.Library.Models.Airports;
-using MalikP.IVAO.Library.Test.Framework;
+﻿using MalikP.IVAO.Library.Common.Extensions;
+using MalikP.IVAO.Library.Models.Airports;
 
 using NUnit.Framework;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 
 using MalikP.IVAO.Library.Common.Enums;
+using MalikP.IVAO.Library.Common.Extensions;
 using MalikP.IVAO.Library.Models.Clients;
 using MalikP.IVAO.Library.Test.Common;
-using MalikP.IVAO.Library.Test.Framework;
 
 using NUnit.Framework;
 

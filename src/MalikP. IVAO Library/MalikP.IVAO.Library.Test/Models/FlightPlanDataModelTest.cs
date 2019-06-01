@@ -1,9 +1,6 @@
-﻿using System;
-
-using MalikP.IVAO.Library.Common.Enums;
-using MalikP.IVAO.Library.Common.Enums.Custom;
+﻿using MalikP.IVAO.Library.Common.Enums.Custom;
+using MalikP.IVAO.Library.Common.Extensions;
 using MalikP.IVAO.Library.Models.Other;
-using MalikP.IVAO.Library.Test.Framework;
 
 using NUnit.Framework;
 
