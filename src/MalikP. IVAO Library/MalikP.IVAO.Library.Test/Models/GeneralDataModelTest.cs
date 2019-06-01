@@ -12,16 +12,17 @@ namespace MalikP.IVAO.Library.Test.Models
     public class GeneralDataModelTest : ModelAbstractTest
     {
         [Test]
-        public void Equals_WhenTwoSameInstancesAreCreated_ThenInstancesAreEquals()
+        public void Equals_WhenTwoSameInstancesAreCreated_ThenInstancesAreEqual()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
-                            .WithConnectedAirports(20)
-                            .WithConnectedClients(23)
-                            .WithConnectedServers(22)
-                            .WithReload(2)
-                            .WithUpdate(DateTime.Now)
-                            .WithVersion(222);
+                .WithConnectedAirports(20)
+                .WithConnectedClients(23)
+                .WithConnectedServers(22)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
+
             GeneralData generalData = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder.Build();
 
@@ -36,16 +37,47 @@ namespace MalikP.IVAO.Library.Test.Models
         }
 
         [Test]
-        public void GetHashCode_WhenTwoSameInstancesAreCreated_ThenInstancesHashCodesAreEquals()
+        public void Equals_WhenTwoDifferentInstancesAreCreated_ThenInstancesAreNotEqual()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
-                            .WithConnectedAirports(20)
-                            .WithConnectedClients(23)
-                            .WithConnectedServers(22)
-                            .WithReload(2)
-                            .WithUpdate(DateTime.Now)
-                            .WithVersion(222);
+                .WithConnectedAirports(20)
+                .WithConnectedClients(23)
+                .WithConnectedServers(22)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
+
+            GeneralDataBuilder generalDataBuilder1 = GeneralDataBuilder.Create()
+                .WithConnectedServers(22)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
+
+            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData1 = generalDataBuilder1.Build();
+
+            // act
+            bool result = Equals(generalData, generalData1);
+
+            // assert
+            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData1, Is.Not.Null);
+            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void GetHashCode_WhenTwoSameInstancesAreCreated_ThenInstancesHashCodesAreEqual()
+        {
+            // arrange
+            GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
+                .WithConnectedAirports(20)
+                .WithConnectedClients(23)
+                .WithConnectedServers(22)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
 
             GeneralData generalData = generalDataBuilder.Build();
             GeneralData generalData1 = generalDataBuilder.Build();
@@ -62,7 +94,39 @@ namespace MalikP.IVAO.Library.Test.Models
         }
 
         [Test]
-        public void Equals_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesAreEquals()
+        public void GetHashCode_WhenTwoDifferentInstancesAreCreated_ThenInstancesHashCodesAreNotEqual()
+        {
+            // arrange
+            GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
+                .WithConnectedAirports(20)
+                .WithConnectedClients(23)
+                .WithConnectedServers(22)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
+
+            GeneralDataBuilder generalDataBuilder1 = GeneralDataBuilder.Create()
+                .WithConnectedAirports(20)
+                .WithReload(2)
+                .WithUpdate(DateTime.Now)
+                .WithVersion(222);
+
+            GeneralData generalData = generalDataBuilder.Build();
+            GeneralData generalData1 = generalDataBuilder1.Build();
+
+            // act
+            int result1 = generalData.GetHashCode();
+            int result2 = generalData1.GetHashCode();
+
+            // assert
+            Assert.That(generalData, Is.Not.Null);
+            Assert.That(generalData1, Is.Not.Null);
+            Assert.That(ReferenceEquals(generalData, generalData1), Is.Not.True);
+            Assert.That(Equals(result1, result2), Is.False);
+        }
+
+        [Test]
+        public void Equals_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesAreEqual()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
@@ -90,7 +154,7 @@ namespace MalikP.IVAO.Library.Test.Models
         }
 
         [Test]
-        public void GetHashCode_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesHashCodesAreEquals()
+        public void GetHashCode_WhenInstanceIsDeseraializeAndSerializedBack_ThenInstancesHashCodesAreEqual()
         {
             // arrange
             GeneralDataBuilder generalDataBuilder = GeneralDataBuilder.Create()
