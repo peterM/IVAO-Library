@@ -38,6 +38,7 @@ namespace MalikP.IVAO.Library.App
             ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedLocalGZippedDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
+
             IGeneralSelector generalSelector = new GeneralSelector();
             IClientsSelector clientsSelector = new ClientsSelector();
             IServersSelector serverSelector = new ServersSelector();
