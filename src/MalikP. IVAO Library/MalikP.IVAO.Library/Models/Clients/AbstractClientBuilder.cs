@@ -29,6 +29,7 @@ using System;
 
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -39,7 +40,7 @@ namespace MalikP.IVAO.Library.Models.Clients
         protected string name;
         protected ClientType clientType;
         protected GPS location;
-        protected string server;
+        protected Server server;
         protected string protocol;
         protected DateTime connectionTime;
         protected string softwareName;
@@ -77,7 +78,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             return GetBuilder();
         }
 
-        public TBuilder WithServer(string server)
+        public TBuilder WithServer(Server server)
         {
             this.server = server;
             return GetBuilder();

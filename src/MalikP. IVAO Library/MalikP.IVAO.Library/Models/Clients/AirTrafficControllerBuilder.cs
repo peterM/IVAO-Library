@@ -29,6 +29,7 @@ using System;
 
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -62,7 +63,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                 .WithLocation(model.Location == null ? model.Location : (GPS)model.Location.Clone())
                 .WithName(model.Name)
                 .WithProtocol(model.Protocol)
-                .WithServer(model.Server)
+                .WithServer(model.Server == null ? null : (Server)model.Server.Clone())
                 .WithSoftwareName(model.SoftwareName)
                 .WithSoftwareVersion(model.SoftwareVersion)
                 .WithVID(model.VID)

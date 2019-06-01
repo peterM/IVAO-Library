@@ -25,7 +25,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -55,7 +55,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -65,7 +65,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithCallsign("LZKZ_FOLLOW")
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -95,7 +95,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -126,7 +126,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -137,7 +137,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -168,7 +168,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -201,7 +201,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -235,7 +235,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
@@ -268,7 +268,7 @@ namespace MalikP.IVAO.Library.Test.Models
                 .WithLocation(null)
                 .WithName("name")
                 .WithProtocol("protocol")
-                .WithServer("server")
+                .WithServer(null)
                 .WithSoftwareName("IVAC")
                 .WithSoftwareVersion("3.2.1.3")
                 .WithVID("1234567");
