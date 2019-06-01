@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: Aerodrome.cs 
+// File: SerializerExtensions.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,59 +25,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
+using System.IO;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
 
-namespace MalikP.IVAO.Library.Models.Other
+namespace MalikP.IVAO.Library.Common.Extensions
 {
-    [DataContract]
-    public class Aerodrome : IModel, ICloneable
+    public static class SerializerExtensions
     {
-        public Aerodrome(string icao)
+        public static string Serialize<T>(this T item)
         {
-            ICAO = icao ?? string.Empty;
-        }
-
-        private Aerodrome()
-        {
-        }
-
-        [DataMember]
-        public string ICAO { get; private set; }
-
-        public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
-
-        public object Clone()
-        {
-            return new Aerodrome(ICAO);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(obj, null))
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                return false;
+                DataContractSerializer ser = new DataContractSerializer(typeof(T));
+                ser.WriteObject(memoryStream, item);
+
+                byte[] data = memoryStream.ToArray();
+                return Encoding.UTF8.GetString(data);
             }
-
-            if (ReferenceEquals(obj, this))
-            {
-                return true;
-            }
-
-            Aerodrome casted = obj as Aerodrome;
-            if (casted == null)
-            {
-                return false;
-            }
-
-            return string.Equals(casted.ICAO, ICAO, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public override int GetHashCode()
+        public static T Deserialize<T>(this string item)
         {
-            unchecked
+            byte[] data = Encoding.UTF8.GetBytes(item);
+
+            using (MemoryStream memoryStream = new MemoryStream(data))
             {
-                return ICAO.ToUpper().GetHashCode() * 3 * 17;
+                DataContractSerializer ser = new DataContractSerializer(typeof(T));
+
+                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(memoryStream, new XmlDictionaryReaderQuotas());
+                return (T)ser.ReadObject(reader, true);
             }
         }
     }

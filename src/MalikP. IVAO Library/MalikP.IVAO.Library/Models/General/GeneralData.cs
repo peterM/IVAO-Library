@@ -112,6 +112,12 @@ namespace MalikP.IVAO.Library.Models.General
             }
         }
 
+        public override object Clone()
+        {
+            return GeneralDataBuilder.FromModel(this)
+                .Build();
+        }
+
         public static GeneralDataBuilder Builder => GeneralDataBuilder.Create();
     }
 }

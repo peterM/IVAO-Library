@@ -80,6 +80,12 @@ namespace MalikP.IVAO.Library.Models.Airports
             }
         }
 
+        public override object Clone()
+        {
+            return AirportBuilder.FromModel(this)
+                .Build();
+        }
+
         public static AirportBuilder Builder => AirportBuilder.Create();
     }
 }

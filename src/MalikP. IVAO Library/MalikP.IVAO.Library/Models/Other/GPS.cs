@@ -33,7 +33,7 @@ using MalikP.IVAO.Library.Common.Annotation;
 namespace MalikP.IVAO.Library.Models.Other
 {
     [DataContract]
-    public class GPS
+    public class GPS : IModel
     {
         public GPS(
             decimal latitude,
@@ -92,6 +92,12 @@ namespace MalikP.IVAO.Library.Models.Other
                     + (Longitude.GetHashCode() * 3)
                     + (Altitude.GetHashCode() * 3) * 17;
             }
+        }
+
+        public object Clone()
+        {
+            return GPSBuilder.FromModel(this)
+                .Build();
         }
 
         public static GPSBuilder Builder => GPSBuilder.Create();

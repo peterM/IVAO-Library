@@ -1,5 +1,5 @@
-﻿using MalikP.IVAO.Library.Models.Other;
-using MalikP.IVAO.Library.Test.Framework;
+﻿using MalikP.IVAO.Library.Common.Extensions;
+using MalikP.IVAO.Library.Models.Other;
 
 using NUnit.Framework;
 
@@ -156,6 +156,55 @@ namespace MalikP.IVAO.Library.Test.Models
             Assert.That(instance1, Is.Not.Null);
             Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
             Assert.That(Equals(result0, result1), Is.True);
+        }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesHashCodesAreEqual()
+        {
+            // arrange
+            GPSBuilder builder = GPSBuilder.Create()
+                .WithAltitude(100)
+                .WithLatitude(123.3m)
+                .WithLongitude(180.11m);
+
+            GPS instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            int result0 = instance0.GetHashCode();
+            int result1 = instance1.GetHashCode();
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<GPS>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(Equals(result0, result1), Is.True);
+        }
+
+        [Test]
+        public void Clone_WhenInstanceCloned_ThenInstancesAreEqual()
+        {
+            // arrange
+            GPSBuilder builder = GPSBuilder.Create()
+                .WithAltitude(100)
+                .WithLatitude(123.3m)
+                .WithLongitude(180.11m);
+
+            GPS instance0 = builder.Build();
+
+            object instance1 = instance0.Clone();
+
+            // act
+            bool result = Equals(instance0, instance1);
+
+            // assert
+            Assert.That(instance0, Is.Not.Null);
+            Assert.That(instance1, Is.Not.Null);
+            Assert.That(instance1, Is.InstanceOf<GPS>());
+            Assert.That(ReferenceEquals(instance0, instance1), Is.Not.True);
+            Assert.That(result, Is.True);
         }
     }
 }

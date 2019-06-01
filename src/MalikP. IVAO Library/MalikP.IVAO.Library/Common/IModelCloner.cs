@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IIvaoModel.cs 
+// File: IModelCloner.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,9 +25,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace MalikP.IVAO.Library.Models
+using MalikP.IVAO.Library.Models;
+
+namespace MalikP.IVAO.Library.Common
 {
-    public interface IIvaoModel : IModel
+    public interface IModelCloner
     {
+        T Clone<T>(T source)
+            where T : IModel;
     }
 }

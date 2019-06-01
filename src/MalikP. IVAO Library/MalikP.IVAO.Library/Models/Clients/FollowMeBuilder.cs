@@ -26,6 +26,7 @@
 // SOFTWARE.
 
 using MalikP.IVAO.Library.Common.Enums;
+using MalikP.IVAO.Library.Models.Other;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -38,6 +39,23 @@ namespace MalikP.IVAO.Library.Models.Clients
         public static FollowMeBuilder Create()
         {
             return new FollowMeBuilder().WithClientType(ClientType.FollowMeCar);
+        }
+
+        public static FollowMeBuilder FromModel(FollowMe model)
+        {
+            return new FollowMeBuilder()
+                .WithClientType(model.ClientType)
+                .WithAdministrativeVersion(model.AdministrativeVersion)
+                .WithCallsign(model.Callsign)
+                .WithClientRating(model.ClientRating)
+                .WithConnectionTime(model.ConnectionTime)
+                .WithLocation(model.Location == null ? model.Location : (GPS)model.Location.Clone())
+                .WithName(model.Name)
+                .WithProtocol(model.Protocol)
+                .WithServer(model.Server)
+                .WithSoftwareName(model.SoftwareName)
+                .WithSoftwareVersion(model.SoftwareVersion)
+                .WithVID(model.VID);
         }
 
         public FollowMe Build()

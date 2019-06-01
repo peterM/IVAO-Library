@@ -45,6 +45,17 @@ namespace MalikP.IVAO.Library.Models.Servers
             return new ServerBuilder();
         }
 
+        public static ServerBuilder FromModel(Server model)
+        {
+            return new ServerBuilder()
+                .WithConnectionsAllowed(model.ConnectionsAllowed)
+                .WithHostname(model.Hostname)
+                .WithIP(model.IP)
+                .WithLocation(model.Location)
+                .WithMaximumConnections(model.MaximumConnections)
+                .WithName(model.Name);
+        }
+
         public ServerBuilder WithHostname(string hostname)
         {
             _hostname = hostname;

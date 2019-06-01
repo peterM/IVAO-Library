@@ -139,6 +139,12 @@ namespace MalikP.IVAO.Library.Models.Clients
             }
         }
 
+        public override object Clone()
+        {
+            return AirTrafficControllerBuilder.FromModel(this)
+                .Build();
+        }
+
         public static AirTrafficControllerBuilder Builder => AirTrafficControllerBuilder.Create();
     }
 }

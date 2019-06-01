@@ -33,7 +33,7 @@ using MalikP.IVAO.Library.Common.Enums.Custom;
 namespace MalikP.IVAO.Library.Models.Other
 {
     [DataContract]
-    public sealed class FlightPlan
+    public sealed class FlightPlan : IModel
     {
         public FlightPlan(
             string aircraft,
@@ -202,6 +202,12 @@ namespace MalikP.IVAO.Library.Models.Other
                     + (Revision.GetHashCode() * 3)
                     + (FlightRules.GetHashCode() * 3) * 17;
             }
+        }
+
+        public object Clone()
+        {
+            return FlightPlanBuilder.FromModel(this)
+                .Build();
         }
 
         public static FlightPlanBuilder Builder => FlightPlanBuilder.Create();

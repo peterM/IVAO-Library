@@ -36,6 +36,8 @@ namespace MalikP.IVAO.Library.Models
         {
         }
 
+        public abstract object Clone();
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null))

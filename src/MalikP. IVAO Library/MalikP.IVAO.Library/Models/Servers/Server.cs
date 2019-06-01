@@ -112,6 +112,12 @@ namespace MalikP.IVAO.Library.Models.Servers
             }
         }
 
+        public override object Clone()
+        {
+            return ServerBuilder.FromModel(this)
+                .Build();
+        }
+
         public static ServerBuilder Builder => ServerBuilder.Create();
     }
 }

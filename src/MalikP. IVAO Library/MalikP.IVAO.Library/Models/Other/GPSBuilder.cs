@@ -42,6 +42,14 @@ namespace MalikP.IVAO.Library.Models.Other
             return new GPSBuilder();
         }
 
+        public static GPSBuilder FromModel(GPS model)
+        {
+            return new GPSBuilder()
+                .WithAltitude(model.Altitude)
+                .WithLatitude(model.Latitude)
+                .WithLongitude(model.Longitude);
+        }
+
         public GPSBuilder WithLatitude(decimal latitude)
         {
             _latitude = latitude;
