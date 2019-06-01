@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml;
 
 using MalikP.IVAO.Library.Common;
+using MalikP.IVAO.Library.Common.Enhancers;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -59,6 +60,14 @@ namespace MalikP.IVAO.Library.App
             List<Client> atcDataModels = atcClientsDataProvider.GetData().ToList();
             List<Client> pilotDataModels = pilotClientsDataProvider.GetData().ToList();
             List<Client> followMeDataModels = followMeClientsDataProvider.GetData().ToList();
+
+            IAirTrafficControllerServerEnhancer atcServerEnhancer = new AirTrafficControllerServerEnhancer(serversDataProvider);
+            IPilotServerEnhancer pilotServerEnhancer = new PilotServerEnhancer(serversDataProvider);
+            IFollowMeServerEnhancer followMeServerEnhancer = new FollowMeServerEnhancer(serversDataProvider);
+
+            atcDataModels = atcDataModels.Select(atcServerEnhancer.Enhance).Cast<Client>().ToList();
+            pilotDataModels = pilotDataModels.Select(pilotServerEnhancer.Enhance).Cast<Client>().ToList();
+            followMeDataModels = followMeDataModels.Select(followMeServerEnhancer.Enhance).Cast<Client>().ToList();
 
             Client item = pilotDataModels.First();
 

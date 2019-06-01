@@ -62,7 +62,7 @@ namespace MalikP.IVAO.Library.Models.Servers
         [DataMember]
         private string IPAddressIntenal
         {
-            get { return IP.ToString(); }
+            get { return IP == null ? string.Empty : IP.ToString(); }
             set { IP = IPAddress.Parse(value); }
         }
 

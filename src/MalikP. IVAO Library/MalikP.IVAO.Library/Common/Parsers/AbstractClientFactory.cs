@@ -89,7 +89,7 @@ namespace MalikP.IVAO.Library.Common.Parsers
         private Server GetServer(string[] rowData)
         {
             return ServerBuilder.Create()
-                .WithName(rowData[ClientIndex.All.Server])
+                .WithHostname(rowData[ClientIndex.All.Server])
                 .Build();
         }
     }
