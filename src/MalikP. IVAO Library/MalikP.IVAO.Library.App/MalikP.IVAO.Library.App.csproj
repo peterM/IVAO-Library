@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MalikP.IoC" Version="0.6.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MalikP.IVAO.Library.IoC\MalikP.IVAO.Library.IoC.csproj" />
     <ProjectReference Include="..\MalikP.IVAO.Library\MalikP.IVAO.Library.csproj" />
   </ItemGroup>
 

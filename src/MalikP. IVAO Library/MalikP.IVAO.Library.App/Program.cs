@@ -2,10 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
 
+using MalikP.IoC;
+using MalikP.IoC.Factories;
 using MalikP.IVAO.Library.Common;
 using MalikP.IVAO.Library.Common.Enhancers;
 using MalikP.IVAO.Library.Common.Parsers;
@@ -27,6 +26,66 @@ namespace MalikP.IVAO.Library.App
         public static void Main(string[] args)
         {
             string path = GetPath();
+
+            OptionIoC(path);
+
+            OptionDirect(path);
+        }
+
+        private static void OptionIoC(string path)
+        {
+            IIoC ioc = Locator.GetContainer(new AdvancedContainerFactory());
+            ioc.AddIVAOServices();
+            ioc.Register<LocalGZippedIVAOWhazzupDataSource>()
+                .Extend()
+                .WithSpecific<string>(path);
+
+            ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<LocalGZippedIVAOWhazzupDataSource>()));
+
+            ICachedIVAOWhazzupDataSource dataSource = ioc.Resolve<ICachedIVAOWhazzupDataSource>();
+
+            //IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
+            //IIVAOWhazzupDataSource nonCachedWebGZippedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
+
+            //IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+            //IIVAOWhazzupDataSource nonCachedLocalGZippedDataSource = new LocalGZippedIVAOWhazzupDataSource(path, compression);
+
+            IGeneralDataProvider generalDataProvider = ioc.Resolve<IGeneralDataProvider>();
+            IClientsProvider clientsDataProvider = ioc.Resolve<IClientsProvider>();
+            IServersProvider serversDataProvider = ioc.Resolve<IServersProvider>();
+            IAirportsProvider airportsDataProvider = ioc.Resolve<IAirportsProvider>();
+
+            IClientsProvider atcClientsDataProvider = ioc.Resolve<IAirTrafficControllersProvider>();
+            IClientsProvider pilotClientsDataProvider = ioc.Resolve<IPilotsProvider>();
+            IClientsProvider followMeClientsDataProvider = ioc.Resolve<IFollowMesProvider>();
+
+            IEnumerable<IClientsProvider> providers = ioc.ResolveAll<IClientsProvider>();
+
+            List<GeneralData> generalDataModels = generalDataProvider.GetData().ToList();
+            List<Client> clientDataModels = clientsDataProvider.GetData().ToList();
+            List<Server> serversDataModels = serversDataProvider.GetData().ToList();
+            List<Airport> airportsDataModels = airportsDataProvider.GetData().ToList();
+
+            List<Client> atcDataModels = atcClientsDataProvider.GetData().ToList();
+            List<Client> pilotDataModels = pilotClientsDataProvider.GetData().ToList();
+            List<Client> followMeDataModels = followMeClientsDataProvider.GetData().ToList();
+
+            IAirTrafficControllerServerEnhancer atcServerEnhancer = ioc.Resolve<IAirTrafficControllerServerEnhancer>();
+            IPilotServerEnhancer pilotServerEnhancer = ioc.Resolve<IPilotServerEnhancer>();
+            IFollowMeServerEnhancer followMeServerEnhancer = ioc.Resolve<IFollowMeServerEnhancer>();
+
+            atcDataModels = atcDataModels.Select(atcServerEnhancer.Enhance).Cast<Client>().ToList();
+            pilotDataModels = pilotDataModels.Select(pilotServerEnhancer.Enhance).Cast<Client>().ToList();
+            followMeDataModels = followMeDataModels.Select(followMeServerEnhancer.Enhance).Cast<Client>().ToList();
+
+            Client item = pilotDataModels.First();
+
+            IModelCloner modelCloner = ioc.Resolve<IModelCloner>();
+            Client m = modelCloner.Clone(pilotDataModels[0]);
+        }
+
+        private static void OptionDirect(string path)
+        {
             IGZipCompression compression = new GZipCompression();
 
             IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
