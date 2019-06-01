@@ -73,25 +73,6 @@ namespace MalikP.IVAO.Library.App
 
             IModelCloner modelCloner = new ModelCloner();
             Client m = modelCloner.Clone(pilotDataModels[0]);
-
-            TrySerialize(item);
-        }
-
-        private static void TrySerialize(Client item)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                DataContractSerializer ser = new DataContractSerializer(typeof(Pilot));
-                ser.WriteObject(ms, item);
-
-                byte[] d = ms.ToArray();
-                string s = Encoding.UTF8.GetString(d);
-
-                ms.Position = 0;
-
-                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(ms, new XmlDictionaryReaderQuotas());
-                object deserializedPerson = ser.ReadObject(reader, true);
-            }
         }
 
         private static string GetPath()
