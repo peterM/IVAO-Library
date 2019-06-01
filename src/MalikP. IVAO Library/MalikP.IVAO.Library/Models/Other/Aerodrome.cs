@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 namespace MalikP.IVAO.Library.Models.Other
 {
     [DataContract]
-    public class Aerodrome : IModel
+    public class Aerodrome : IModel, ICloneable
     {
         public Aerodrome(string icao)
         {
@@ -46,6 +46,11 @@ namespace MalikP.IVAO.Library.Models.Other
         public string ICAO { get; private set; }
 
         public bool IsValid => !string.IsNullOrEmpty(ICAO) && ICAO.Length == 4;
+
+        public object Clone()
+        {
+            return new Aerodrome(ICAO);
+        }
 
         public override bool Equals(object obj)
         {

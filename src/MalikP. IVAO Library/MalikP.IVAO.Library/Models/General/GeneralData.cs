@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 namespace MalikP.IVAO.Library.Models.General
 {
     [DataContract]
-    public sealed class GeneralData : AbstractIvaoModel, ICloneable
+    public sealed class GeneralData : AbstractIvaoModel
     {
         public GeneralData(
             int version,
@@ -112,7 +112,7 @@ namespace MalikP.IVAO.Library.Models.General
             }
         }
 
-        public object Clone()
+        public override object Clone()
         {
             return GeneralDataBuilder.FromModel(this)
                 .Build();

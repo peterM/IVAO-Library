@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 namespace MalikP.IVAO.Library.Models.Airports
 {
     [DataContract]
-    public sealed class Airport : AbstractIvaoModel, ICloneable
+    public sealed class Airport : AbstractIvaoModel
     {
         public Airport(
             string icao,
@@ -80,7 +80,7 @@ namespace MalikP.IVAO.Library.Models.Airports
             }
         }
 
-        public object Clone()
+        public override object Clone()
         {
             return AirportBuilder.FromModel(this)
                 .Build();

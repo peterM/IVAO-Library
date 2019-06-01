@@ -31,7 +31,7 @@ using System.Runtime.Serialization;
 namespace MalikP.IVAO.Library.Models.Servers
 {
     [DataContract]
-    public sealed class Server : AbstractIvaoModel, ICloneable
+    public sealed class Server : AbstractIvaoModel
     {
         public Server(
             string hostname,
@@ -112,7 +112,7 @@ namespace MalikP.IVAO.Library.Models.Servers
             }
         }
 
-        public object Clone()
+        public override object Clone()
         {
             return ServerBuilder.FromModel(this)
                 .Build();
