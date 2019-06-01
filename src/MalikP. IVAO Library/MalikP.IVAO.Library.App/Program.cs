@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
+using MalikP.IVAO.Library.Common;
 using MalikP.IVAO.Library.Common.Parsers;
 using MalikP.IVAO.Library.Common.Selector;
 using MalikP.IVAO.Library.Data.Source;
@@ -19,16 +20,21 @@ namespace MalikP.IVAO.Library.App
 {
     internal static class Program
     {
-        const string fileName = "testData.txt";
+        const string fileName = "whazzup.txt.gz";
+        //const string fileName = "whazzup.txt";
 
         public static void Main(string[] args)
         {
             string path = GetPath();
+            IGZipCompression compression = new GZipCompression();
 
             IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
-            IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+            IIVAOWhazzupDataSource nonCachedWebGZippedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
 
-            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedLocalDataSource);
+            IIVAOWhazzupDataSource nonCachedLocalDataSource = new LocalIVAOWhazzupDataSource(path);
+            IIVAOWhazzupDataSource nonCachedLocalGZippedDataSource = new LocalGZippedIVAOWhazzupDataSource(path, compression);
+
+            ICachedIVAOWhazzupDataSource dataSource = new CachedIVAOWhazzupDataSource(nonCachedLocalGZippedDataSource);
 
             IParserFactory parserFactory = new ParserFactory();
             IGeneralSelector generalSelector = new GeneralSelector();

@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: WebIVAOWhazzupDataSource.cs 
+// File: LocalGZippedIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,20 +25,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
+using System.IO;
+using System.Linq;
+
+using System.Text.RegularExpressions;
+using MalikP.IVAO.Library.Common;
+using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public sealed class WebIVAOWhazzupDataSource : AbstractWebIVAOWhazzupDataSource
+    public sealed class LocalGZippedIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, ILocalIVAOWhazzupDataSource
     {
-        public WebIVAOWhazzupDataSource(string url)
-            : base(url)
+        private readonly IGZipCompression _gZipCompression;
+        private static readonly Regex _regex = new Regex("\r\n|\r|\n");
+
+        public LocalGZippedIVAOWhazzupDataSource(string path, IGZipCompression gZipCompression)
         {
+            Path = path;
+            _gZipCompression = gZipCompression;
         }
 
-        public WebIVAOWhazzupDataSource(Uri uri)
-            : base(uri)
+        private string Path { get; }
+
+        public override IWhazzup GetIVAOData()
         {
+            if (string.IsNullOrWhiteSpace(Path) || !File.Exists(Path))
+            {
+                return Whazzup.Null;
+            }
+
+            byte[] bytes = File.ReadAllBytes(Path);
+
+            bytes = _gZipCompression.Decompress(bytes);
+
+            string dataString = GetEncoding(ENCODING).GetString(bytes);
+
+            string[] data = _regex.Split(dataString)
+                .Where(d => !string.IsNullOrWhiteSpace(d))
+                .ToArray();
+
+            return new Whazzup(data);
         }
     }
 }

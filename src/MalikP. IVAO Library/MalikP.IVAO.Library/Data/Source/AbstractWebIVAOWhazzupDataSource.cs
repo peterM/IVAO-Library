@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: AbstractIVAODataSource.cs 
+// File: AbstractWebIVAOWhazzupDataSource.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Net
@@ -25,23 +25,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
+using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
+
+using MalikP.IVAO.Library.Models.DataHolders;
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public abstract class AbstractIVAODataSource<TModel> : IIVAODataSource<TModel>
+    public abstract class AbstractWebIVAOWhazzupDataSource : AbstractIVAOWhazzupDataSource, IWebIVAOWhazzupDataSource
     {
-        protected const string ENCODING = "iso-8859-1";
-        public abstract TModel GetIVAOData();
+        private readonly Uri _uri;
 
-        object IIVAODataSource.GetIVAOData()
+        protected AbstractWebIVAOWhazzupDataSource(string url)
+            : this(new Uri(url))
         {
-            return GetIVAOData();
         }
 
-        protected virtual Encoding GetEncoding(string encoding)
+        protected AbstractWebIVAOWhazzupDataSource(Uri uri)
         {
-            return Encoding.GetEncoding(encoding);
+            _uri = uri;
+        }
+
+        public override IWhazzup GetIVAOData()
+        {
+            if (_uri == null)
+            {
+                return Whazzup.Null;
+            }
+
+            string[] data = Enumerable.Empty<string>().ToArray();
+
+            using (WebClient client = new WebClient())
+            {
+                client.Encoding = GetEncoding(ENCODING);
+
+                string dataString = client.DownloadString(_uri);
+                dataString = ProcessDataString(dataString);
+
+                data = Regex.Split(dataString, "\r\n|\r|\n")
+                    .Where(d => !string.IsNullOrWhiteSpace(d))
+                    .ToArray();
+            }
+
+            return new Whazzup(data);
+        }
+
+        protected virtual string ProcessDataString(string dataString)
+        {
+            return dataString;
         }
     }
 }
