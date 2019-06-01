@@ -97,6 +97,12 @@ namespace MalikP.IVAO.Library.Models.Clients
             }
         }
 
+        public override object Clone()
+        {
+            return FollowMeBuilder.FromModel(this)
+                .Build();
+        }
+
         public static FollowMeBuilder Builder => FollowMeBuilder.Create();
     }
 }
