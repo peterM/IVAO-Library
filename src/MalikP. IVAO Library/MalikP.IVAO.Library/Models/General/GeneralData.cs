@@ -91,7 +91,7 @@ namespace MalikP.IVAO.Library.Models.General
 
             return base.Equals(obj)
                 && Equals(casted.Version, Version)
-                && Equals(casted.Version, Reload)
+                && Equals(casted.Reload, Reload)
                 && Equals(casted.Update, Update)
                 && Equals(casted.ConnectedClients, ConnectedClients)
                 && Equals(casted.ConnectedServers, ConnectedServers)
@@ -104,7 +104,7 @@ namespace MalikP.IVAO.Library.Models.General
             {
                 return base.GetHashCode()
                     + (Version.GetHashCode() * 3)
-                    + (Version.GetHashCode() * 3)
+                    + (Reload.GetHashCode() * 3)
                     + (Update.GetHashCode() * 3)
                     + (ConnectedClients.GetHashCode() * 3)
                     + (ConnectedServers.GetHashCode() * 3)

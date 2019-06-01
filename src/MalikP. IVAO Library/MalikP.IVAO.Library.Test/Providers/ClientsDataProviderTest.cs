@@ -1,10 +1,10 @@
-using System.Linq;
+﻿using System.Linq;
 
 using NUnit.Framework;
 
 namespace MalikP.IVAO.Library.Tests.Providers
 {
-    public class GeneralDataProviderTest : AbstractGeneralDataProviderTest
+    public class ClientsDataProviderTest : AbstractClientsDataProviderTest
     {
         [Test]
         public void GetData_WhenStandardFileIsLoaded_ThenOneGeneralDataModelIsCreated()
@@ -16,7 +16,7 @@ namespace MalikP.IVAO.Library.Tests.Providers
 
             // assert
             Assert.That(data, Is.Not.Null);
-            Assert.That(data.Count, Is.EqualTo(1));
+            Assert.That(data.Count, Is.GreaterThan(1));
         }
     }
 }
