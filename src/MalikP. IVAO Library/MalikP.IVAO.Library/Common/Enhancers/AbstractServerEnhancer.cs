@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IWebIVAOWhazzupDataSource.cs 
+// File: AbstractServerEnhancer.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,9 +25,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace MalikP.IVAO.Library.Data.Source
+using MalikP.IVAO.Library.Models;
+using MalikP.IVAO.Library.Models.Clients;
+using MalikP.IVAO.Library.Providers;
+
+namespace MalikP.IVAO.Library.Common.Enhancers
 {
-    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
+    public abstract class AbstractServerEnhancer<TClientModel> : IDataEnhancer<TClientModel>
+        where TClientModel : Client
     {
+        protected AbstractServerEnhancer(IServersProvider serversProvider)
+        {
+            ServersProvider = serversProvider;
+        }
+
+        protected IServersProvider ServersProvider { get; }
+
+        public abstract TClientModel Enhance(TClientModel modelToEnhance);
+
+        public IModel Enhance(IModel modelToEnhance)
+        {
+            return Enhance((TClientModel)modelToEnhance);
+        }
     }
 }

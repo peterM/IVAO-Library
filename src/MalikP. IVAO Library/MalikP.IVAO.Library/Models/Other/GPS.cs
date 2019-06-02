@@ -101,5 +101,15 @@ namespace MalikP.IVAO.Library.Models.Other
         }
 
         public static GPSBuilder Builder => GPSBuilder.Create();
+
+        public static bool operator !=(GPS instance1, GPS instance2)
+        {
+            return !Equals(instance1, instance2);
+        }
+
+        public static bool operator ==(GPS instance1, GPS instance2)
+        {
+            return Equals(instance1, instance2);
+        }
     }
 }

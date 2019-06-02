@@ -30,6 +30,7 @@ using System.Runtime.Serialization;
 
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -42,7 +43,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             string name,
             ClientType clientType,
             GPS location,
-            string server,
+            Server server,
             string protocol,
             DateTime connectionTime,
             string softwareName,
@@ -72,5 +73,7 @@ namespace MalikP.IVAO.Library.Models.Clients
 
         [DataMember]
         public TRating Rating { get; private set; }
+
+        public new TRating ClientRating => (TRating)Enum.Parse(typeof(TRating), base.ClientRating.ToString());
     }
 }

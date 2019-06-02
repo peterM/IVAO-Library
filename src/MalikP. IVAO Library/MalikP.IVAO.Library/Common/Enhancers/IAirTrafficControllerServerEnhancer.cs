@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IWebIVAOWhazzupDataSource.cs 
+// File: IAirTrafficControllerServerEnhancer.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,9 +25,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace MalikP.IVAO.Library.Data.Source
+using MalikP.IVAO.Library.Models.Clients;
+
+namespace MalikP.IVAO.Library.Common.Enhancers
 {
-    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
+    public interface IAirTrafficControllerServerEnhancer : IDataEnhancer<AirTrafficController>
     {
     }
 }

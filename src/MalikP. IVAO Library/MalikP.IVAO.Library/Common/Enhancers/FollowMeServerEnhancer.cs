@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IWebIVAOWhazzupDataSource.cs 
+// File: FollowMeServerEnhancer.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,9 +25,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace MalikP.IVAO.Library.Data.Source
+using System.Linq;
+using MalikP.IVAO.Library.Models.Clients;
+using MalikP.IVAO.Library.Models.Servers;
+using MalikP.IVAO.Library.Providers;
+
+namespace MalikP.IVAO.Library.Common.Enhancers
 {
-    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
+    public class FollowMeServerEnhancer : AbstractServerEnhancer<FollowMe>, IFollowMeServerEnhancer
     {
+        public FollowMeServerEnhancer(IServersProvider serversProvider)
+            : base(serversProvider)
+        {
+        }
+
+        public override FollowMe Enhance(FollowMe modelToEnhance)
+        {
+            if (modelToEnhance.Server == null)
+            {
+                return modelToEnhance;
+            }
+
+            Server server = ServersProvider.GetData()
+                .FirstOrDefault(d => d.Hostname == modelToEnhance.Server.Hostname);
+
+            if (server == null)
+            {
+                return modelToEnhance;
+            }
+
+            return FollowMeBuilder.FromModel(modelToEnhance)
+                .WithServer((Server)server.Clone())
+                .Build();
+        }
     }
 }

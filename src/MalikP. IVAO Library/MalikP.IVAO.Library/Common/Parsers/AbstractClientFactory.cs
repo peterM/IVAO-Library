@@ -32,6 +32,7 @@ using MalikP.IVAO.Library.Common.Indexes;
 using MalikP.IVAO.Library.Common.Parsers.DataExtractors.Client;
 using MalikP.IVAO.Library.Models.Clients;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Common.Parsers
 {
@@ -69,19 +70,27 @@ namespace MalikP.IVAO.Library.Common.Parsers
             where TBuilder : AbstractClientBuilder<TBuilder>
         {
             GPS location = GetLocation(rowData);
+            Server server = GetServer(rowData);
 
             return builder
                 .WithCallsign(rowData[ClientIndex.All.Callsign])
                 .WithVID(rowData[ClientIndex.All.VID])
                 .WithName(rowData[ClientIndex.All.Name])
                 .WithLocation(location)
-                .WithServer(rowData[ClientIndex.All.Server])
+                .WithServer(server)
                 .WithProtocol(rowData[ClientIndex.All.Protocol])
                 .WithConnectionTime(_ivaoStringService.IVAO_GetDateTime(rowData[ClientIndex.All.ConnectionTime]) ?? DateTime.MinValue)
                 .WithSoftwareName(rowData[ClientIndex.All.SoftwareName])
                 .WithSoftwareVersion(rowData[ClientIndex.All.SoftwareVersion])
                 .WithAdministrativeVersion((AdministrativeRating)_ivaoStringService.IVAO_GetInt(rowData[ClientIndex.All.AdministrativeVersion]))
                 .WithClientRating(_ivaoStringService.IVAO_GetInt(rowData[ClientIndex.All.ClientRating]));
+        }
+
+        private Server GetServer(string[] rowData)
+        {
+            return ServerBuilder.Create()
+                .WithHostname(rowData[ClientIndex.All.Server])
+                .Build();
         }
     }
 }

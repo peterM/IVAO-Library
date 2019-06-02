@@ -87,5 +87,15 @@ namespace MalikP.IVAO.Library.Models.Airports
         }
 
         public static AirportBuilder Builder => AirportBuilder.Create();
+
+        public static bool operator !=(Airport instance1, Airport instance2)
+        {
+            return !Equals(instance1, instance2);
+        }
+
+        public static bool operator ==(Airport instance1, Airport instance2)
+        {
+            return Equals(instance1, instance2);
+        }
     }
 }

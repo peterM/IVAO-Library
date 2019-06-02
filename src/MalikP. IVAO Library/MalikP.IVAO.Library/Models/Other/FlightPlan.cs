@@ -211,5 +211,15 @@ namespace MalikP.IVAO.Library.Models.Other
         }
 
         public static FlightPlanBuilder Builder => FlightPlanBuilder.Create();
+
+        public static bool operator !=(FlightPlan instance1, FlightPlan instance2)
+        {
+            return !Equals(instance1, instance2);
+        }
+
+        public static bool operator ==(FlightPlan instance1, FlightPlan instance2)
+        {
+            return Equals(instance1, instance2);
+        }
     }
 }

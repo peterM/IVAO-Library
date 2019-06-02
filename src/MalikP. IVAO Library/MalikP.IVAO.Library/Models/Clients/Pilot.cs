@@ -31,6 +31,7 @@ using System.Runtime.Serialization;
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
@@ -43,7 +44,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             string name,
             ClientType clientType,
             GPS location,
-            string server,
+            Server server,
             string protocol,
             DateTime connectionTime,
             string softwareName,
@@ -158,5 +159,15 @@ namespace MalikP.IVAO.Library.Models.Clients
         }
 
         public static PilotBuilder Builder => PilotBuilder.Create();
+
+        public static bool operator !=(Pilot instance1, Pilot instance2)
+        {
+            return !Equals(instance1, instance2);
+        }
+
+        public static bool operator ==(Pilot instance1, Pilot instance2)
+        {
+            return Equals(instance1, instance2);
+        }
     }
 }

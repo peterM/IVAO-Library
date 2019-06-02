@@ -31,10 +31,15 @@ using System.Runtime.Serialization;
 using MalikP.IVAO.Library.Common.Annotation;
 using MalikP.IVAO.Library.Common.Enums;
 using MalikP.IVAO.Library.Models.Other;
+using MalikP.IVAO.Library.Models.Servers;
 
 namespace MalikP.IVAO.Library.Models.Clients
 {
     [DataContract]
+    [KnownType(typeof(AirTrafficController))]
+    [KnownType(typeof(Pilot))]
+    [KnownType(typeof(FollowMe))]
+    [KnownType(typeof(ClientWithRating<>))]
     public abstract class Client : AbstractIvaoModel
     {
         public Client(
@@ -43,7 +48,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             string name,
             ClientType clientType,
             GPS location,
-            string server,
+            Server server,
             string protocol,
             DateTime connectionTime,
             string softwareName,
@@ -56,7 +61,7 @@ namespace MalikP.IVAO.Library.Models.Clients
             Name = name ?? string.Empty;
             ClientType = clientType;
             Location = location;
-            Server = server ?? string.Empty;
+            Server = server;
             Protocol = protocol ?? string.Empty;
             ConnectionTime = connectionTime;
             SoftwareName = softwareName ?? string.Empty;
@@ -88,7 +93,7 @@ namespace MalikP.IVAO.Library.Models.Clients
         public GPS Location { get; private set; }
 
         [DataMember]
-        public string Server { get; private set; }
+        public Server Server { get; private set; }
 
         [DataMember]
         public string Protocol { get; private set; }
@@ -132,7 +137,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                 && string.Equals(casted.Name, Name, StringComparison.InvariantCultureIgnoreCase)
                 && Equals(casted.ClientType, ClientType)
                 && Equals(casted.Location, Location)
-                && string.Equals(casted.Server, Server, StringComparison.InvariantCultureIgnoreCase)
+                && Equals(casted.Server, Server)
                 && string.Equals(casted.Protocol, Protocol, StringComparison.InvariantCultureIgnoreCase)
                 && Equals(casted.ConnectionTime, ConnectionTime)
                 && string.Equals(casted.SoftwareName, SoftwareName, StringComparison.InvariantCultureIgnoreCase)
@@ -151,7 +156,7 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (Name.ToUpper().GetHashCode() * 3)
                     + (ClientType.GetHashCode() * 3)
                     + (GetItemHashCode(Location) * 3)
-                    + (Server.ToUpper().GetHashCode() * 3)
+                    + (GetItemHashCode(Server) * 3)
                     + (Protocol.ToUpper().GetHashCode() * 3)
                     + (ConnectionTime.GetHashCode() * 3)
                     + (SoftwareName.ToUpper().GetHashCode() * 3)
@@ -159,6 +164,16 @@ namespace MalikP.IVAO.Library.Models.Clients
                     + (AdministrativeVersion.GetHashCode() * 3)
                     + (ClientRating.GetHashCode() * 3) * 17;
             }
+        }
+
+        public static bool operator !=(Client instance1, Client instance2)
+        {
+            return !Equals(instance1, instance2);
+        }
+
+        public static bool operator ==(Client instance1, Client instance2)
+        {
+            return Equals(instance1, instance2);
         }
     }
 }

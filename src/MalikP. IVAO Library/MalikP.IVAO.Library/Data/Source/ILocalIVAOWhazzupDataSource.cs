@@ -27,7 +27,7 @@
 
 namespace MalikP.IVAO.Library.Data.Source
 {
-    public interface ILocalIVAOWhazzupDataSource : IIVAOWhazzupDataSource
+    public interface ILocalIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
     {
     }
 }

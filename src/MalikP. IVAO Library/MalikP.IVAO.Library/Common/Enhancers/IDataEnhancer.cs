@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2019 Peter Malik. (MalikP.)
 // 
-// File: IWebIVAOWhazzupDataSource.cs 
+// File: IDataEnhancer.cs 
 // Company: MalikP.
 //
 // Repository: https://github.com/peterM/IVAO-Library
@@ -25,9 +25,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace MalikP.IVAO.Library.Data.Source
+using MalikP.IVAO.Library.Models;
+
+namespace MalikP.IVAO.Library.Common.Enhancers
 {
-    public interface IWebIVAOWhazzupDataSource : IIVAOWhazzupSpecificDataSource
+    public interface IDataEnhancer
     {
+        IModel Enhance(IModel modelToEnhance);
+    }
+
+    public interface IDataEnhancer<TModelToEnhance> : IDataEnhancer
+        where TModelToEnhance : IModel
+    {
+        TModelToEnhance Enhance(TModelToEnhance modelToEnhance);
     }
 }
