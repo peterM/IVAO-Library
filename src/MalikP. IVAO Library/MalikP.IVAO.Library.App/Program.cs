@@ -35,19 +35,14 @@ namespace MalikP.IVAO.Library.App
         private static void OptionIoC(string path)
         {
             IIoC ioc = Locator.GetContainer(new AdvancedContainerFactory());
-            ioc.RegisterDefaultIvaoWhazzupServices();
+
+            ioc.RegisterIvaoDefaultWhazzupServices();
+            ioc.RegisterIvaoModelBuilders();
+            ioc.RegisterIvaoCachedDataSource();
+
             ioc.Register<IIVAOWhazzupSpecificDataSource, LocalGZippedIVAOWhazzupDataSource>()
                 .Extend()
-                .WithSpecific<string>(path)
-                .ToSingleton();
-
-            //ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<LocalGZippedIVAOWhazzupDataSource>()));
-            //ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>(d => new CachedIVAOWhazzupDataSource(d.Resolve<IIVAOWhazzupSpecificDataSource>()));
-            ioc.Register<IIVAOWhazzupDataSource, CachedIVAOWhazzupDataSource>()
-                .Extend()
-                .ToSingleton();
-
-            ICachedIVAOWhazzupDataSource dataSource = ioc.Resolve<ICachedIVAOWhazzupDataSource>();
+                .WithSpecific<string>(path);
 
             //IIVAOWhazzupDataSource nonCachedWebDataSource = new WebIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt");
             //IIVAOWhazzupDataSource nonCachedWebGZippedDataSource = new WebGZippedIVAOWhazzupDataSource("http://api.ivao.aero/getdata/whazzup/whazzup.txt.gz", compression);
